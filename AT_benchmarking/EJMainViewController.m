@@ -17,24 +17,56 @@
 // type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: custom
 typedef enum {hour, day = 1, week, month, year, life, custom} EJtype;
 
-NSMutableArray *dataArray;
+
 NSArray *colorArray;
+
+- (void)viewWillAppear:(BOOL)animated {
+    // navigation bar style
+    self.navigationController.navigationBar.barTintColor = [self colorFromHexString:@"#F74553"];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{
+                                                                      NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                      NSFontAttributeName : [UIFont boldSystemFontOfSize:24.0]
+                                                                      }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addData)];
     self.navigationItem.rightBarButtonItem = refreshButton;
     
-    
     // 임시 데이터객체
-    dataArray = [[NSMutableArray alloc] init];
+    _dataArray = [[NSMutableArray alloc] init];
     
     // color values
     colorArray = [NSArray arrayWithObjects:@"#99CCCC", @"#BDD5BD", @"#D7D8B1", @"#F5DC90", @"#F2CA78", @"#EFAB79", @"#EC8C71",
                   @"#E6756B", @"#EC8C71", @"#EFAB79", @"#F2CA78", @"#F5DC90", @"#D7D8B1", @"#BDD5BD", @"#99CCCC", nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(dataReceived:) name:@"addData" object:nil];
+}
+
+#pragma mark - Notification
+- (void)dataReceived:(NSNotification*)notification {
+    NSLog(@"Data received");
+    [self.tableView reloadData];
 }
 
 - (void)addData {
+    
+    // maximum data: 15
+    if ([_dataArray count] > 14) {
+        NSLog(@"no more add");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"앗! AT가 너무 많아요."
+                                                        message:@"더 많은 AT를 만들기 위해서는 업그레이드가 필요해요."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EJAddViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"addViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
@@ -68,7 +100,7 @@ NSArray *colorArray;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [dataArray count];
+    return [_dataArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,7 +111,7 @@ NSArray *colorArray;
         cell = [nib objectAtIndex:0];
     }
 
-    EJData *cellData = [dataArray objectAtIndex:indexPath.row];
+    EJData *cellData = [_dataArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [self colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
     cell.cellTitle.text = cellData.title;
     cell.cellstart.text = cellData.startString;

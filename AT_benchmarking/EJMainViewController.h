@@ -10,5 +10,6 @@
 
 @interface EJMainViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray *dataArray;
 
 @end

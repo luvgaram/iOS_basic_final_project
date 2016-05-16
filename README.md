@@ -1,5 +1,6 @@
 #### NHN NEXT iOS Basic 2016 first semester
 
-| date | detail | 
-| ------------------- | ------------------ |
-| 2016.5.16 | main view and add view |
+| no | date | detail | 
+|-------- | ------------------- | ------------------ |
+| 1 | 2016.5.16 | main view and add view skeleton |
+| 2 | 2016.5.16 | add temp day and time data |
