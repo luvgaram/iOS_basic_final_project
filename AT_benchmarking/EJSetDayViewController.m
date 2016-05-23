@@ -8,7 +8,10 @@
 
 #import "EJSetDayViewController.h"
 #import "EJColorLib.h"
+#import "EJDateLib.h"
+#import "EJData.h"
 #import "PDTSimpleCalendarViewController.h"
+#import "EJMainViewController.h"
 #import "EJNavigationBar.h"
 
 @interface EJSetDayViewController ()
@@ -31,8 +34,31 @@
 @implementation EJSetDayViewController
 
 UINavigationController *dayEditNavController;
+
+BOOL isTitleInserted;
 BOOL isStartDate;
 BOOL isEndDate;
+int dayType;
+NSString* dayTitle;
+
+- (IBAction)dayTitleTextViewClicked:(id)sender {
+    if (self.dayTitleTextView.text.length > 0)
+        isTitleInserted = YES;
+    else isTitleInserted = NO;
+    
+    NSLog(@"textview: %hhd, %d", isTitleInserted, self.dayTitleTextView.text.length);
+    [self swichSaveButtonStatus];
+}
+
+- (void)swichSaveButtonStatus {
+    NSLog(@"isTitleInserted: %hhd, sdate: %d, edate: %d", isTitleInserted, ![_customDates[0] isKindOfClass:[NSNull class]], ![_customDates[1] isKindOfClass:[NSNull class]]);
+    
+    if (isTitleInserted &&
+        ![_customDates[0] isKindOfClass:[NSNull class]] &&
+        ![_customDates[1] isKindOfClass:[NSNull class]])
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    else self.navigationItem.rightBarButtonItem.enabled = NO;
+}
 
 - (IBAction)periodButtonClicked:(id)sender {
     _dayPeriodButton.backgroundColor = [EJColorLib colorFromHexString:@"#F2DB85"];
@@ -67,6 +93,10 @@ BOOL isEndDate;
     isStartDate = NO;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
+}
+
 // change navigation bar style
 - (void)setNavigationBar {
     self.navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F8ECDA"];
@@ -76,14 +106,45 @@ BOOL isEndDate;
                                                                       NSFontAttributeName : [UIFont boldSystemFontOfSize:24.0]
                                                                       }];
     self.title = @"+AT";
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveDate)];
+    self.navigationItem.rightBarButtonItem = saveButton;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
+- (void)saveDate {
+    EJData *newData = [[EJData alloc] initWithType:1 character:1 title:self.dayTitleTextView.text start:[EJDateLib stringFromDate:_customDates[0]] end:[EJDateLib stringFromDate:_customDates[1]]];
+    [self addDataToMainViewController:newData];
+}
+
+- (void)addDataToMainViewController:(EJData *) newData {
+    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    [mainViewController.dataArray addObject:newData];
+    
+    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    [[self navigationController] popToRootViewControllerAnimated:YES];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (PDTSimpleCalendarViewController *)setCalendar{
     PDTSimpleCalendarViewController *calendarViewController = [[PDTSimpleCalendarViewController alloc] init];
+    
+    // set start Date
+    calendarViewController.firstDate = [EJDateLib dateFromString:@"2010-01-01-00-00-00"];
+    
+    // set last Date
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    offsetComponents.month = 12;
+    NSDate *lastDate =[calendarViewController.calendar dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
+    calendarViewController.lastDate = lastDate;
+    
+    // show today
+    [calendarViewController scrollToDate:[NSDate date] animated:NO];
+    
     [calendarViewController setDelegate:self];
     calendarViewController.weekdayHeaderEnabled = YES;
     calendarViewController.weekdayTextType = PDTSimpleCalendarViewWeekdayTextTypeVeryShort;
@@ -138,17 +199,24 @@ BOOL isEndDate;
 }
 
 - (void)preiodStartViewTapped:(UITapGestureRecognizer *)recognizer {
-    [self setCalendarView:YES isRoot:YES];
+    NSDate *date = [NSDate date];
+    if (![_customDates[0] isKindOfClass:[NSNull class]]) date = _customDates[0];
+    [self setCalendarView:YES isRoot:YES targetDate:date];
     NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
 }
 
 - (void)preiodEndViewTapped:(UITapGestureRecognizer *)recognizer {
-    [self setCalendarView:NO isRoot:YES];
+    NSDate *date = [NSDate date];
+    if (![_customDates[1] isKindOfClass:[NSNull class]]) date = _customDates[1];
+    [self setCalendarView:NO isRoot:YES targetDate:date];
     NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
 }
 
-- (void)setCalendarView:(BOOL)isStart isRoot:(BOOL)isRoot {
+- (void)setCalendarView:(BOOL)isStart isRoot:(BOOL)isRoot targetDate:(NSDate *)date{
     PDTSimpleCalendarViewController *calendarViewController = [self setCalendar];
+
+    [calendarViewController scrollToDate:date animated:NO];
+    
     if (isRoot) [dayEditNavController setViewControllers:@[calendarViewController] animated:NO];
     
     if (isStart) {
@@ -187,7 +255,15 @@ BOOL isEndDate;
 }
 
 - (void)closeEditDateViewController {
-    [dayEditNavController dismissModalViewControllerAnimated:YES];
+    [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveSelectedDate {
+    self.dayStartPeriod.text = [EJDateLib dayStringFromDate:_customDates[0]];
+    self.dayEndPeriod.text = [EJDateLib dayStringFromDate:_customDates[1]];
+
+    [self swichSaveButtonStatus];
+    [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - PDTSimpleCalendarViewDelegate
@@ -198,21 +274,31 @@ BOOL isEndDate;
     
     if (!isStartDate) {
         _customDates[1] = date;
-        if ([_customDates[0] isKindOfClass:[NSNull class]]) [self setCalendarView:YES isRoot:NO];
+        if ([_customDates[0] isKindOfClass:[NSNull class]]) [self setCalendarView:YES isRoot:NO targetDate:date];
     } else {
         _customDates[0] = date;
-        [self setCalendarView:NO isRoot:NO];
+        [self setCalendarView:NO isRoot:NO targetDate:date];
     }
     
-    if (![_customDates[0] isKindOfClass:[NSNull class]] && ![_customDates[1] isKindOfClass:[NSNull class]]) {
-        UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(temp)];
+    UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeEditDateViewController)];
+    [dayEditNavController viewControllers][1].navigationItem.leftBarButtonItem = stopButton;
+    
+    if (![_customDates[0] isKindOfClass:[NSNull class]] &&
+        ![_customDates[1] isKindOfClass:[NSNull class]]) {
+        if ([_customDates[0] compare:_customDates[1]] == NSOrderedAscending) {
+        UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveSelectedDate)];
         
-        [dayEditNavController.viewControllers objectAtIndex:1].navigationItem.rightBarButtonItem = refreshButton;
+        [dayEditNavController viewControllers][1].navigationItem.rightBarButtonItem = refreshButton;
+        } else {
+            NSLog(@"errors in selected dates");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"시작일보다 종료일이 늦어야 해요."
+                                                            message:@"날짜를 다시 골라주세요. ㅠㅠ"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
-}
-
-- (void)temp {
-    NSLog(@"temp!");
 }
 
 - (BOOL)simpleCalendarViewController:(PDTSimpleCalendarViewController *)controller shouldUseCustomColorsForDate:(NSDate *)date {

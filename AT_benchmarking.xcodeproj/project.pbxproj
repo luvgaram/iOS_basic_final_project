@@ -30,6 +30,7 @@
 		A86F8A1E1CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A171CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m */; };
 		A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A191CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m */; };
 		A8F0DC291CE95CA500ADEE76 /* EJAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */; };
+		BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		A86F8A191CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewWeekdayHeader.m; sourceTree = "<group>"; };
 		A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJAddViewController.h; sourceTree = "<group>"; };
 		A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJAddViewController.m; sourceTree = "<group>"; };
+		BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJDateLib.h; sourceTree = "<group>"; };
+		BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJDateLib.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,8 @@
 				A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */,
 				A86F89FE1CEAE9A8005C53BE /* EJColorLib.h */,
 				A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */,
+				BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */,
+				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
 			);
 			path = AT_benchmarking;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				A86F8A1C1CEC37D6005C53BE /* PDTSimpleCalendarViewController.m in Sources */,
 				A86F8A001CEAE9A8005C53BE /* EJColorLib.m in Sources */,
 				A859DB4D1CE19AEF00AB0590 /* EJTableViewCell.m in Sources */,
+				BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */,
 				A859DB501CE19D9C00AB0590 /* EJData.m in Sources */,
 				A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */,
 				A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */,

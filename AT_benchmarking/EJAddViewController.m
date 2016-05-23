@@ -102,7 +102,7 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
 }
 
 - (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = [self backViewController];
+    EJMainViewController *mainViewController = (EJMainViewController *)[self backViewController];
     [mainViewController.dataArray addObject:newData];
     
     NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];

@@ -7,6 +7,7 @@
 //
 
 #import "EJData.h"
+#import "EJDateLib.h"
 
 @implementation EJData
 
@@ -41,15 +42,15 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
 - (void)setProperties:(NSString *)start end:(NSString *)end type:(int)type {
     switch (type) {
         case hour: {
-            NSDate *startDate = [self dateFromString:start];
-            NSDate *endDate = [self dateFromString:end];
+            NSDate *startDate = [EJDateLib dateFromString:start];
+            NSDate *endDate = [EJDateLib dateFromString:end];
             NSDate *now = [NSDate date];
             
-            NSDateComponents *conversionInfo = [self componentsFrom:startDate To:endDate];
+            NSDateComponents *conversionInfo = [EJDateLib componentsFrom:startDate To:endDate];
             
             _measure = [conversionInfo day] * 24 * 60 + [conversionInfo hour] * 60 + [conversionInfo minute];
             
-            NSDateComponents *conversionInfoPercent = [self componentsFrom:startDate To:now];
+            NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
             int measurePercent = [conversionInfoPercent day] * 24 * 60 + [conversionInfoPercent hour] * 60 + [conversionInfoPercent minute];
             
             NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
@@ -67,15 +68,15 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
         }
             
         case day: {
-            NSDate *startDate = [self dateFromString:start];
-            NSDate *endDate = [self dateFromString:end];
+            NSDate *startDate = [EJDateLib dateFromString:start];
+            NSDate *endDate = [EJDateLib dateFromString:end];
             NSDate *now = [NSDate date];
             
-            NSDateComponents *conversionInfo = [self componentsFrom:startDate To:endDate];
+            NSDateComponents *conversionInfo = [EJDateLib componentsFrom:startDate To:endDate];
             
             _measure = [conversionInfo day];
             
-            NSDateComponents *conversionInfoPercent = [self componentsFrom:startDate To:now];
+            NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
             int measurePercent = [conversionInfoPercent day];
             
             NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
@@ -115,7 +116,7 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
             
             _measure = days.length;
             
-            NSDateComponents *components = [self componentsForToday:today];
+            NSDateComponents *components = [EJDateLib componentsForToday:today];
 
             int day = [components day];
 
@@ -135,36 +136,36 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
 }
 
 
-#pragma mark - DateConvertor
-
-- (NSDate *)dateFromString:(NSString *)string {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
-    return [dateFormatter dateFromString:string];
-}
-
-- (NSString *)stringFromDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy MM dd HH mm ss"];
-    return [dateFormatter stringFromDate:date];
-}
-
-- (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate {
-    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
-
-//    unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth;
-    unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay;
-    
-    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:startDate  toDate:endDate  options:0];
-
-//    NSLog(@"Conversion: %dmin %dhours %ddays %dmonths",[conversionInfo minute], [conversionInfo hour], [conversionInfo day], [conversionInfo month]);
-    NSLog(@"Conversion: %dmin %dhours %ddays",[conversionInfo minute], [conversionInfo hour], [conversionInfo day]);
-
-    return conversionInfo;
-}
-
-- (NSDateComponents *)componentsForToday:(NSDate *)date {
-    return [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
-}
+//#pragma mark - DateConvertor
+//
+//- (NSDate *)dateFromString:(NSString *)string {
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
+//    return [dateFormatter dateFromString:string];
+//}
+//
+//- (NSString *)stringFromDate:(NSDate *)date {
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+//    [dateFormatter setDateFormat:@"yyyy MM dd HH mm ss"];
+//    return [dateFormatter stringFromDate:date];
+//}
+//
+//- (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate {
+//    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+//
+////    unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth;
+//    unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay;
+//    
+//    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:startDate  toDate:endDate  options:0];
+//
+////    NSLog(@"Conversion: %dmin %dhours %ddays %dmonths",[conversionInfo minute], [conversionInfo hour], [conversionInfo day], [conversionInfo month]);
+//    NSLog(@"Conversion: %dmin %dhours %ddays",[conversionInfo minute], [conversionInfo hour], [conversionInfo day]);
+//
+//    return conversionInfo;
+//}
+//
+//- (NSDateComponents *)componentsForToday:(NSDate *)date {
+//    return [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+//}
 
 @end
