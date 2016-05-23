@@ -203,7 +203,7 @@
                                                 <color key="textColor" red="0.71764705882352942" green="0.60784313725490191" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="시 작 일" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-oO-1MU">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="시 작 일" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-oO-1MU">
                                                 <rect key="frame" x="170" y="-9" width="100" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="80b-oF-YGX"/>
@@ -213,7 +213,7 @@
                                                 <color key="textColor" red="0.71764705882352942" green="0.60784313725490191" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="종 료 일" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjG-9J-OsJ">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="종 료 일" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjG-9J-OsJ">
                                                 <rect key="frame" x="302" y="-9" width="100" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="0UH-b8-3za"/>
@@ -291,6 +291,9 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="male.png" translatesAutoresizingMaskIntoConstraints="NO" id="aJO-Gr-0nu">
                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="216"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="110" id="GGY-7y-OoL"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female.png" translatesAutoresizingMaskIntoConstraints="NO" id="xqH-7D-TdW">
                                                 <rect key="frame" x="150" y="0.0" width="110" height="216"/>
@@ -328,8 +331,10 @@
                     <connections>
                         <outlet property="dayDateBG" destination="XaT-sC-Je4" id="GXe-y8-0iF"/>
                         <outlet property="dayDateLable" destination="RiJ-zC-U9b" id="Ttn-ep-tki"/>
+                        <outlet property="dayEndPeriod" destination="xjG-9J-OsJ" id="NXA-2i-qTR"/>
                         <outlet property="dayPeriodBG" destination="ELl-Ce-EtH" id="Cac-Zh-j1O"/>
                         <outlet property="dayPeriodLable" destination="64f-uB-nCW" id="9lp-KL-Pad"/>
+                        <outlet property="dayStartPeriod" destination="ONy-oO-1MU" id="AEN-iA-x2n"/>
                         <outlet property="dayTitleTextView" destination="4D1-MR-6Nq" id="xdq-1i-B5M"/>
                         <outlet property="firstView" destination="Q4V-gz-2eI" id="lCf-i3-d6D"/>
                         <outlet property="secondView" destination="cA1-g8-30A" id="ypz-0l-YJN"/>
@@ -338,6 +343,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT3-Hv-24i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1736" y="-200"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="abF-Un-rBP">
+            <objects>
+                <viewController id="OQt-0c-CcQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qux-bY-33l"/>
+                        <viewControllerLayoutGuide type="bottom" id="dMv-I7-9vl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K9V-me-QhK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CV5-aM-Idf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2366" y="-200"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="XiG-SZ-RCK">

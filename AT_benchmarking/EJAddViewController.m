@@ -27,7 +27,12 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // change navigation bar style
+    [self setNavigationBar];
+    [self setTap];
+}
+
+// change navigation bar style
+- (void)setNavigationBar {
     self.navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F8ECDA"];
     self.navigationController.navigationBar.tintColor = [EJColorLib colorFromHexString:@"#DD3243"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
@@ -35,8 +40,8 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
                                                                       NSFontAttributeName : [UIFont boldSystemFontOfSize:24.0]
                                                                       }];
     self.title = @"+AT";
-    
-    [self setTap];
+
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 # pragma mark - tap gesture

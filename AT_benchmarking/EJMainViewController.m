@@ -11,6 +11,7 @@
 #import "EJTableViewCell.h"
 #import "EJData.h"
 #import "EJProgressView.h"
+#import "EJColorLib.h"
 
 @implementation EJMainViewController
 
@@ -22,7 +23,8 @@ NSArray *colorArray;
 
 - (void)viewWillAppear:(BOOL)animated {
     // navigation bar style
-    self.navigationController.navigationBar.barTintColor = [self colorFromHexString:@"#F74553"];
+    
+    self.navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F74553"];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName : [UIColor whiteColor],
