@@ -12,6 +12,7 @@
 #import "PDTSimpleCalendarViewCell.h"
 #import "PDTSimpleCalendarViewHeader.h"
 
+#import "EJColorLib.h"
 
 const CGFloat PDTSimpleCalendarOverlaySize = 14.0f;
 
@@ -276,7 +277,8 @@ static const NSCalendarUnit kCalendarUnitYMD = NSCalendarUnitYear | NSCalendarUn
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    [self.collectionView setBackgroundColor:self.backgroundColor];
+//    [self.collectionView setBackgroundColor:self.backgroundColor];
+    [self.collectionView setBackgroundColor:[EJColorLib colorFromHexString:@"#F8ECDA"]];
 
     //Configure the Overlay View
     [self.overlayView setBackgroundColor:[self.backgroundColor colorWithAlphaComponent:0.90]];

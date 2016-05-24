@@ -52,7 +52,6 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"viewDidLoad");
     
     isPeriod = YES;
     [self setNavigationBar];
@@ -67,7 +66,6 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"viewWillApper");
 
     dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
     isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
@@ -234,8 +232,6 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     [calendarViewController setDelegate:self];
     calendarViewController.weekdayHeaderEnabled = YES;
     calendarViewController.weekdayTextType = PDTSimpleCalendarViewWeekdayTextTypeVeryShort;
-    
-    calendarViewController.backgroundColor = [EJColorLib colorFromHexString:@"#F8ECDA"];
     calendarViewController.overlayTextColor = [EJColorLib colorFromHexString:@"#F8ECDA"];
     
     return calendarViewController;
@@ -354,9 +350,9 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 }
 
 - (BOOL)simpleCalendarViewController:(PDTSimpleCalendarViewController *)controller shouldUseCustomColorsForDate:(NSDate *)date {
-    if ([periodStart isEqualToDate:date] || [periodEnd isEqualToDate:date] || [oneDay isEqualToDate:date]) {
-        return YES;
-    }
+    
+    if (isPeriod && ([periodStart isEqualToDate:date] || [periodEnd isEqualToDate:date])) return YES;
+    else if (!isPeriod && [oneDay isEqualToDate:date]) return YES;
     
     return NO;
 }
