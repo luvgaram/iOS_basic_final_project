@@ -21,18 +21,18 @@
     [super viewDidLoad];
 
     float viewSize = self.view.frame.size.height;
-    float pickerSize = (viewSize - 100.0) / 2.0;
+    float pickerSize = (viewSize - 120.0) / 2.0;
     
     NSLog(@"origin, %f, %f, size: %f, %f, picker: %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height, pickerSize);
 
     ESTimePicker *startTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
     
-    [startTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 6, pickerSize, pickerSize)];
+    [startTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 10, pickerSize, pickerSize)];
     [self.startTimeview addSubview:startTimePicker];
     
     ESTimePicker *endTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
     
-    [endTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 6, pickerSize, pickerSize)];
+    [endTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 10, pickerSize, pickerSize)];
     [self.endTimeView addSubview:endTimePicker];
 }
 
@@ -49,7 +49,6 @@
 - (void)timePickerMinutesChanged:(ESTimePicker *)timePicker toMinutes:(int)minute {
 //    [minutesLabel setText:[NSString stringWithFormat:@"%i", minutes]];
 }
-
 
 /*
 #pragma mark - Navigation
