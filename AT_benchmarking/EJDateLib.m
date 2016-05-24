@@ -30,6 +30,12 @@
     return [dateFormatter stringFromDate:date];
 }
 
++ (NSString *)simpleDayStringFromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"M월 d일"];
+    return [dateFormatter stringFromDate:date];
+}
+
 + (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate {
     NSCalendar *sysCalendar = [NSCalendar currentCalendar];
     

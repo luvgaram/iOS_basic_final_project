@@ -13,6 +13,7 @@
 @property int type;
 @property int character;
 @property NSString *title;
+@property NSDate *date;
 @property NSString *start;
 @property NSString *end;
 @property NSString *now;
@@ -21,6 +22,6 @@
 @property NSString *startString;
 @property NSString *endString;
 
-- (id)initWithType:(int)type character:(int)character title:(NSString *)title start:(NSString *)start end:(NSString *)end;
+- (id)initWithType:(int)type character:(int)character title:(NSString *)title date:(NSDate *)date start:(NSString *)start end:(NSString *)end;
 
 @end

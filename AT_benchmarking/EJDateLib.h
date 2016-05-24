@@ -13,8 +13,9 @@
 #pragma mark - DateConvertor
 
 + (NSDate *)dateFromString:(NSString *)string;
-+ (NSString *)stringFromDate:(NSDate *)date ;
-+ (NSString *)dayStringFromDate:(NSDate *)date ;
++ (NSString *)stringFromDate:(NSDate *)date;
++ (NSString *)dayStringFromDate:(NSDate *)date;
++ (NSString *)simpleDayStringFromDate:(NSDate *)date;
 + (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate;
 + (NSDateComponents *)componentsForToday:(NSDate *)date;
 

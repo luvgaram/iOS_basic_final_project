@@ -27,8 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *dayDateLable;
 @property (weak, nonatomic) IBOutlet UILabel *dayStartPeriod;
 @property (weak, nonatomic) IBOutlet UILabel *dayEndPeriod;
+@property (weak, nonatomic) IBOutlet UILabel *dayDateSelect;
 
-@property (nonatomic, strong) NSMutableArray *customDates;
+//@property (nonatomic, strong) NSMutableArray *customDates;
+
 @end
 
 @implementation EJSetDayViewController
@@ -36,10 +38,40 @@
 UINavigationController *dayEditNavController;
 
 BOOL isTitleInserted;
+BOOL isPeriod;
 BOOL isStartDate;
 BOOL isEndDate;
 int dayType;
-NSString* dayTitle;
+NSString *dayTitle;
+NSDate *periodStart;
+NSDate *periodEnd;
+NSDate *oneDay;
+
+// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
+typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDaytype;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSLog(@"viewDidLoad");
+    
+    isPeriod = YES;
+    [self setNavigationBar];
+    [self setTap];
+    
+    periodStart = nil;
+    periodEnd = nil;
+    oneDay = nil;
+
+    isStartDate = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"viewWillApper");
+
+    dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
+    isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
+}
 
 - (IBAction)dayTitleTextViewClicked:(id)sender {
     if (self.dayTitleTextView.text.length > 0)
@@ -48,53 +80,6 @@ NSString* dayTitle;
     
     NSLog(@"textview: %hhd, %d", isTitleInserted, self.dayTitleTextView.text.length);
     [self swichSaveButtonStatus];
-}
-
-- (void)swichSaveButtonStatus {
-    NSLog(@"isTitleInserted: %hhd, sdate: %d, edate: %d", isTitleInserted, ![_customDates[0] isKindOfClass:[NSNull class]], ![_customDates[1] isKindOfClass:[NSNull class]]);
-    
-    if (isTitleInserted &&
-        ![_customDates[0] isKindOfClass:[NSNull class]] &&
-        ![_customDates[1] isKindOfClass:[NSNull class]])
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    else self.navigationItem.rightBarButtonItem.enabled = NO;
-}
-
-- (IBAction)periodButtonClicked:(id)sender {
-    _dayPeriodButton.backgroundColor = [EJColorLib colorFromHexString:@"#F2DB85"];
-    [_dayPeriodButton setTitleColor:[EJColorLib colorFromHexString:@"#DD3243"] forState:UIControlStateNormal];
-    _dayPeriodButton.titleLabel.textColor = [EJColorLib colorFromHexString:@"#DD3243"];
-    _dayDayButton.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
-    [_dayDayButton setTitleColor:[EJColorLib colorFromHexString:@"#444447"] forState:UIControlStateNormal];
-    [_firstView setHidden:NO];
-    [_secondView setHidden:YES];
-}
-
-- (IBAction)dayButtonClicked:(id)sender {
-    _dayDayButton.backgroundColor = [EJColorLib colorFromHexString:@"#F2DB85"];
-    [_dayDayButton setTitleColor:[EJColorLib colorFromHexString:@"#DD3243"] forState:UIControlStateNormal];
-    _dayPeriodButton.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
-    [_dayPeriodButton setTitleColor:[EJColorLib colorFromHexString:@"#444447"] forState:UIControlStateNormal];
-
-    [_firstView setHidden:YES];
-    [_secondView setHidden:NO];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setNavigationBar];
-    [self setTap];
-    
-    self.customDates = [[NSMutableArray alloc] initWithCapacity:2];
-    _customDates[0] = [NSNull null];
-    _customDates[1] = [NSNull null];
-    
-    isStartDate = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
 }
 
 // change navigation bar style
@@ -111,8 +96,34 @@ NSString* dayTitle;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
+- (void)swichSaveButtonStatus {
+    isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
+    
+    if (isPeriod) {
+        NSLog(@"isTitleInserted: %hhd, sdate: %d, edate: %d", isTitleInserted, periodStart != nil, periodEnd != nil);
+        if (isTitleInserted && periodStart != nil && periodEnd != nil) self.navigationItem.rightBarButtonItem.enabled = YES;
+        else self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        NSLog(@"isTitleInserted: %hhd, date: %d", isTitleInserted, oneDay != nil);
+        if (isTitleInserted && oneDay != nil) self.navigationItem.rightBarButtonItem.enabled = YES;
+        else self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
+}
+
 - (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:1 character:1 title:self.dayTitleTextView.text start:[EJDateLib stringFromDate:_customDates[0]] end:[EJDateLib stringFromDate:_customDates[1]]];
+    EJData *newData;
+    NSLog(@"isPeriod: %hhd", isPeriod);
+    
+    if (isPeriod) {
+        newData = [[EJData alloc] initWithType:day character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
+    } else {
+//        NSTimeInterval secondsInOneDay = 24 * 60 * 60;
+//        NSDate *oneDayEnd = [oneDay dateByAddingTimeInterval:secondsInOneDay];
+//        NSLog(@"oneDayStart: %@ oneDayEnd: %@", oneDay, oneDayEnd);
+        
+        NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
+        newData = [[EJData alloc] initWithType:anniversary character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
+    }
     [self addDataToMainViewController:newData];
 }
 
@@ -126,9 +137,84 @@ NSString* dayTitle;
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+# pragma mark - tap gesture
+- (void)setTap {
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(periodViewTapped:)];
+    [self.dayPeriodBG addGestureRecognizer:singleFingerTap];
+    
+    singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(dateViewTapped:)];
+    [self.dayDateBG addGestureRecognizer:singleFingerTap];
+    
+    singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(preiodStartTapped:)];
+    [self.dayStartPeriod addGestureRecognizer:singleFingerTap];
+    
+    singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(preiodEndTapped:)];
+    [self.dayEndPeriod addGestureRecognizer:singleFingerTap];
+    
+    singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(dateSelectTapped:)];
+    [self.dayDateSelect addGestureRecognizer:singleFingerTap];
+}
+
+- (void)periodViewTapped:(UITapGestureRecognizer *)recognizer {
+    isPeriod = YES;
+    self.dayPeriodBG.backgroundColor = [EJColorLib colorFromHexString:@"#F3D47E"];
+    self.dayPeriodLable.textColor = [EJColorLib colorFromHexString:@"#DD3243"];
+    self.dayDateBG.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
+    self.dayDateLable.textColor = [EJColorLib colorFromHexString:@"#444447"];
+    
+    [_firstView setHidden:NO];
+    [_secondView setHidden:YES];
+    [self swichSaveButtonStatus];
+}
+
+- (void)dateViewTapped:(UITapGestureRecognizer *)recognizer {
+    isPeriod = NO;
+    self.dayDateBG.backgroundColor = [EJColorLib colorFromHexString:@"#F3D47E"];
+    self.dayDateLable.textColor = [EJColorLib colorFromHexString:@"#DD3243"];
+    self.dayPeriodBG.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
+    self.dayPeriodLable.textColor = [EJColorLib colorFromHexString:@"#444447"];
+    
+    [_secondView setHidden:NO];
+    [_firstView setHidden:YES];
+    [self swichSaveButtonStatus];
+}
+
+- (void)preiodStartTapped:(UITapGestureRecognizer *)recognizer {
+    NSDate *date = [NSDate date];
+    if (periodStart != nil) date = periodStart;
+    [self setCalendarView:YES isRoot:YES targetDate:date];
+    NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
+}
+
+- (void)preiodEndTapped:(UITapGestureRecognizer *)recognizer {
+    NSDate *date = [NSDate date];
+    if (periodEnd != nil) date = periodEnd;
+    [self setCalendarView:NO isRoot:YES targetDate:date];
+    NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
+}
+
+- (void)dateSelectTapped:(UITapGestureRecognizer *)recognizer {
+    NSLog(@"dateSelectTapped");
+    NSDate *date = [NSDate date];
+    if (oneDay != nil) date = oneDay;
+    [self setOneCalendarView:date];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+# pragma mark - Set Calendar
 
 - (PDTSimpleCalendarViewController *)setCalendar{
     PDTSimpleCalendarViewController *calendarViewController = [[PDTSimpleCalendarViewController alloc] init];
@@ -155,64 +241,26 @@ NSString* dayTitle;
     return calendarViewController;
 }
 
-# pragma mark - tap gesture
-- (void)setTap {
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(periodViewTapped:)];
-    [self.dayPeriodBG addGestureRecognizer:singleFingerTap];
+- (void)setOneCalendarView:(NSDate *)date{
+    PDTSimpleCalendarViewController *calendarViewController = [self setCalendar];
     
-    singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(dateViewTapped:)];
-    [self.dayDateBG addGestureRecognizer:singleFingerTap];
+    [calendarViewController scrollToDate:date animated:NO];
     
-    singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(preiodStartViewTapped:)];
-    [self.dayStartPeriod addGestureRecognizer:singleFingerTap];
+    [dayEditNavController setViewControllers:@[calendarViewController] animated:NO];
     
-    singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(preiodEndViewTapped:)];
-    [self.dayEndPeriod addGestureRecognizer:singleFingerTap];
-}
-
-- (void)periodViewTapped:(UITapGestureRecognizer *)recognizer {
-    self.dayPeriodBG.backgroundColor = [EJColorLib colorFromHexString:@"#F3D47E"];
-    self.dayPeriodLable.textColor = [EJColorLib colorFromHexString:@"#DD3243"];
-    self.dayDateBG.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
-    self.dayDateLable.textColor = [EJColorLib colorFromHexString:@"#444447"];
+    [calendarViewController setTitle:@"날짜를 골라주세요"];
     
-    [_firstView setHidden:NO];
-    [_secondView setHidden:YES];
-}
-
-- (void)dateViewTapped:(UITapGestureRecognizer *)recognizer {
-    self.dayDateBG.backgroundColor = [EJColorLib colorFromHexString:@"#F3D47E"];
-    self.dayDateLable.textColor = [EJColorLib colorFromHexString:@"#DD3243"];
-    self.dayPeriodBG.backgroundColor = [EJColorLib colorFromHexString:@"#ECCF6F"];
-    self.dayPeriodLable.textColor = [EJColorLib colorFromHexString:@"#444447"];
-    
-    [_secondView setHidden:NO];
-    [_firstView setHidden:YES];
-}
-
-- (void)preiodStartViewTapped:(UITapGestureRecognizer *)recognizer {
-    NSDate *date = [NSDate date];
-    if (![_customDates[0] isKindOfClass:[NSNull class]]) date = _customDates[0];
-    [self setCalendarView:YES isRoot:YES targetDate:date];
-    NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
-}
-
-- (void)preiodEndViewTapped:(UITapGestureRecognizer *)recognizer {
-    NSDate *date = [NSDate date];
-    if (![_customDates[1] isKindOfClass:[NSNull class]]) date = _customDates[1];
-    [self setCalendarView:NO isRoot:YES targetDate:date];
-    NSLog(@"start: %hhd, end: %hhd", isStartDate, isEndDate);
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveSelectedOneDay)];
+    calendarViewController.navigationItem.rightBarButtonItem = saveButton;
+    calendarViewController.navigationItem.rightBarButtonItem.enabled = oneDay ? YES : NO;
+    [self setDayNavigationBar:dayEditNavController];
+    [self presentViewController:dayEditNavController animated:YES completion:nil];
 }
 
 - (void)setCalendarView:(BOOL)isStart isRoot:(BOOL)isRoot targetDate:(NSDate *)date{
+    
+    NSLog(@"setCalendarView:isStart %hhd isRoot: %hhd targetDate: %@", isStart, isRoot, date);
+    
     PDTSimpleCalendarViewController *calendarViewController = [self setCalendar];
 
     [calendarViewController scrollToDate:date animated:NO];
@@ -228,14 +276,6 @@ NSString* dayTitle;
     }
     
     [self setDayNavigationBar:dayEditNavController];
-    
-//    if ([_customDates[0] isKindOfClass:[NSNull class]]) {
-//        NSLog(@"start date is null");
-//    }
-//    
-//    if ([_customDates[1] isKindOfClass:[NSNull class]]) {
-//        NSLog(@"end date is null");
-//    }
     
     if (isRoot) [self presentViewController:dayEditNavController animated:YES completion:nil];
     else [dayEditNavController pushViewController:calendarViewController animated:YES];
@@ -258,9 +298,15 @@ NSString* dayTitle;
     [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)saveSelectedOneDay {
+    self.dayDateSelect.text = [EJDateLib dayStringFromDate:oneDay];
+    [self swichSaveButtonStatus];
+    [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)saveSelectedDate {
-    self.dayStartPeriod.text = [EJDateLib dayStringFromDate:_customDates[0]];
-    self.dayEndPeriod.text = [EJDateLib dayStringFromDate:_customDates[1]];
+    self.dayStartPeriod.text = [EJDateLib dayStringFromDate:periodStart];
+    self.dayEndPeriod.text = [EJDateLib dayStringFromDate:periodEnd];
 
     [self swichSaveButtonStatus];
     [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
@@ -268,27 +314,33 @@ NSString* dayTitle;
 
 #pragma mark - PDTSimpleCalendarViewDelegate
 
+// when date clicked
 - (void)simpleCalendarViewController:(PDTSimpleCalendarViewController *)controller didSelectDate:(NSDate *)date {
     NSLog(@"Date Selected : %@", date);
     NSLog(@"Date Selected with Locale %@", [date descriptionWithLocale:[NSLocale systemLocale]]);
     
+    if (!isPeriod) {
+        oneDay = date;
+        [dayEditNavController viewControllers][0].navigationItem.rightBarButtonItem.enabled = YES;
+        return;
+    }
+    
     if (!isStartDate) {
-        _customDates[1] = date;
-        if ([_customDates[0] isKindOfClass:[NSNull class]]) [self setCalendarView:YES isRoot:NO targetDate:date];
+        periodEnd = date;
+        if (periodStart == nil) [self setCalendarView:YES isRoot:NO targetDate:date];
     } else {
-        _customDates[0] = date;
+        periodStart = date;
         [self setCalendarView:NO isRoot:NO targetDate:date];
     }
     
     UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeEditDateViewController)];
     [dayEditNavController viewControllers][1].navigationItem.leftBarButtonItem = stopButton;
     
-    if (![_customDates[0] isKindOfClass:[NSNull class]] &&
-        ![_customDates[1] isKindOfClass:[NSNull class]]) {
-        if ([_customDates[0] compare:_customDates[1]] == NSOrderedAscending) {
-        UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveSelectedDate)];
+    if (periodStart != nil && periodEnd != nil) {
+        if ([periodStart compare:periodEnd] == NSOrderedAscending) {
+            UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveSelectedDate)];
         
-        [dayEditNavController viewControllers][1].navigationItem.rightBarButtonItem = refreshButton;
+            [dayEditNavController viewControllers][1].navigationItem.rightBarButtonItem = refreshButton;
         } else {
             NSLog(@"errors in selected dates");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"시작일보다 종료일이 늦어야 해요."
@@ -302,7 +354,7 @@ NSString* dayTitle;
 }
 
 - (BOOL)simpleCalendarViewController:(PDTSimpleCalendarViewController *)controller shouldUseCustomColorsForDate:(NSDate *)date {
-    if ([self.customDates containsObject:date]) {
+    if ([periodStart isEqualToDate:date] || [periodEnd isEqualToDate:date] || [oneDay isEqualToDate:date]) {
         return YES;
     }
     

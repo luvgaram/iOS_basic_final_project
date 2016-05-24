@@ -7,3 +7,4 @@
 | 3 | 2016.5.17 | add set day view controller UI w/o calendar  |
 | 4 | 2016.5.23 | modifying calendar for day view controller |
 | 5 | 2016.5.23 | save period day data in temp array |
+| 6 | 2016.5.24 | save date data in temp array |

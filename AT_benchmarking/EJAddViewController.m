@@ -88,7 +88,7 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
     NSString *start = @"2016-04-10-00-00-00";
     NSString *end = @"2016-05-18-00-00-00";
     
-    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"시간" start:start end:end];
+    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"시간" date:[NSDate date] start:start end:end];
     
     [self addDataToMainViewController:newData];
 }

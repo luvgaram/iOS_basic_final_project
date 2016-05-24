@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KFR-cb-bkz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KFR-cb-bkz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -229,7 +229,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cA1-g8-30A">
                                         <rect key="frame" x="14" y="142" width="572" height="55"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="날 짜 선 택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54e-6R-rgw">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="날 짜 선 택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54e-6R-rgw">
                                                 <rect key="frame" x="204" y="-8" width="165" height="63"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="diV-5j-azB"/>
@@ -334,6 +334,7 @@
                     <connections>
                         <outlet property="dayDateBG" destination="XaT-sC-Je4" id="GXe-y8-0iF"/>
                         <outlet property="dayDateLable" destination="RiJ-zC-U9b" id="Ttn-ep-tki"/>
+                        <outlet property="dayDateSelect" destination="54e-6R-rgw" id="GVe-ci-6cR"/>
                         <outlet property="dayEndPeriod" destination="xjG-9J-OsJ" id="NXA-2i-qTR"/>
                         <outlet property="dayPeriodBG" destination="ELl-Ce-EtH" id="Cac-Zh-j1O"/>
                         <outlet property="dayPeriodLable" destination="64f-uB-nCW" id="9lp-KL-Pad"/>

@@ -11,8 +11,8 @@
 
 @implementation EJData
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: custom
-enum {hour, day = 1, week, month, year, life, custom} curType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
+enum {hour, day = 1, week, month, year, life, anniversary, custom} curType;
 
 //@property int type;
 //@property int character;
@@ -23,13 +23,14 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
 //@property int percent;
 //@property float measure;
 
-- (id)initWithType:(int)type character:(int)character title:(NSString *)title start:(NSString *)start end:(NSString *)end {
+- (id)initWithType:(int)type character:(int)character title:(NSString *)title date:(NSDate *)date start:(NSString *)start end:(NSString *)end {
     self = [super init];
     
     if (self) {
         _type = type;
         _character = character;
         _title = title;
+        _date = date;
         _start = start;
         _end = end;
         
@@ -40,6 +41,9 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
 }
 
 - (void)setProperties:(NSString *)start end:(NSString *)end type:(int)type {
+    
+    NSLog(@"type: %d", type);
+    
     switch (type) {
         case hour: {
             NSDate *startDate = [EJDateLib dateFromString:start];
@@ -130,6 +134,60 @@ enum {hour, day = 1, week, month, year, life, custom} curType;
             break;
         case life:
             break;
+            
+        case anniversary: {
+            NSDate *startDate = [EJDateLib dateFromString:start];
+            NSDate *endDate = [EJDateLib dateFromString:end];
+            NSDate *now = [NSDate date];
+            
+            NSLog(@"startDate: %@, endDate: %@", startDate, endDate);
+            
+            // check d-day
+            if ([now compare:startDate] == NSOrderedAscending) {
+                endDate = startDate;
+                NSDate *inputDateMidNight = [[NSCalendar currentCalendar] startOfDayForDate:_date];
+                startDate = inputDateMidNight;
+                NSLog(@"startDate: %@, endDate: %@", startDate, endDate);
+                
+                NSDateComponents *conversionInfo = [EJDateLib componentsFrom:startDate To:endDate];
+                
+                _measure = [conversionInfo day];
+                
+                NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
+                int measurePercent = [conversionInfoPercent day];
+                
+                NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
+                
+                _startString = [EJDateLib simpleDayStringFromDate:startDate];
+                _endString = [EJDateLib simpleDayStringFromDate:endDate];
+                _percent = (measurePercent / _measure) * 100;
+                
+            } else {
+                NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
+                NSDateComponents *checkDays = [EJDateLib componentsFrom:startDate To:now];
+                int measureR = [checkDays day];
+                
+                int r = 100 - (measureR % 100);
+                NSLog(@"measurePercent: %d, 100r: %d", measureR, r );
+                
+                endDate = [todayMidNight dateByAddingTimeInterval:60 * 60 * 24 * r];
+                
+                NSDateComponents *conversionInfo = [EJDateLib componentsFrom:startDate To:endDate];
+                
+                _measure = [conversionInfo day];
+                
+                NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
+                int measurePercent = [conversionInfoPercent day];
+                
+                NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
+                
+                _startString = [EJDateLib simpleDayStringFromDate:startDate];
+                _endString = [NSString stringWithFormat:@"%d일", [[NSNumber numberWithFloat:_measure] intValue]];
+                _percent = (measurePercent / _measure) * 100;
+            }
+            
+            break;
+        }
         case custom:
             break;
     }
