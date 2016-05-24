@@ -9,3 +9,4 @@
 | 5 | 2016.5.23 | save period day data in temp array |
 | 6 | 2016.5.24 | save date data in temp array |
 | 7 | 2016.5.24 | fix calendar background |
+| 8 | 2016.5.24 | time picker skeleton |

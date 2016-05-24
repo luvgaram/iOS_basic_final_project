@@ -29,6 +29,9 @@
 		A86F8A1D1CEC37D6005C53BE /* PDTSimpleCalendarViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A151CEC37D6005C53BE /* PDTSimpleCalendarViewFlowLayout.m */; };
 		A86F8A1E1CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A171CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m */; };
 		A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A191CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m */; };
+		A88FB8011CF41FEF00954764 /* ESMathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB7FE1CF41FEF00954764 /* ESMathUtils.m */; };
+		A88FB8021CF41FEF00954764 /* ESTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB8001CF41FEF00954764 /* ESTimePicker.m */; };
+		A88FB80B1CF4218B00954764 /* EJSetTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */; };
 		A8F0DC291CE95CA500ADEE76 /* EJAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */; };
 		BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */; };
 /* End PBXBuildFile section */
@@ -72,6 +75,12 @@
 		A86F8A171CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewHeader.m; sourceTree = "<group>"; };
 		A86F8A181CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewWeekdayHeader.h; sourceTree = "<group>"; };
 		A86F8A191CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTSimpleCalendarViewWeekdayHeader.m; sourceTree = "<group>"; };
+		A88FB7FD1CF41FEF00954764 /* ESMathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESMathUtils.h; path = ESTimePicker/ESMathUtils.h; sourceTree = "<group>"; };
+		A88FB7FE1CF41FEF00954764 /* ESMathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESMathUtils.m; path = ESTimePicker/ESMathUtils.m; sourceTree = "<group>"; };
+		A88FB7FF1CF41FEF00954764 /* ESTimePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTimePicker.h; path = ESTimePicker/ESTimePicker.h; sourceTree = "<group>"; };
+		A88FB8001CF41FEF00954764 /* ESTimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESTimePicker.m; path = ESTimePicker/ESTimePicker.m; sourceTree = "<group>"; };
+		A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSetTimeViewController.h; sourceTree = "<group>"; };
+		A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSetTimeViewController.m; sourceTree = "<group>"; };
 		A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJAddViewController.h; sourceTree = "<group>"; };
 		A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJAddViewController.m; sourceTree = "<group>"; };
 		BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJDateLib.h; sourceTree = "<group>"; };
@@ -108,6 +117,7 @@
 		A859DB2D1CE1984600AB0590 /* AT_benchmarking */ = {
 			isa = PBXGroup;
 			children = (
+				A88FB7FC1CF41FDE00954764 /* ESTimePicker */,
 				A86F8A0D1CEC37D6005C53BE /* PDTSimpleCalendar */,
 				A86F8A051CEB0654005C53BE /* female.png */,
 				A86F8A061CEB0654005C53BE /* male.png */,
@@ -138,6 +148,8 @@
 				A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */,
 				BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */,
 				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
+				A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */,
+				A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */,
 			);
 			path = AT_benchmarking;
 			sourceTree = "<group>";
@@ -167,6 +179,17 @@
 				A86F8A191CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m */,
 			);
 			path = PDTSimpleCalendar;
+			sourceTree = "<group>";
+		};
+		A88FB7FC1CF41FDE00954764 /* ESTimePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A88FB7FD1CF41FEF00954764 /* ESMathUtils.h */,
+				A88FB7FE1CF41FEF00954764 /* ESMathUtils.m */,
+				A88FB7FF1CF41FEF00954764 /* ESTimePicker.h */,
+				A88FB8001CF41FEF00954764 /* ESTimePicker.m */,
+			);
+			name = ESTimePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,8 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88FB80B1CF4218B00954764 /* EJSetTimeViewController.m in Sources */,
+				A88FB8021CF41FEF00954764 /* ESTimePicker.m in Sources */,
 				A859DB4A1CE199D600AB0590 /* EJMainViewController.m in Sources */,
 				A86F8A1D1CEC37D6005C53BE /* PDTSimpleCalendarViewFlowLayout.m in Sources */,
+				A88FB8011CF41FEF00954764 /* ESMathUtils.m in Sources */,
 				A859DB331CE1984600AB0590 /* AppDelegate.m in Sources */,
 				A86F8A1B1CEC37D6005C53BE /* PDTSimpleCalendarViewCell.m in Sources */,
 				A86F89FB1CEADD61005C53BE /* EJSetDayViewController.m in Sources */,

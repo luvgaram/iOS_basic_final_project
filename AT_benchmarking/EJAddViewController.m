@@ -68,29 +68,28 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
 }
 
 - (void)dayViewTapped:(UITapGestureRecognizer *)recognizer {
-//    NSLog(@"dayViewTapped");
-//    MyType type = day;
-//    NSString *start = @"2016-05-10-00-00-00";
-//    NSString *end = @"2016-05-20-00-00-00";
-//    
-//    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"날짜" start:start end:end];
-//    
-//    [self addDataToMainViewController:newData];
+    NSLog(@"dayViewTapped");
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    EJAddViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
+    UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
     
 }
 
 - (void)timeViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"timeViewTapped");
-    MyType type = hour;
-    NSString *start = @"2016-04-10-00-00-00";
-    NSString *end = @"2016-05-18-00-00-00";
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setTimeViewControllerIdentifier"];
+    [self.navigationController pushViewController:addViewController animated:YES];
     
-    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"시간" date:[NSDate date] start:start end:end];
-    
-    [self addDataToMainViewController:newData];
+//    MyType type = hour;
+//    NSString *start = @"2016-04-10-00-00-00";
+//    NSString *end = @"2016-05-18-00-00-00";
+//    
+//    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"시간" date:[NSDate date] start:start end:end];
+//    
+//    [self addDataToMainViewController:newData];
 }
 
 - (void)customViewTapped:(UITapGestureRecognizer *)recognizer {
