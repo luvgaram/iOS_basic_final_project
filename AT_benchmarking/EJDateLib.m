@@ -36,6 +36,12 @@
     return [dateFormatter stringFromDate:date];
 }
 
++ (NSString *)simpleHourStringFromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    return [dateFormatter stringFromDate:date];
+}
+
 + (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate {
     NSCalendar *sysCalendar = [NSCalendar currentCalendar];
     
@@ -52,6 +58,13 @@
 
 + (NSDateComponents *)componentsForToday:(NSDate *)date {
     return [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+}
+
++ (NSDate *)dateFromHour:(int)hour Minite:(int)minute {
+    NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
+
+    int addSeconds = (60 * 60 * hour) + (60 * minute);
+    return [todayMidNight dateByAddingTimeInterval:addSeconds];
 }
 
 @end

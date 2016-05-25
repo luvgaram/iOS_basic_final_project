@@ -77,10 +77,10 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     else isTitleInserted = NO;
     
     NSLog(@"textview: %hhd, %d", isTitleInserted, self.dayTitleTextView.text.length);
-    [self swichSaveButtonStatus];
+    [self switchSaveButtonStatus];
 }
 
-// change navigation bar style
+# pragma mark - navigation bar and button
 - (void)setNavigationBar {
     self.navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F8ECDA"];
     self.navigationController.navigationBar.tintColor = [EJColorLib colorFromHexString:@"#DD3243"];
@@ -94,7 +94,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void)swichSaveButtonStatus {
+- (void)switchSaveButtonStatus {
     isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
     
     if (isPeriod) {
@@ -108,6 +108,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     }
 }
 
+# pragma mark - data save
 - (void)saveDate {
     EJData *newData;
     NSLog(@"isPeriod: %hhd", isPeriod);
@@ -172,7 +173,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     
     [_firstView setHidden:NO];
     [_secondView setHidden:YES];
-    [self swichSaveButtonStatus];
+    [self switchSaveButtonStatus];
 }
 
 - (void)dateViewTapped:(UITapGestureRecognizer *)recognizer {
@@ -184,7 +185,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     
     [_secondView setHidden:NO];
     [_firstView setHidden:YES];
-    [self swichSaveButtonStatus];
+    [self switchSaveButtonStatus];
 }
 
 - (void)preiodStartTapped:(UITapGestureRecognizer *)recognizer {
@@ -296,7 +297,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 
 - (void)saveSelectedOneDay {
     self.dayDateSelect.text = [EJDateLib dayStringFromDate:oneDay];
-    [self swichSaveButtonStatus];
+    [self switchSaveButtonStatus];
     [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -304,7 +305,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     self.dayStartPeriod.text = [EJDateLib dayStringFromDate:periodStart];
     self.dayEndPeriod.text = [EJDateLib dayStringFromDate:periodEnd];
 
-    [self swichSaveButtonStatus];
+    [self switchSaveButtonStatus];
     [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
 }
 

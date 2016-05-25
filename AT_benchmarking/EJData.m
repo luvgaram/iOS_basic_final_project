@@ -12,7 +12,7 @@
 @implementation EJData
 
 // type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-enum {hour, day = 1, week, month, year, life, anniversary, custom} curType;
+enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} curType;
 
 //@property int type;
 //@property int character;
@@ -59,8 +59,11 @@ enum {hour, day = 1, week, month, year, life, anniversary, custom} curType;
             
             NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
             
-            _startString = @"0분";
-            _endString = [NSString stringWithFormat:@"%d분", [[NSNumber numberWithFloat:_measure] intValue]];
+//            _startString = @"0분";
+//            _endString = [NSString stringWithFormat:@"%d분", [[NSNumber numberWithFloat:_measure] intValue]];
+            
+            _startString = [EJDateLib simpleHourStringFromDate:startDate];
+            _endString = [EJDateLib simpleHourStringFromDate:endDate];
             
             if ([now compare:endDate] == NSOrderedAscending) {
                 _percent = (measurePercent / _measure) * 100;

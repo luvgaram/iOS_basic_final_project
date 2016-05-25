@@ -11,3 +11,4 @@
 | 7 | 2016.5.24 | fix calendar background |
 | 8 | 2016.5.24 | time picker skeleton |
 | 9 | 2016.5.24 | modify time picker |
+| 10 | 2016.5.24 | save time data in temp array |

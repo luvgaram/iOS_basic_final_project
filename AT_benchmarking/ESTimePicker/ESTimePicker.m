@@ -206,7 +206,7 @@ static double const kAnimationSpeed = 0.25f;
     [fm setDateFormat:@"a"];
     NSString *formatStringForHours = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     _pm = NO;
-    _notation24Hours = NO;
+    _notation24Hours = YES;
     if ([formatStringForHours rangeOfString:@"a"].location != NSNotFound) {
         _pm = [[fm stringFromDate:date] isEqualToString:@"PM"];
         

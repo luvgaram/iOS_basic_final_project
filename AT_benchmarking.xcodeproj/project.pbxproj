@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8468E6B1CF52E6C0079644F /* EJFlowTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8468E6A1CF52E6C0079644F /* EJFlowTouchView.m */; };
+		A8468E6E1CF555620079644F /* EJSetTimePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */; };
 		A859DB301CE1984600AB0590 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB2F1CE1984600AB0590 /* main.m */; };
 		A859DB331CE1984600AB0590 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB321CE1984600AB0590 /* AppDelegate.m */; };
 		A859DB391CE1984600AB0590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A859DB371CE1984600AB0590 /* Main.storyboard */; };
@@ -37,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A8468E691CF52E6C0079644F /* EJFlowTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJFlowTouchView.h; sourceTree = "<group>"; };
+		A8468E6A1CF52E6C0079644F /* EJFlowTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJFlowTouchView.m; sourceTree = "<group>"; };
+		A8468E6C1CF555620079644F /* EJSetTimePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSetTimePickerViewController.h; sourceTree = "<group>"; };
+		A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSetTimePickerViewController.m; sourceTree = "<group>"; };
 		A859DB2B1CE1984500AB0590 /* AT_benchmarking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AT_benchmarking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A859DB2F1CE1984600AB0590 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A859DB311CE1984600AB0590 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -98,6 +104,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8468E6F1CF5640F0079644F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB4E1CE19D9C00AB0590 /* EJData.h */,
+				A859DB4F1CE19D9C00AB0590 /* EJData.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A8468E701CF564250079644F /* EJLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				A86F89FE1CEAE9A8005C53BE /* EJColorLib.h */,
+				A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */,
+				BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */,
+				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
+			);
+			name = EJLibrary;
+			sourceTree = "<group>";
+		};
+		A8468E711CF565120079644F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB541CE1B18500AB0590 /* EJProgressView.h */,
+				A859DB551CE1B18500AB0590 /* EJProgressView.m */,
+				A8468E691CF52E6C0079644F /* EJFlowTouchView.h */,
+				A8468E6A1CF52E6C0079644F /* EJFlowTouchView.m */,
+				A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */,
+				A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */,
+				A859DB4B1CE19AEF00AB0590 /* EJTableViewCell.h */,
+				A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A8468E721CF565320079644F /* Esset */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB571CE1B37200AB0590 /* bar_red.png */,
+				A859DB581CE1B37200AB0590 /* bar_white.png */,
+				A86F8A051CEB0654005C53BE /* female.png */,
+				A86F8A061CEB0654005C53BE /* male.png */,
+			);
+			name = Esset;
+			sourceTree = "<group>";
+		};
+		A8468E731CF565CB0079644F /* OtherLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				A88FB7FC1CF41FDE00954764 /* ESTimePicker */,
+				A86F8A0D1CEC37D6005C53BE /* PDTSimpleCalendar */,
+			);
+			name = OtherLibrary;
+			sourceTree = "<group>";
+		};
 		A859DB221CE1984500AB0590 = {
 			isa = PBXGroup;
 			children = (
@@ -117,10 +178,11 @@
 		A859DB2D1CE1984600AB0590 /* AT_benchmarking */ = {
 			isa = PBXGroup;
 			children = (
-				A88FB7FC1CF41FDE00954764 /* ESTimePicker */,
-				A86F8A0D1CEC37D6005C53BE /* PDTSimpleCalendar */,
-				A86F8A051CEB0654005C53BE /* female.png */,
-				A86F8A061CEB0654005C53BE /* male.png */,
+				A8468E731CF565CB0079644F /* OtherLibrary */,
+				A8468E721CF565320079644F /* Esset */,
+				A8468E711CF565120079644F /* View */,
+				A8468E701CF564250079644F /* EJLibrary */,
+				A8468E6F1CF5640F0079644F /* Model */,
 				A859DB311CE1984600AB0590 /* AppDelegate.h */,
 				A859DB321CE1984600AB0590 /* AppDelegate.m */,
 				A859DB371CE1984600AB0590 /* Main.storyboard */,
@@ -130,26 +192,14 @@
 				A859DB2E1CE1984600AB0590 /* Supporting Files */,
 				A859DB481CE199D600AB0590 /* EJMainViewController.h */,
 				A859DB491CE199D600AB0590 /* EJMainViewController.m */,
-				A859DB4B1CE19AEF00AB0590 /* EJTableViewCell.h */,
-				A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */,
-				A859DB4E1CE19D9C00AB0590 /* EJData.h */,
-				A859DB4F1CE19D9C00AB0590 /* EJData.m */,
-				A859DB541CE1B18500AB0590 /* EJProgressView.h */,
-				A859DB551CE1B18500AB0590 /* EJProgressView.m */,
-				A859DB571CE1B37200AB0590 /* bar_red.png */,
-				A859DB581CE1B37200AB0590 /* bar_white.png */,
-				A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */,
-				A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */,
 				A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */,
 				A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */,
 				A86F89F91CEADD61005C53BE /* EJSetDayViewController.h */,
 				A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */,
-				A86F89FE1CEAE9A8005C53BE /* EJColorLib.h */,
-				A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */,
-				BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */,
-				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
 				A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */,
 				A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */,
+				A8468E6C1CF555620079644F /* EJSetTimePickerViewController.h */,
+				A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */,
 			);
 			path = AT_benchmarking;
 			sourceTree = "<group>";
@@ -273,6 +323,7 @@
 				A86F8A1D1CEC37D6005C53BE /* PDTSimpleCalendarViewFlowLayout.m in Sources */,
 				A88FB8011CF41FEF00954764 /* ESMathUtils.m in Sources */,
 				A859DB331CE1984600AB0590 /* AppDelegate.m in Sources */,
+				A8468E6E1CF555620079644F /* EJSetTimePickerViewController.m in Sources */,
 				A86F8A1B1CEC37D6005C53BE /* PDTSimpleCalendarViewCell.m in Sources */,
 				A86F89FB1CEADD61005C53BE /* EJSetDayViewController.m in Sources */,
 				A859DB601CE1BDA200AB0590 /* EJNavigationBar.m in Sources */,
@@ -284,6 +335,7 @@
 				A859DB501CE19D9C00AB0590 /* EJData.m in Sources */,
 				A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */,
 				A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */,
+				A8468E6B1CF52E6C0079644F /* EJFlowTouchView.m in Sources */,
 				A859DB301CE1984600AB0590 /* main.m in Sources */,
 				A8F0DC291CE95CA500ADEE76 /* EJAddViewController.m in Sources */,
 			);
