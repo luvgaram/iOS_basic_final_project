@@ -21,8 +21,8 @@
 
 @implementation EJAddViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: custom
-typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
+typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} MyType;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,18 +82,20 @@ typedef enum {hour, day = 1, week, month, year, life, custom} MyType;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setTimeViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
-    
-//    MyType type = hour;
-//    NSString *start = @"2016-04-10-00-00-00";
-//    NSString *end = @"2016-05-18-00-00-00";
-//    
-//    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"시간" date:[NSDate date] start:start end:end];
-//    
-//    [self addDataToMainViewController:newData];
 }
 
 - (void)customViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"customViewTapped");
+    MyType type = custom;
+    NSString *start = @"44.346";
+    NSString *end = @"26.234";
+    NSString *now = @"32.23";
+    
+    NSString *unit = @"kg";
+    
+    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"커스텀테스트" date:[NSDate date] start:start end:end now:now unit:unit];
+    
+    [self addDataToMainViewController:newData];
 }
 
 - (void)recipeViewTapped:(UITapGestureRecognizer *)recognizer {

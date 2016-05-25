@@ -104,15 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A8468E6F1CF5640F0079644F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				A859DB4E1CE19D9C00AB0590 /* EJData.h */,
-				A859DB4F1CE19D9C00AB0590 /* EJData.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		A8468E701CF564250079644F /* EJLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,21 +113,6 @@
 				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
 			);
 			name = EJLibrary;
-			sourceTree = "<group>";
-		};
-		A8468E711CF565120079644F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				A859DB541CE1B18500AB0590 /* EJProgressView.h */,
-				A859DB551CE1B18500AB0590 /* EJProgressView.m */,
-				A8468E691CF52E6C0079644F /* EJFlowTouchView.h */,
-				A8468E6A1CF52E6C0079644F /* EJFlowTouchView.m */,
-				A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */,
-				A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */,
-				A859DB4B1CE19AEF00AB0590 /* EJTableViewCell.h */,
-				A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		A8468E721CF565320079644F /* Esset */ = {
@@ -159,6 +135,47 @@
 			name = OtherLibrary;
 			sourceTree = "<group>";
 		};
+		A8468E751CF592AD0079644F /* EJModel */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB4E1CE19D9C00AB0590 /* EJData.h */,
+				A859DB4F1CE19D9C00AB0590 /* EJData.m */,
+			);
+			name = EJModel;
+			sourceTree = "<group>";
+		};
+		A8468E761CF592BA0079644F /* EJView */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB541CE1B18500AB0590 /* EJProgressView.h */,
+				A859DB551CE1B18500AB0590 /* EJProgressView.m */,
+				A8468E691CF52E6C0079644F /* EJFlowTouchView.h */,
+				A8468E6A1CF52E6C0079644F /* EJFlowTouchView.m */,
+				A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */,
+				A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */,
+				A859DB4B1CE19AEF00AB0590 /* EJTableViewCell.h */,
+				A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */,
+			);
+			name = EJView;
+			sourceTree = "<group>";
+		};
+		A8468E771CF592C50079644F /* EJController */ = {
+			isa = PBXGroup;
+			children = (
+				A859DB481CE199D600AB0590 /* EJMainViewController.h */,
+				A859DB491CE199D600AB0590 /* EJMainViewController.m */,
+				A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */,
+				A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */,
+				A86F89F91CEADD61005C53BE /* EJSetDayViewController.h */,
+				A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */,
+				A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */,
+				A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */,
+				A8468E6C1CF555620079644F /* EJSetTimePickerViewController.h */,
+				A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */,
+			);
+			name = EJController;
+			sourceTree = "<group>";
+		};
 		A859DB221CE1984500AB0590 = {
 			isa = PBXGroup;
 			children = (
@@ -178,28 +195,19 @@
 		A859DB2D1CE1984600AB0590 /* AT_benchmarking */ = {
 			isa = PBXGroup;
 			children = (
-				A8468E731CF565CB0079644F /* OtherLibrary */,
-				A8468E721CF565320079644F /* Esset */,
-				A8468E711CF565120079644F /* View */,
-				A8468E701CF564250079644F /* EJLibrary */,
-				A8468E6F1CF5640F0079644F /* Model */,
+				A8468E771CF592C50079644F /* EJController */,
+				A8468E761CF592BA0079644F /* EJView */,
+				A8468E751CF592AD0079644F /* EJModel */,
 				A859DB311CE1984600AB0590 /* AppDelegate.h */,
 				A859DB321CE1984600AB0590 /* AppDelegate.m */,
-				A859DB371CE1984600AB0590 /* Main.storyboard */,
-				A859DB3A1CE1984600AB0590 /* Assets.xcassets */,
-				A859DB3C1CE1984600AB0590 /* LaunchScreen.storyboard */,
 				A859DB3F1CE1984600AB0590 /* Info.plist */,
+				A859DB3A1CE1984600AB0590 /* Assets.xcassets */,
+				A8468E701CF564250079644F /* EJLibrary */,
+				A8468E721CF565320079644F /* Esset */,
+				A859DB3C1CE1984600AB0590 /* LaunchScreen.storyboard */,
+				A859DB371CE1984600AB0590 /* Main.storyboard */,
+				A8468E731CF565CB0079644F /* OtherLibrary */,
 				A859DB2E1CE1984600AB0590 /* Supporting Files */,
-				A859DB481CE199D600AB0590 /* EJMainViewController.h */,
-				A859DB491CE199D600AB0590 /* EJMainViewController.m */,
-				A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */,
-				A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */,
-				A86F89F91CEADD61005C53BE /* EJSetDayViewController.h */,
-				A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */,
-				A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */,
-				A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */,
-				A8468E6C1CF555620079644F /* EJSetTimePickerViewController.h */,
-				A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */,
 			);
 			path = AT_benchmarking;
 			sourceTree = "<group>";
