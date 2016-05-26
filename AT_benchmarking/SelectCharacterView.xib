@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EJSelectCharacterView">
+            <connections>
+                <outlet property="select01" destination="o9k-Jb-LTC" id="jEd-FF-amX"/>
+                <outlet property="select02" destination="oDh-gA-DXm" id="oG5-5f-V0M"/>
+                <outlet property="select03" destination="qrr-ad-z4c" id="NN9-hg-sNp"/>
+                <outlet property="select04" destination="sS0-7O-3a3" id="OXy-7E-SPg"/>
+                <outlet property="select05" destination="YRL-kf-6Uz" id="phg-FV-PL3"/>
+                <outlet property="select06" destination="dLt-IE-CME" id="d2L-Fb-EQW"/>
+                <outlet property="selectTriangle01" destination="Ec7-f9-fEa" id="8W3-td-2cH"/>
+                <outlet property="selectTriangle02" destination="tkk-lc-LbV" id="uww-na-vNo"/>
+                <outlet property="selectTriangle03" destination="RXl-i4-GaR" id="cKI-y1-SLq"/>
+                <outlet property="selectTriangle04" destination="lVg-dX-35Q" id="XdL-Vs-MZ9"/>
+                <outlet property="selectTriangle05" destination="VvA-sR-27L" id="HYL-Pg-A0L"/>
+                <outlet property="selectTriangle06" destination="9CX-lF-e4Y" id="5hP-XU-jjH"/>
+                <outlet property="view" destination="iN0-l3-epB" id="c7Y-N6-5w2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleAspectFill" misplaced="YES" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="KTG-Wk-Bse">
+                    <rect key="frame" x="16" y="223" width="568" height="218"/>
+                    <subviews>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="male01.png" translatesAutoresizingMaskIntoConstraints="NO" id="o9k-Jb-LTC">
+                            <rect key="frame" x="0.0" y="0.0" width="87" height="218"/>
+                        </imageView>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="male02.png" translatesAutoresizingMaskIntoConstraints="NO" id="oDh-gA-DXm">
+                            <rect key="frame" x="96" y="0.0" width="87" height="218"/>
+                        </imageView>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="male03.png" translatesAutoresizingMaskIntoConstraints="NO" id="qrr-ad-z4c">
+                            <rect key="frame" x="192" y="0.0" width="88" height="218"/>
+                        </imageView>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female01.png" translatesAutoresizingMaskIntoConstraints="NO" id="sS0-7O-3a3">
+                            <rect key="frame" x="289" y="0.0" width="87" height="218"/>
+                        </imageView>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female02.png" translatesAutoresizingMaskIntoConstraints="NO" id="YRL-kf-6Uz">
+                            <rect key="frame" x="385" y="0.0" width="87" height="218"/>
+                        </imageView>
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female03.png" translatesAutoresizingMaskIntoConstraints="NO" id="dLt-IE-CME">
+                            <rect key="frame" x="481" y="0.0" width="87" height="218"/>
+                        </imageView>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="dAU-q8-KL8">
+                    <rect key="frame" x="33" y="176" width="533" height="54"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ec7-f9-fEa">
+                            <rect key="frame" x="0.0" y="0.0" width="59" height="54"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="tkk-lc-LbV">
+                            <rect key="frame" x="95" y="0.0" width="59" height="54"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="RXl-i4-GaR">
+                            <rect key="frame" x="190" y="0.0" width="59" height="54"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="lVg-dX-35Q">
+                            <rect key="frame" x="285" y="0.0" width="58" height="54"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="VvA-sR-27L">
+                            <rect key="frame" x="379" y="0.0" width="59" height="54"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectTriangle.png" translatesAutoresizingMaskIntoConstraints="NO" id="9CX-lF-e4Y">
+                            <rect key="frame" x="474" y="0.0" width="59" height="54"/>
+                        </imageView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="캐릭터 선택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICW-gK-frS">
+                    <rect key="frame" x="236" y="135" width="129" height="26"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.37254901960784315" green="0.68627450980392157" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="dAU-q8-KL8" firstAttribute="width" secondItem="KTG-Wk-Bse" secondAttribute="width" constant="-35" id="JSF-xd-LaY"/>
+                <constraint firstItem="KTG-Wk-Bse" firstAttribute="top" secondItem="dAU-q8-KL8" secondAttribute="bottom" constant="-60" id="Okx-ge-YAS"/>
+                <constraint firstItem="dAU-q8-KL8" firstAttribute="top" secondItem="ICW-gK-frS" secondAttribute="bottom" constant="15" id="QDl-sI-eqj"/>
+                <constraint firstItem="KTG-Wk-Bse" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dlW-l0-GtN"/>
+                <constraint firstItem="dAU-q8-KL8" firstAttribute="centerX" secondItem="KTG-Wk-Bse" secondAttribute="centerX" id="fsR-ql-vLI"/>
+                <constraint firstAttribute="trailing" secondItem="KTG-Wk-Bse" secondAttribute="trailing" constant="16" id="mbe-Ne-btA"/>
+                <constraint firstItem="KTG-Wk-Bse" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="s3w-5T-4vj"/>
+                <constraint firstItem="ICW-gK-frS" firstAttribute="centerX" secondItem="KTG-Wk-Bse" secondAttribute="centerX" id="w1W-o1-J2B"/>
+                <constraint firstItem="KTG-Wk-Bse" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="zEC-JS-bKe"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="female01.png" width="110" height="218"/>
+        <image name="female02.png" width="110" height="218"/>
+        <image name="female03.png" width="110" height="218"/>
+        <image name="male01.png" width="110" height="216"/>
+        <image name="male02.png" width="110" height="216"/>
+        <image name="male03.png" width="110" height="216"/>
+        <image name="selectTriangle.png" width="59" height="54"/>
+    </resources>
+</document>

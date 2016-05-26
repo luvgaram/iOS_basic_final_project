@@ -10,4 +10,7 @@
 
 @interface EJSetDayViewController : UIViewController
 
+@property NSString *dayTitleFromRecipe;
+@property BOOL dateTypeFromRecipe;
+
 @end

@@ -13,3 +13,4 @@
 | 9 | 2016.5.24 | modify time picker |
 | 10 | 2016.5.25 | save time data in temp array |
 | 11 | 2016.5.25 | custom data logic and view skeleton |
+| 12 | 2016.5.26 | custom and recipe data + character select view |

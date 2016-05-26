@@ -23,6 +23,7 @@
 
 // type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
 typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} MyType;
+UIStoryboard *storyboard;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,6 +47,8 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} M
 
 # pragma mark - tap gesture
 - (void)setTap {
+    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(dayViewTapped:)];
@@ -69,8 +72,7 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} M
 
 - (void)dayViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"dayViewTapped");
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
     UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
     
@@ -79,27 +81,22 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} M
 - (void)timeViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"timeViewTapped");
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setTimeViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
 
 - (void)customViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"customViewTapped");
-    MyType type = custom;
-    NSString *start = @"44.346";
-    NSString *end = @"26.234";
-    NSString *now = @"32.23";
     
-    NSString *unit = @"kg";
-    
-    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"커스텀테스트" date:[NSDate date] start:start end:end now:now unit:unit];
-    
-    [self addDataToMainViewController:newData];
+    UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setCustomViewControllerIdentifier"];
+    [self.navigationController pushViewController:addViewController animated:YES];
 }
 
 - (void)recipeViewTapped:(UITapGestureRecognizer *)recognizer {
     NSLog(@"recipeViewTapped");
+    
+    UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setRecipeViewControllerIdentifier"];
+    [self.navigationController pushViewController:addViewController animated:YES];
 }
 
 - (void)addDataToMainViewController:(EJData *) newData {

@@ -15,12 +15,11 @@
 #import "EJNavigationBar.h"
 
 @interface EJSetDayViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *dayTitleTextView;
+
 @property (weak, nonatomic) IBOutlet UIView *firstView;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *daySegmentControl;
-@property (weak, nonatomic) IBOutlet UIButton *dayPeriodButton;
-@property (weak, nonatomic) IBOutlet UIButton *dayDayButton;
+@property (weak, nonatomic) IBOutlet UITextField *dayTitleTextView;
+
 @property (weak, nonatomic) IBOutlet UIView *dayPeriodBG;
 @property (weak, nonatomic) IBOutlet UIView *dayDateBG;
 @property (weak, nonatomic) IBOutlet UILabel *dayPeriodLable;
@@ -37,18 +36,18 @@
 
 UINavigationController *dayEditNavController;
 
-BOOL isTitleInserted;
+//BOOL isTitleInserted;
 BOOL isPeriod;
 BOOL isStartDate;
 BOOL isEndDate;
 int dayType;
-NSString *dayTitle;
+//NSString *dayTitle;
 NSDate *periodStart;
 NSDate *periodEnd;
 NSDate *oneDay;
 
 // type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDaytype;
+typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} EJDaytype;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,17 +65,20 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
+    [self setValuesFromRecipe];
+    
     dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
-    isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
+    
+    [self switchSaveButtonStatus];
+}
+
+- (void)setValuesFromRecipe {
+    if (self.dayTitleFromRecipe) self.dayTitleTextView.text = self.dayTitleFromRecipe;
+    if (self.dateTypeFromRecipe) [self dateViewTapped:nil];
 }
 
 - (IBAction)dayTitleTextViewClicked:(id)sender {
-    if (self.dayTitleTextView.text.length > 0)
-        isTitleInserted = YES;
-    else isTitleInserted = NO;
-    
-    NSLog(@"textview: %hhd, %d", isTitleInserted, self.dayTitleTextView.text.length);
     [self switchSaveButtonStatus];
 }
 
@@ -95,7 +97,7 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
 }
 
 - (void)switchSaveButtonStatus {
-    isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
+    BOOL isTitleInserted = (self.dayTitleTextView.text.length > 0) ? YES : NO;
     
     if (isPeriod) {
         NSLog(@"isTitleInserted: %hhd, sdate: %d, edate: %d", isTitleInserted, periodStart != nil, periodEnd != nil);
@@ -116,10 +118,6 @@ typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJDay
     if (isPeriod) {
         newData = [[EJData alloc] initWithType:day character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
     } else {
-//        NSTimeInterval secondsInOneDay = 24 * 60 * 60;
-//        NSDate *oneDayEnd = [oneDay dateByAddingTimeInterval:secondsInOneDay];
-//        NSLog(@"oneDayStart: %@ oneDayEnd: %@", oneDay, oneDayEnd);
-        
         NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
         newData = [[EJData alloc] initWithType:anniversary character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
     }

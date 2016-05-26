@@ -10,4 +10,6 @@
 
 @interface EJSetTimeViewController : UIViewController
 
+@property NSString *timeTitleFromRecipe;
+
 @end

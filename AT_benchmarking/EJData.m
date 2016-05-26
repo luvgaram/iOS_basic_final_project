@@ -11,8 +11,8 @@
 
 @implementation EJData
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} curType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom 8: today
+enum {hour = 0, day = 1, week, month, year, life, anniversary, custom, today} curType;
 
 //@property int type;
 //@property int character;
@@ -71,11 +71,11 @@ NSString *nowForUnit;
             break;
     
         case week:
-            [self setWeekType:start end:end];
+            [self setWeekType];
             break;
             
         case month:
-            [self setMonthType:start end:end];
+            [self setMonthType];
             break;
 
         case year:
@@ -90,35 +90,37 @@ NSString *nowForUnit;
         case custom:
             [self setCustomType:start end:end];
             break;
+            
+        case today:
+            [self setTodayType];
+            break;
     }
 }
 
-- (void)setCustomType:(NSString *)start end:(NSString *)end {
-    NSLog(@"custom");
-    float startNumber = [start floatValue];
-    float endNumber = [end floatValue];
-    float currentNumber = [nowForUnit floatValue];
-    float measurePercent;
+- (void)setTodayType {
+    NSDate *startDate = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
+    NSDate *endDate = [startDate dateByAddingTimeInterval: (60 * 60 * 24 * 1)];
+    NSDate *now = [NSDate date];
     
+    NSDateComponents *conversionInfo = [EJDateLib componentsFrom:startDate To:endDate];
+    
+    _measure = [conversionInfo day] * 24 * 60 + [conversionInfo hour] * 60 + [conversionInfo minute];
+    
+    NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
+    int measurePercent = [conversionInfoPercent day] * 24 * 60 + [conversionInfoPercent hour] * 60 + [conversionInfoPercent minute];
+    
+    NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
 
+    _startString = @"0시";
+    _endString = @"24시";
     
-    _measure = endNumber - startNumber;
-    measurePercent = currentNumber - startNumber;
-    
-    if (startNumber > endNumber) {
-        _measure = -_measure;
-        measurePercent = -measurePercent;
+    if ([now compare:endDate] == NSOrderedAscending) {
+        _percent = (measurePercent / _measure) * 100;
+    } else {
+        _percent = 100;
     }
-    
-    NSLog(@"startNumber: %f, endNumber: %f, currentNumber: %f, measure: %f, mPer: %f", startNumber, endNumber, currentNumber, _measure, measurePercent);
-    
-    _percent = (int)((measurePercent / _measure) * 100);
-        
-    NSLog(@"startNumber: %f, endNumber: %f, currentNuber: %f, measure: %f, mPer: %f", startNumber, endNumber, currentNumber, _measure, measurePercent);
-    
-    _startString = [NSString stringWithFormat:@"%d%@", (int)startNumber, unit];
-    _endString = [NSString stringWithFormat:@"%d%@", (int)endNumber, unit];
 }
+
 
 - (void)setHourType:(NSString *)start end:(NSString *)end {
     NSDate *startDate = [EJDateLib dateFromString:start];
@@ -134,8 +136,6 @@ NSString *nowForUnit;
     
     NSLog(@"_measure: %f, now: %d", _measure, measurePercent);
     
-    //            _startString = @"0분";
-    //            _endString = [NSString stringWithFormat:@"%d분", [[NSNumber numberWithFloat:_measure] intValue]];
     
     _startString = [EJDateLib simpleHourStringFromDate:startDate];
     _endString = [EJDateLib simpleHourStringFromDate:endDate];
@@ -171,7 +171,7 @@ NSString *nowForUnit;
     }
 }
 
-- (void)setWeekType:(NSString *)start end:(NSString *)end {
+- (void)setWeekType {
     _startString = @"일";
     _endString = @"토";
     
@@ -183,7 +183,7 @@ NSString *nowForUnit;
     _percent = ((weekDay - 1) / _measure) * 100;
 }
 
-- (void)setMonthType:(NSString *)start end:(NSString *)end {
+- (void)setMonthType {
     NSDate *today = [NSDate date];
     NSCalendar *currentCalendar = [NSCalendar currentCalendar];
     NSRange days = [currentCalendar rangeOfUnit:NSCalendarUnitDay
@@ -251,6 +251,31 @@ NSString *nowForUnit;
         _endString = [NSString stringWithFormat:@"%d일", [[NSNumber numberWithFloat:_measure] intValue]];
         _percent = (measurePercent / _measure) * 100;
     }
+}
+
+- (void)setCustomType:(NSString *)start end:(NSString *)end {
+    NSLog(@"custom");
+    float startNumber = [start floatValue];
+    float endNumber = [end floatValue];
+    float currentNumber = [nowForUnit floatValue];
+    float measurePercent;
+    
+    _measure = endNumber - startNumber;
+    measurePercent = currentNumber - startNumber;
+    
+    if (startNumber > endNumber) {
+        _measure = -_measure;
+        measurePercent = -measurePercent;
+    }
+    
+    NSLog(@"startNumber: %f, endNumber: %f, currentNumber: %f, measure: %f, mPer: %f", startNumber, endNumber, currentNumber, _measure, measurePercent);
+    
+    _percent = (int)((measurePercent / _measure) * 100);
+    
+    NSLog(@"startNumber: %f, endNumber: %f, currentNuber: %f, measure: %f, mPer: %f", startNumber, endNumber, currentNumber, _measure, measurePercent);
+    
+    _startString = [NSString stringWithFormat:@"%d%@", (int)startNumber, unit];
+    _endString = [NSString stringWithFormat:@"%d%@", (int)endNumber, unit];
 }
 
 @end

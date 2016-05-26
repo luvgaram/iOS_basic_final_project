@@ -24,7 +24,7 @@
 
 @implementation EJSetTimeViewController
 
-BOOL isTimeTitleInserted;
+//BOOL isTimeTitleInserted;
 NSDate *startTime;
 NSDate *endTime;
 
@@ -37,6 +37,17 @@ NSDate *endTime;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(timeSelected:) name:@"timeSelected" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setValuesFromRecipe];
+    [self switchSaveButtonStatus];
+}
+
+- (void)setValuesFromRecipe {
+    if (self.timeTitleFromRecipe) self.timeTitleTextView.text = self.timeTitleFromRecipe;
 }
 
 # pragma mark - Notification
@@ -87,7 +98,7 @@ NSDate *endTime;
 
 
 - (void)switchSaveButtonStatus {
-    isTimeTitleInserted = (self.timeTitleTextView.text.length > 0) ? YES : NO;
+    BOOL isTimeTitleInserted = (self.timeTitleTextView.text.length > 0) ? YES : NO;
     
     NSLog(@"isTitleInserted: %hhd, sdate: %d, edate: %d", isTimeTitleInserted, startTime != nil, endTime != nil);
     if (isTimeTitleInserted && startTime != nil && endTime != nil) self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -106,7 +117,6 @@ NSDate *endTime;
 - (void)timeLabelTapped {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EJSetTimePickerViewController *timePickerViewController = [storyboard instantiateViewControllerWithIdentifier:@"setTimePickerControllerIdentifier"];
-//    [self.navigationController pushViewController:timePickerViewController animated:YES];
     
     UINavigationController *timeEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
 
@@ -116,11 +126,6 @@ NSDate *endTime;
 }
 
 - (IBAction)timeTitleTextEdited:(id)sender {
-    if (self.timeTitleTextView.text.length > 0)
-        isTimeTitleInserted = YES;
-    else isTimeTitleInserted = NO;
-    
-    NSLog(@"textview: %hhd, %d", isTimeTitleInserted, self.timeTitleTextView.text.length);
     [self switchSaveButtonStatus];
 }
 

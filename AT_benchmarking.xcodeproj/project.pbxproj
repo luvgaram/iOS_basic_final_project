@@ -18,13 +18,9 @@
 		A859DB4D1CE19AEF00AB0590 /* EJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */; };
 		A859DB501CE19D9C00AB0590 /* EJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB4F1CE19D9C00AB0590 /* EJData.m */; };
 		A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB551CE1B18500AB0590 /* EJProgressView.m */; };
-		A859DB591CE1B37200AB0590 /* bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = A859DB571CE1B37200AB0590 /* bar_red.png */; };
-		A859DB5A1CE1B37200AB0590 /* bar_white.png in Resources */ = {isa = PBXBuildFile; fileRef = A859DB581CE1B37200AB0590 /* bar_white.png */; };
 		A859DB601CE1BDA200AB0590 /* EJNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */; };
 		A86F89FB1CEADD61005C53BE /* EJSetDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */; };
 		A86F8A001CEAE9A8005C53BE /* EJColorLib.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */; };
-		A86F8A071CEB0654005C53BE /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = A86F8A051CEB0654005C53BE /* female.png */; };
-		A86F8A081CEB0654005C53BE /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = A86F8A061CEB0654005C53BE /* male.png */; };
 		A86F8A1A1CEC37D6005C53BE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A86F8A0E1CEC37D6005C53BE /* Info.plist */; };
 		A86F8A1B1CEC37D6005C53BE /* PDTSimpleCalendarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A111CEC37D6005C53BE /* PDTSimpleCalendarViewCell.m */; };
 		A86F8A1C1CEC37D6005C53BE /* PDTSimpleCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F8A131CEC37D6005C53BE /* PDTSimpleCalendarViewController.m */; };
@@ -34,6 +30,21 @@
 		A88FB8011CF41FEF00954764 /* ESMathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB7FE1CF41FEF00954764 /* ESMathUtils.m */; };
 		A88FB8021CF41FEF00954764 /* ESTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB8001CF41FEF00954764 /* ESTimePicker.m */; };
 		A88FB80B1CF4218B00954764 /* EJSetTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */; };
+		A8E408C01CF688210068E312 /* EJSetCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E408BF1CF688210068E312 /* EJSetCustomViewController.m */; };
+		A8E408C31CF6A3070068E312 /* EJRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E408C21CF6A3070068E312 /* EJRecipeViewController.m */; };
+		A8E408C51CF6C4E40068E312 /* SelectCharacterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E408C41CF6C4E40068E312 /* SelectCharacterView.xib */; };
+		A8E408CE1CF6CB0E0068E312 /* bar_red.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408C61CF6CB0E0068E312 /* bar_red.png */; };
+		A8E408CF1CF6CB0E0068E312 /* bar_white.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408C71CF6CB0E0068E312 /* bar_white.png */; };
+		A8E408D11CF6CB0E0068E312 /* female01.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408C91CF6CB0E0068E312 /* female01.png */; };
+		A8E408D21CF6CB0E0068E312 /* female02.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408CA1CF6CB0E0068E312 /* female02.png */; };
+		A8E408D31CF6CB0E0068E312 /* male01.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408CB1CF6CB0E0068E312 /* male01.png */; };
+		A8E408D41CF6CB0E0068E312 /* male02.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408CC1CF6CB0E0068E312 /* male02.png */; };
+		A8E408D51CF6CB0E0068E312 /* male03.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408CD1CF6CB0E0068E312 /* male03.png */; };
+		A8E408D71CF6CC190068E312 /* female03.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408D61CF6CC190068E312 /* female03.png */; };
+		A8E408D91CF6CD390068E312 /* selectTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E408D81CF6CD390068E312 /* selectTriangle.png */; };
+		A8E408DC1CF6CF760068E312 /* EJSelectCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E408DB1CF6CF760068E312 /* EJSelectCharacterView.m */; };
+		A8E408DF1CF6D2380068E312 /* EJSelectCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E408DE1CF6D2380068E312 /* EJSelectCharacterViewController.m */; };
+		A8E408E81CF6DE8E0068E312 /* EJTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E408E71CF6DE8E0068E312 /* EJTapGestureRecognizer.m */; };
 		A8F0DC291CE95CA500ADEE76 /* EJAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */; };
 		BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */; };
 /* End PBXBuildFile section */
@@ -59,16 +70,12 @@
 		A859DB4F1CE19D9C00AB0590 /* EJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJData.m; sourceTree = "<group>"; };
 		A859DB541CE1B18500AB0590 /* EJProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJProgressView.h; sourceTree = "<group>"; };
 		A859DB551CE1B18500AB0590 /* EJProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJProgressView.m; sourceTree = "<group>"; };
-		A859DB571CE1B37200AB0590 /* bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_red.png; sourceTree = "<group>"; };
-		A859DB581CE1B37200AB0590 /* bar_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_white.png; sourceTree = "<group>"; };
 		A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJNavigationBar.h; sourceTree = "<group>"; };
 		A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJNavigationBar.m; sourceTree = "<group>"; };
 		A86F89F91CEADD61005C53BE /* EJSetDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSetDayViewController.h; sourceTree = "<group>"; };
 		A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSetDayViewController.m; sourceTree = "<group>"; };
 		A86F89FE1CEAE9A8005C53BE /* EJColorLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJColorLib.h; sourceTree = "<group>"; };
 		A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJColorLib.m; sourceTree = "<group>"; };
-		A86F8A051CEB0654005C53BE /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
-		A86F8A061CEB0654005C53BE /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		A86F8A0E1CEC37D6005C53BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A86F8A0F1CEC37D6005C53BE /* PDTSimpleCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendar.h; sourceTree = "<group>"; };
 		A86F8A101CEC37D6005C53BE /* PDTSimpleCalendarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTSimpleCalendarViewCell.h; sourceTree = "<group>"; };
@@ -87,6 +94,26 @@
 		A88FB8001CF41FEF00954764 /* ESTimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ESTimePicker.m; path = ESTimePicker/ESTimePicker.m; sourceTree = "<group>"; };
 		A88FB8091CF4218B00954764 /* EJSetTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSetTimeViewController.h; sourceTree = "<group>"; };
 		A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSetTimeViewController.m; sourceTree = "<group>"; };
+		A8E408BE1CF688210068E312 /* EJSetCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSetCustomViewController.h; sourceTree = "<group>"; };
+		A8E408BF1CF688210068E312 /* EJSetCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSetCustomViewController.m; sourceTree = "<group>"; };
+		A8E408C11CF6A3070068E312 /* EJRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJRecipeViewController.h; sourceTree = "<group>"; };
+		A8E408C21CF6A3070068E312 /* EJRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJRecipeViewController.m; sourceTree = "<group>"; };
+		A8E408C41CF6C4E40068E312 /* SelectCharacterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCharacterView.xib; sourceTree = "<group>"; };
+		A8E408C61CF6CB0E0068E312 /* bar_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_red.png; path = Esset/bar_red.png; sourceTree = "<group>"; };
+		A8E408C71CF6CB0E0068E312 /* bar_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_white.png; path = Esset/bar_white.png; sourceTree = "<group>"; };
+		A8E408C91CF6CB0E0068E312 /* female01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = female01.png; path = Esset/female01.png; sourceTree = "<group>"; };
+		A8E408CA1CF6CB0E0068E312 /* female02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = female02.png; path = Esset/female02.png; sourceTree = "<group>"; };
+		A8E408CB1CF6CB0E0068E312 /* male01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = male01.png; path = Esset/male01.png; sourceTree = "<group>"; };
+		A8E408CC1CF6CB0E0068E312 /* male02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = male02.png; path = Esset/male02.png; sourceTree = "<group>"; };
+		A8E408CD1CF6CB0E0068E312 /* male03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = male03.png; path = Esset/male03.png; sourceTree = "<group>"; };
+		A8E408D61CF6CC190068E312 /* female03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = female03.png; path = Esset/female03.png; sourceTree = "<group>"; };
+		A8E408D81CF6CD390068E312 /* selectTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectTriangle.png; sourceTree = "<group>"; };
+		A8E408DA1CF6CF760068E312 /* EJSelectCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSelectCharacterView.h; sourceTree = "<group>"; };
+		A8E408DB1CF6CF760068E312 /* EJSelectCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSelectCharacterView.m; sourceTree = "<group>"; };
+		A8E408DD1CF6D2380068E312 /* EJSelectCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSelectCharacterViewController.h; sourceTree = "<group>"; };
+		A8E408DE1CF6D2380068E312 /* EJSelectCharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJSelectCharacterViewController.m; sourceTree = "<group>"; };
+		A8E408E61CF6DE8E0068E312 /* EJTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJTapGestureRecognizer.h; sourceTree = "<group>"; };
+		A8E408E71CF6DE8E0068E312 /* EJTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJTapGestureRecognizer.m; sourceTree = "<group>"; };
 		A8F0DC271CE95CA500ADEE76 /* EJAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJAddViewController.h; sourceTree = "<group>"; };
 		A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJAddViewController.m; sourceTree = "<group>"; };
 		BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJDateLib.h; sourceTree = "<group>"; };
@@ -111,6 +138,8 @@
 				A86F89FF1CEAE9A8005C53BE /* EJColorLib.m */,
 				BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */,
 				BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */,
+				A8E408E61CF6DE8E0068E312 /* EJTapGestureRecognizer.h */,
+				A8E408E71CF6DE8E0068E312 /* EJTapGestureRecognizer.m */,
 			);
 			name = EJLibrary;
 			sourceTree = "<group>";
@@ -118,10 +147,15 @@
 		A8468E721CF565320079644F /* Esset */ = {
 			isa = PBXGroup;
 			children = (
-				A859DB571CE1B37200AB0590 /* bar_red.png */,
-				A859DB581CE1B37200AB0590 /* bar_white.png */,
-				A86F8A051CEB0654005C53BE /* female.png */,
-				A86F8A061CEB0654005C53BE /* male.png */,
+				A8E408C61CF6CB0E0068E312 /* bar_red.png */,
+				A8E408C71CF6CB0E0068E312 /* bar_white.png */,
+				A8E408C91CF6CB0E0068E312 /* female01.png */,
+				A8E408CA1CF6CB0E0068E312 /* female02.png */,
+				A8E408CB1CF6CB0E0068E312 /* male01.png */,
+				A8E408CC1CF6CB0E0068E312 /* male02.png */,
+				A8E408CD1CF6CB0E0068E312 /* male03.png */,
+				A8E408D81CF6CD390068E312 /* selectTriangle.png */,
+				A8E408D61CF6CC190068E312 /* female03.png */,
 			);
 			name = Esset;
 			sourceTree = "<group>";
@@ -147,6 +181,8 @@
 		A8468E761CF592BA0079644F /* EJView */ = {
 			isa = PBXGroup;
 			children = (
+				A8E408DA1CF6CF760068E312 /* EJSelectCharacterView.h */,
+				A8E408DB1CF6CF760068E312 /* EJSelectCharacterView.m */,
 				A859DB541CE1B18500AB0590 /* EJProgressView.h */,
 				A859DB551CE1B18500AB0590 /* EJProgressView.m */,
 				A8468E691CF52E6C0079644F /* EJFlowTouchView.h */,
@@ -172,6 +208,12 @@
 				A88FB80A1CF4218B00954764 /* EJSetTimeViewController.m */,
 				A8468E6C1CF555620079644F /* EJSetTimePickerViewController.h */,
 				A8468E6D1CF555620079644F /* EJSetTimePickerViewController.m */,
+				A8E408BE1CF688210068E312 /* EJSetCustomViewController.h */,
+				A8E408BF1CF688210068E312 /* EJSetCustomViewController.m */,
+				A8E408C11CF6A3070068E312 /* EJRecipeViewController.h */,
+				A8E408C21CF6A3070068E312 /* EJRecipeViewController.m */,
+				A8E408DD1CF6D2380068E312 /* EJSelectCharacterViewController.h */,
+				A8E408DE1CF6D2380068E312 /* EJSelectCharacterViewController.m */,
 			);
 			name = EJController;
 			sourceTree = "<group>";
@@ -206,6 +248,7 @@
 				A8468E721CF565320079644F /* Esset */,
 				A859DB3C1CE1984600AB0590 /* LaunchScreen.storyboard */,
 				A859DB371CE1984600AB0590 /* Main.storyboard */,
+				A8E408C41CF6C4E40068E312 /* SelectCharacterView.xib */,
 				A8468E731CF565CB0079644F /* OtherLibrary */,
 				A859DB2E1CE1984600AB0590 /* Supporting Files */,
 			);
@@ -309,12 +352,18 @@
 			files = (
 				A86F8A1A1CEC37D6005C53BE /* Info.plist in Resources */,
 				A859DB3E1CE1984600AB0590 /* LaunchScreen.storyboard in Resources */,
-				A859DB5A1CE1B37200AB0590 /* bar_white.png in Resources */,
-				A859DB591CE1B37200AB0590 /* bar_red.png in Resources */,
+				A8E408D21CF6CB0E0068E312 /* female02.png in Resources */,
 				A859DB3B1CE1984600AB0590 /* Assets.xcassets in Resources */,
-				A86F8A081CEB0654005C53BE /* male.png in Resources */,
+				A8E408CE1CF6CB0E0068E312 /* bar_red.png in Resources */,
+				A8E408CF1CF6CB0E0068E312 /* bar_white.png in Resources */,
+				A8E408D31CF6CB0E0068E312 /* male01.png in Resources */,
+				A8E408D51CF6CB0E0068E312 /* male03.png in Resources */,
+				A8E408D11CF6CB0E0068E312 /* female01.png in Resources */,
+				A8E408D71CF6CC190068E312 /* female03.png in Resources */,
 				A859DB391CE1984600AB0590 /* Main.storyboard in Resources */,
-				A86F8A071CEB0654005C53BE /* female.png in Resources */,
+				A8E408D91CF6CD390068E312 /* selectTriangle.png in Resources */,
+				A8E408D41CF6CB0E0068E312 /* male02.png in Resources */,
+				A8E408C51CF6C4E40068E312 /* SelectCharacterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E408C31CF6A3070068E312 /* EJRecipeViewController.m in Sources */,
 				A88FB80B1CF4218B00954764 /* EJSetTimeViewController.m in Sources */,
 				A88FB8021CF41FEF00954764 /* ESTimePicker.m in Sources */,
 				A859DB4A1CE199D600AB0590 /* EJMainViewController.m in Sources */,
@@ -332,14 +382,18 @@
 				A88FB8011CF41FEF00954764 /* ESMathUtils.m in Sources */,
 				A859DB331CE1984600AB0590 /* AppDelegate.m in Sources */,
 				A8468E6E1CF555620079644F /* EJSetTimePickerViewController.m in Sources */,
+				A8E408C01CF688210068E312 /* EJSetCustomViewController.m in Sources */,
 				A86F8A1B1CEC37D6005C53BE /* PDTSimpleCalendarViewCell.m in Sources */,
 				A86F89FB1CEADD61005C53BE /* EJSetDayViewController.m in Sources */,
+				A8E408DF1CF6D2380068E312 /* EJSelectCharacterViewController.m in Sources */,
+				A8E408E81CF6DE8E0068E312 /* EJTapGestureRecognizer.m in Sources */,
 				A859DB601CE1BDA200AB0590 /* EJNavigationBar.m in Sources */,
 				A86F8A1E1CEC37D6005C53BE /* PDTSimpleCalendarViewHeader.m in Sources */,
 				A86F8A1C1CEC37D6005C53BE /* PDTSimpleCalendarViewController.m in Sources */,
 				A86F8A001CEAE9A8005C53BE /* EJColorLib.m in Sources */,
 				A859DB4D1CE19AEF00AB0590 /* EJTableViewCell.m in Sources */,
 				BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */,
+				A8E408DC1CF6CF760068E312 /* EJSelectCharacterView.m in Sources */,
 				A859DB501CE19D9C00AB0590 /* EJData.m in Sources */,
 				A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */,
 				A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */,
