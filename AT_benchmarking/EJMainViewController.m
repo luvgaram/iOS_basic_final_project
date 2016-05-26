@@ -12,11 +12,12 @@
 #import "EJData.h"
 #import "EJProgressView.h"
 #import "EJColorLib.h"
+#import "EJDateLib.h"
 
 @implementation EJMainViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-typedef enum {hour, day = 1, week, month, year, life, anniversary, custom} EJtype;
+// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom 8: today
+typedef enum {hour, day = 1, week, month, year, life, anniversary, custom, today} EJtype;
 
 
 NSArray *colorArray;
@@ -40,6 +41,14 @@ NSArray *colorArray;
     // 임시 데이터객체
     _dataArray = [[NSMutableArray alloc] init];
     
+    EJData *temp = [[EJData alloc] initWithType:today character:2 title:@"오늘" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
+    EJData *temp2 = [[EJData alloc] initWithType:week character:1 title:@"이번주" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
+    EJData *temp3 = [[EJData alloc] initWithType:month character:4 title:@"이번달" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
+
+    [_dataArray addObject:temp];
+    [_dataArray addObject:temp2];
+    [_dataArray addObject:temp3];
+
     // color values
     colorArray = [NSArray arrayWithObjects:@"#99CCCC", @"#BDD5BD", @"#D7D8B1", @"#F5DC90", @"#F2CA78", @"#EFAB79", @"#EC8C71",
                   @"#E6756B", @"#EC8C71", @"#EFAB79", @"#F2CA78", @"#F5DC90", @"#D7D8B1", @"#BDD5BD", @"#99CCCC", nil];
@@ -75,26 +84,6 @@ NSArray *colorArray;
     
 }
 
-// temp addData
-//- (void)addData {
-//    
-//    // maximum data: 15
-//    if ([dataArray count] > 14) {
-//        NSLog(@"no more add");
-//        return;
-//    }
-//    
-//    EJtype type = hour;
-//    NSString *start = @"2016-04-10-00-00-00";
-//    NSString *end = @"2016-05-17-00-00-00";
-//    
-//    EJData *newData = [[EJData alloc] initWithType:type character:1 title:@"new" start:start end:end];
-//    
-//    [dataArray addObject:newData];
-//    
-//    [self.tableView reloadData];
-//}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -114,15 +103,19 @@ NSArray *colorArray;
     }
 
     EJData *cellData = [_dataArray objectAtIndex:indexPath.row];
-    cell.backgroundColor = [self colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
+    cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
     cell.cellTitle.text = cellData.title;
     cell.cellstart.text = cellData.startString;
     cell.cellEnd.text = cellData.endString;
     cell.cellPercent.text = [NSString stringWithFormat:@"%d", cellData.percent];
-   
-    UIProgressView* progressTest = [[EJProgressView alloc] initWithFrame:CGRectMake(66, 72, 200, 10)];
-    progressTest.progress = cellData.percent / 100.0;
     
+    EJProgressView* progressTest = [[EJProgressView alloc] initWithFrame:CGRectMake(66, 22, 200, 50)];
+    NSLog(@"character in cellData %d", cellData.character);
+
+    progressTest.progress = cellData.percent / 100.0;
+    progressTest.characterIndex = cellData.character;
+    
+//    [progressTest setProgress:progress animated:YES];
     [cell addSubview:progressTest];
     
     return cell;
@@ -130,30 +123,6 @@ NSArray *colorArray;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
-}
-
-#pragma mark - color library
-
-- (UIColor *)colorFromHexString:(NSString *)hexString {
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
-                       
-#pragma mark - DateConvertor
-                       
-- (NSDate *)dateFromString:(NSString *)string {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
-    return [dateFormatter dateFromString:string];
-}
-                       
-- (NSString *)stringFromDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy MM dd HH mm ss"];
-    return [dateFormatter stringFromDate:date];
 }
 
 @end

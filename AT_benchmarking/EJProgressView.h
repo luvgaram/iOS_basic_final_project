@@ -10,4 +10,6 @@
 
 @interface EJProgressView : UIProgressView
 
+@property int characterIndex;
+
 @end
