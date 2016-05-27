@@ -165,11 +165,16 @@ UIStoryboard *mainStoryboard;
 
 - (void)recipeLifeTapped {
     NSLog(@"recipeLifeTapped");
+
+    EJSetCustomViewController *customViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"setCustomViewControllerIdentifier"];
+    customViewController.customTitleFromRecipe = @"일생";
+    customViewController.customUnitFromRecipe = @"세";
     
-    EJSelectCharacterViewController *characterViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"setSelectCharacterViewControllerIdentifier"];
-    characterViewController.typeFromRecipe = life;
-    
-    [self.navigationController pushViewController:characterViewController animated:YES];
+    [self.navigationController pushViewController:customViewController animated:YES];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 @end

@@ -28,7 +28,7 @@ BOOL isCustomStartInserted;
 BOOL isCustomCurrentInserted;
 BOOL isCustomEndInserted;
 BOOL isCustomUnitInserted;
-
+int customCharacterNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,8 +38,10 @@ BOOL isCustomUnitInserted;
     self.customStart.keyboardType = UIKeyboardTypeDecimalPad;
     self.customCurrent.keyboardType = UIKeyboardTypeDecimalPad;
     self.customEnd.keyboardType = UIKeyboardTypeDecimalPad;
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -49,7 +51,13 @@ BOOL isCustomUnitInserted;
 }
 
 - (void)setValuesFromRecipe {
-    if (self.customTitleFromRecipe) self.customTitleTextView.text = self.customTitleFromRecipe;
+    if (self.customTitleFromRecipe) {
+        self.customTitleTextView.text = self.customTitleFromRecipe;
+        if ([self.customTitleFromRecipe isEqualToString:@"일생"]) {
+            self.customStart.text = @"0";
+            self.customEnd.text = @"100";
+        }
+    }
     if (self.customUnitFromRecipe) self.customUnit.text = self.customUnitFromRecipe;
 }
 
@@ -98,7 +106,7 @@ BOOL isCustomUnitInserted;
 
 # pragma mark - data save
 - (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:7 character:1 title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
+    EJData *newData = [[EJData alloc] initWithType:7 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
     
     [self addDataToMainViewController:newData];
 }
@@ -113,14 +121,10 @@ BOOL isCustomUnitInserted;
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Notification
+- (void)characterChanged:(NSNotification*)notification {
+    customCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
+    NSLog(@"character: %d", customCharacterNumber);
 }
-*/
 
 @end

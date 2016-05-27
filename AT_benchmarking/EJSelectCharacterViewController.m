@@ -62,6 +62,7 @@ int characterNumber;
             newData = [[EJData alloc] initWithType:month character:characterNumber title:@"이번달" date:[NSDate date] start:todayString end:todayString];
             break;
         case year:
+            newData = [[EJData alloc] initWithType:year character:characterNumber title:@"올해" date:[NSDate date] start:todayString end:todayString];
             break;
         case life:
             break;

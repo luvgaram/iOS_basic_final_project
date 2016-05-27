@@ -19,8 +19,6 @@ NSArray *characterArray;
     if (self) {
         NSArray *subViews = self.subviews;
         for (UIView *view in subViews) {
-            
-            NSLog(@"view: %@", view);
             [view removeFromSuperview];
         }
     }
@@ -33,6 +31,13 @@ NSArray *characterArray;
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
 
+    NSArray *subViews = self.subviews;
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[UIImageView class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
     NSInteger maxWidth = rect.size.width;
     NSInteger currentWidth = floor([self progress] * maxWidth);
 
@@ -41,21 +46,19 @@ NSArray *characterArray;
     
     UIView *progressBar =[[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 50, 0, rect.size.height - 40)];
     [progressBar setBackgroundColor:[EJColorLib colorFromHexString:@"#C8454D"]];
-    
-    UIView *characterView = [[UIView alloc] initWithFrame:CGRectMake(0, 24, 10, 24)];
+
     UIImageView *imageView = [[UIImageView alloc] initWithImage:characterArray[self.characterIndex]];
-    imageView.frame = characterView.bounds;
-    [characterView addSubview:imageView];
-    
+    imageView.frame = CGRectMake(0, 24, 10, 24);
+
     [self addSubview:progressBG];
     [self addSubview:progressBar];
-    [self addSubview:characterView];
+    [self addSubview:imageView];
     
     NSLog(@"drawRect %d", self.characterIndex);
 
     [UIView animateWithDuration:1.0 animations:^{
         progressBar.frame = CGRectMake(rect.origin.x, rect.origin.y + 50, currentWidth, rect.size.height - 40);
-        characterView.frame = CGRectMake(currentWidth - 5, 24, 10, 24);
+        imageView.frame = CGRectMake(currentWidth - 5, 24, 10, 24);
     }];
 }
 

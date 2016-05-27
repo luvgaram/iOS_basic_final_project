@@ -9,6 +9,7 @@
 #import "EJSetTimePickerViewController.h"
 #import "ESTimePicker.h"
 #import "EJFlowTouchView.h"
+#import "EJColorLib.h"
 
 @interface EJSetTimePickerViewController ()
 @property (weak, nonatomic) IBOutlet UIView *startTimeView;
@@ -27,6 +28,12 @@ BOOL isStart;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F18A81"];
+    self.navigationController.navigationBar.tintColor = [EJColorLib colorFromHexString:@"#FCE8E5"];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{
+                                                                 NSForegroundColorAttributeName : [EJColorLib colorFromHexString:@"#FCE8E5"],
+                                                                 NSFontAttributeName : [UIFont boldSystemFontOfSize:22.0]
+                                                                 }];
     self.title = @"시간을 선택해 주세요!";
     [self setPickers];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveSelectedTime)];
@@ -37,6 +44,18 @@ BOOL isStart;
     self.navigationItem.leftBarButtonItem = stopButton;
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(timePickerClicked:) name:@"timePickerClicked" object:nil];
+}
+
+- (void)setDayNavigationBar:(UINavigationController *) navigationController {
+    navigationController.navigationBar.barTintColor = [EJColorLib colorFromHexString:@"#F18A81"];
+    navigationController.navigationBar.tintColor = [EJColorLib colorFromHexString:@"#FCE8E5"];
+    [navigationController.navigationBar setTitleTextAttributes:@{
+                                                                 NSForegroundColorAttributeName : [EJColorLib colorFromHexString:@"#FCE8E5"],
+                                                                 NSFontAttributeName : [UIFont boldSystemFontOfSize:22.0]
+                                                                 }];
+    
+    UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeEditDateViewController)];
+    [navigationController viewControllers][0].navigationItem.leftBarButtonItem = stopButton;
 }
 
 - (void)closeEditTimeViewController {
@@ -86,7 +105,6 @@ BOOL isStart;
 }
 
 #pragma mark - data save
-
 - (void)saveSelectedTime {
     NSDictionary* userInfo = @{@"startHour": self.startTimeHourLabel.text,
                                @"startMinute": self.startTimeMinuteLabel.text,
@@ -98,27 +116,6 @@ BOOL isStart;
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
-//# pragma mark - tap gesture
-//- (void)setTap {
-//    UITapGestureRecognizer *singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(startTimeViewTapped:)];
-//    [self.startTimeView addGestureRecognizer:singleFingerTap];
-//    
-//    singleFingerTap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(endTimeViewTapped:)];
-//    [self.endTimeView addGestureRecognizer:singleFingerTap];
-//}
-//
-//- (void)startTimeViewTapped:(UITapGestureRecognizer *)recognizer {
-//    NSLog(@"startTimeViewTapped");
-//}
-//
-//- (void)endTimeViewTapped:(UITapGestureRecognizer *)recognizer {
-//    NSLog(@"startTimeViewTapped");
-//}
 
 - (void)switchSaveButtonStatus {
     if (![self.startTimeHourLabel.text isEqualToString:@"시"] &&

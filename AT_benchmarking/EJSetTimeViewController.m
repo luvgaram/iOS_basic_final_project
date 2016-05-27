@@ -24,10 +24,9 @@
 
 @implementation EJSetTimeViewController
 
-//BOOL isTimeTitleInserted;
 NSDate *startTime;
 NSDate *endTime;
-
+int timeCharacterNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +36,8 @@ NSDate *endTime;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(timeSelected:) name:@"timeSelected" object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,6 +80,12 @@ NSDate *endTime;
     self.timeEnd.text = [EJDateLib simpleHourStringFromDate:endTime];
     
     [self switchSaveButtonStatus];
+}
+
+#pragma mark - Notification
+- (void)characterChanged:(NSNotification*)notification {
+    timeCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
+    NSLog(@"character: %d", timeCharacterNumber);
 }
 
 # pragma mark - navigation bar and button
@@ -135,7 +142,7 @@ NSDate *endTime;
 
 # pragma mark - data save
 - (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:0 character:1 title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
+    EJData *newData = [[EJData alloc] initWithType:0 character:timeCharacterNumber title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
 
     [self addDataToMainViewController:newData];
 }

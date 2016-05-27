@@ -44,10 +44,12 @@ NSArray *colorArray;
     EJData *temp = [[EJData alloc] initWithType:today character:2 title:@"오늘" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
     EJData *temp2 = [[EJData alloc] initWithType:week character:1 title:@"이번주" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
     EJData *temp3 = [[EJData alloc] initWithType:month character:4 title:@"이번달" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
+    EJData *temp4 = [[EJData alloc] initWithType:year character:5 title:@"올해" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
 
     [_dataArray addObject:temp];
     [_dataArray addObject:temp2];
     [_dataArray addObject:temp3];
+    [_dataArray addObject:temp4];
 
     // color values
     colorArray = [NSArray arrayWithObjects:@"#99CCCC", @"#BDD5BD", @"#D7D8B1", @"#F5DC90", @"#F2CA78", @"#EFAB79", @"#EC8C71",
@@ -101,6 +103,14 @@ NSArray *colorArray;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EJCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
+    
+    NSArray *subViews = cell.subviews;
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[EJProgressView class]]) {
+            NSLog(@"EJProgressView: %@", view);
+            [view removeFromSuperview];
+        }
+    }
 
     EJData *cellData = [_dataArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
@@ -115,7 +125,6 @@ NSArray *colorArray;
     progressTest.progress = cellData.percent / 100.0;
     progressTest.characterIndex = cellData.character;
     
-//    [progressTest setProgress:progress animated:YES];
     [cell addSubview:progressTest];
     
     return cell;

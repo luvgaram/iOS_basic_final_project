@@ -41,7 +41,7 @@ BOOL isPeriod;
 BOOL isStartDate;
 BOOL isEndDate;
 int dayType;
-//NSString *dayTitle;
+int dayCharacterNumber;
 NSDate *periodStart;
 NSDate *periodEnd;
 NSDate *oneDay;
@@ -61,6 +61,9 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
     oneDay = nil;
 
     isStartDate = NO;
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -110,13 +113,19 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
     }
 }
 
+#pragma mark - Notification
+- (void)characterChanged:(NSNotification*)notification {
+    dayCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
+    NSLog(@"character: %d", dayCharacterNumber);
+}
+
 # pragma mark - data save
 - (void)saveDate {
     EJData *newData;
     NSLog(@"isPeriod: %hhd", isPeriod);
     
     if (isPeriod) {
-        newData = [[EJData alloc] initWithType:day character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
+        newData = [[EJData alloc] initWithType:day character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
     } else {
         NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
         newData = [[EJData alloc] initWithType:anniversary character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];

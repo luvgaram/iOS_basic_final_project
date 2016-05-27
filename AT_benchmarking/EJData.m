@@ -57,10 +57,6 @@ NSString *nowForUnit;
 #pragma mark - set properties
 
 - (void)setProperties:(NSString *)start end:(NSString *)end type:(int)type {
-    
-    
-    NSLog(@"type: %d", type);
-    
     switch (type) {
         case hour:
             [self setHourType:start end:end];
@@ -79,7 +75,9 @@ NSString *nowForUnit;
             break;
 
         case year:
+            [self setYearType];
             break;
+            
         case life:
             break;
             
@@ -199,6 +197,48 @@ NSString *nowForUnit;
     _percent = ((day - 1) / _measure) * 100;
     _startString = @"0일";
     _endString = [NSString stringWithFormat:@"%d일", [[NSNumber numberWithFloat:_measure] intValue]];
+}
+
+- (void)setYearType {
+    NSDate *today = [NSDate date];
+    
+    NSDateComponents *dateCompoForThisYear = [[NSDateComponents alloc] init];
+    int thisYearNumber = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:NSDate.date];
+    dateCompoForThisYear.year = thisYearNumber;
+    dateCompoForThisYear.month = 1;
+    dateCompoForThisYear.day = 1;
+    
+    NSDate *firstDayOfThisYear = [[NSCalendar currentCalendar] dateFromComponents:dateCompoForThisYear];
+    
+    NSDateComponents *conversionInfo = [EJDateLib componentsFrom:firstDayOfThisYear To:today];
+    
+    int currentDay = [conversionInfo day];
+    
+    NSLog(@"currentDay: %d, %d", currentDay, thisYearNumber);
+    NSLog(@"firstDayOfThisYear: %@", [EJDateLib stringFromDate:firstDayOfThisYear]);
+    
+    NSDateComponents *dateCompoForNextYear = [[NSDateComponents alloc] init];
+    dateCompoForNextYear.year = thisYearNumber + 1;
+    dateCompoForNextYear.month = 1;
+    dateCompoForNextYear.day = 1;
+    
+    NSDate *firstDayOfNextYear = [[NSCalendar currentCalendar] dateFromComponents:dateCompoForNextYear];
+    
+    NSDateComponents *conversionInfo2 = [EJDateLib componentsFrom:firstDayOfThisYear To:firstDayOfNextYear];
+    
+    
+    NSLog(@"firstDayOfThisYear: %@", [EJDateLib stringFromDate:firstDayOfThisYear]);
+    NSLog(@"firstDayOfNextYear: %@", [EJDateLib stringFromDate:firstDayOfNextYear]);
+    
+    int daysInThisYear = [conversionInfo2 day];
+    
+    _measure = daysInThisYear;
+
+    NSLog(@"_measure: %f", _measure);
+    
+    _percent = (currentDay / _measure) * 100;
+    _startString = @"1일1일";
+    _endString = @"12일31일";
 }
 
 - (void)setAnniversaryType:(NSString *)start end:(NSString *)end {
