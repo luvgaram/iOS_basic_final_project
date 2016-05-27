@@ -42,6 +42,13 @@
     return [dateFormatter stringFromDate:date];
 }
 
++ (NSString *)simpleHourStringFromDateString:(NSString *)string {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    
+    return [dateFormatter stringFromDate:[self dateFromString:string]];
+}
+
 + (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate {
     NSCalendar *sysCalendar = [NSCalendar currentCalendar];
     

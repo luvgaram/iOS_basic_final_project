@@ -28,15 +28,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *dayEndPeriod;
 @property (weak, nonatomic) IBOutlet UILabel *dayDateSelect;
 
-//@property (nonatomic, strong) NSMutableArray *customDates;
-
 @end
 
 @implementation EJSetDayViewController
 
 UINavigationController *dayEditNavController;
 
-//BOOL isTitleInserted;
+BOOL isNewDay;
 BOOL isPeriod;
 BOOL isStartDate;
 BOOL isEndDate;
@@ -46,8 +44,8 @@ NSDate *periodStart;
 NSDate *periodEnd;
 NSDate *oneDay;
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} EJDaytype;
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytype;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,16 +62,41 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
+    
+    [self setValuesFromData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+
     [self setValuesFromRecipe];
     
     dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
     
     [self switchSaveButtonStatus];
+}
+
+- (void)setValuesFromData {
+    if (self.dayData) {
+        self.dayTitleTextView.text = self.dayData.title;
+
+        if (self.dayData.type == day) {
+            isPeriod = YES;
+            periodStart = [EJDateLib dateFromString:self.dayData.start];
+            periodEnd = [EJDateLib dateFromString:self.dayData.end];
+            self.dayStartPeriod.text = [EJDateLib dayStringFromDate:periodStart];
+            self.dayEndPeriod.text = [EJDateLib dayStringFromDate:periodEnd];
+        } else {
+            isPeriod = NO;
+            [self dateViewTapped:nil];
+            oneDay = [EJDateLib dateFromString:self.dayData.start];
+            self.dayDateSelect.text = [EJDateLib dayStringFromDate:oneDay];
+            
+            NSLog(@"setValuesFromData: %@", self.dayDateSelect.text);
+        }
+        isNewDay = NO;
+    } else isNewDay = YES;
 }
 
 - (void)setValuesFromRecipe {
@@ -122,21 +145,32 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
 # pragma mark - data save
 - (void)saveDate {
     EJData *newData;
-    NSLog(@"isPeriod: %hhd", isPeriod);
-    
+
     if (isPeriod) {
         newData = [[EJData alloc] initWithType:day character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
     } else {
-        NSDate *todayMidNight = [[NSCalendar currentCalendar] startOfDayForDate:[NSDate date]];
-        newData = [[EJData alloc] initWithType:anniversary character:1 title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
+        newData = [[EJData alloc] initWithType:anniversary character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
     }
-    [self addDataToMainViewController:newData];
+    
+    if (isNewDay) [self addDataToMainViewController:newData];
+    else [self modifyDataToMainViewController:newData];
 }
 
 - (void)addDataToMainViewController:(EJData *) newData {
     EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
     [mainViewController.dataArray addObject:newData];
     
+    [self postNotiToMain];
+}
+
+- (void)modifyDataToMainViewController:(EJData *) newData {
+    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    mainViewController.dataArray[self.dayIndex] = newData;
+    
+    [self postNotiToMain];
+}
+
+- (void)postNotiToMain {
     NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
@@ -303,7 +337,12 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
 }
 
 - (void)saveSelectedOneDay {
+    NSLog(@"saveSelectedOneDay");
+    
     self.dayDateSelect.text = [EJDateLib dayStringFromDate:oneDay];
+    
+    NSLog(@"self.dayDateSelect.text: %@", self.dayDateSelect.text );
+    
     [self switchSaveButtonStatus];
     [dayEditNavController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -334,17 +373,25 @@ typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} E
         if (periodStart == nil) [self setCalendarView:YES isRoot:NO targetDate:date];
     } else {
         periodStart = date;
-        [self setCalendarView:NO isRoot:NO targetDate:date];
+        
+        if (!periodEnd) [self setCalendarView:NO isRoot:NO targetDate:date];
     }
     
+
+    
     UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeEditDateViewController)];
-    [dayEditNavController viewControllers][1].navigationItem.leftBarButtonItem = stopButton;
+
+    NSArray *viewController = [dayEditNavController viewControllers];
+    [dayEditNavController viewControllers][viewController.count - 1].navigationItem.leftBarButtonItem = stopButton;
+    
     
     if (periodStart != nil && periodEnd != nil) {
         if ([periodStart compare:periodEnd] == NSOrderedAscending) {
-            UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveSelectedDate)];
+            UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveSelectedDate)];
         
-            [dayEditNavController viewControllers][1].navigationItem.rightBarButtonItem = refreshButton;
+            NSArray *viewControllers = [dayEditNavController viewControllers];
+            [dayEditNavController viewControllers][viewControllers.count - 1].navigationItem.rightBarButtonItem = saveButton;
+            
         } else {
             NSLog(@"errors in selected dates");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"시작일보다 종료일이 늦어야 해요."

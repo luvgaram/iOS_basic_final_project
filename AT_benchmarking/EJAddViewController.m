@@ -21,8 +21,8 @@
 
 @implementation EJAddViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom
-typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom} MyType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} MyType;
 UIStoryboard *storyboard;
 
 - (void)viewDidLoad {

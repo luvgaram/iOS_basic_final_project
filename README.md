@@ -16,3 +16,4 @@
 | 12 | 2016.5.26 | custom and recipe data + character select view |
 | 13 | 2016.5.27 | progress bar animation (bug: character duplication) |
 | 14 | 2016.5.27 | year and life data handling and fix character duplication bug |
+| 15 | 2016.5.27 | modify and delete features |

@@ -17,6 +17,7 @@
 + (NSString *)dayStringFromDate:(NSDate *)date;
 + (NSString *)simpleDayStringFromDate:(NSDate *)date;
 + (NSString *)simpleHourStringFromDate:(NSDate *)date;
++ (NSString *)simpleHourStringFromDateString:(NSString *)string;
 + (NSDateComponents *)componentsFrom:(NSDate *)startDate To:(NSDate *)endDate;
 + (NSDateComponents *)componentsForToday:(NSDate *)date;
 + (NSDate *)dateFromHour:(int)hour Minite:(int)minute;

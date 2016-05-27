@@ -23,6 +23,7 @@
 
 @implementation EJSetCustomViewController
 
+BOOL isNewCustom;
 BOOL isCustomTitleInserted;
 BOOL isCustomStartInserted;
 BOOL isCustomCurrentInserted;
@@ -34,13 +35,12 @@ int customCharacterNumber;
     [super viewDidLoad];
     
     [self setNavigationBar];
-    
-    self.customStart.keyboardType = UIKeyboardTypeDecimalPad;
-    self.customCurrent.keyboardType = UIKeyboardTypeDecimalPad;
-    self.customEnd.keyboardType = UIKeyboardTypeDecimalPad;
+    [self setKeyboard];
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
+    
+    [self setValuesFromData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,6 +48,37 @@ int customCharacterNumber;
     
     [self setValuesFromRecipe];
     [self switchSaveButtonStatus];
+}
+
+- (void)setKeyboard {
+    self.customStart.keyboardType = UIKeyboardTypeDecimalPad;
+    self.customCurrent.keyboardType = UIKeyboardTypeDecimalPad;
+    self.customEnd.keyboardType = UIKeyboardTypeDecimalPad;
+    
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
+    [numberToolbar sizeToFit];
+    self.customStart.inputAccessoryView = numberToolbar;
+    self.customCurrent.inputAccessoryView = numberToolbar;
+    self.customEnd.inputAccessoryView = numberToolbar;
+}
+
+- (void)doneWithNumberPad {
+    [self.view endEditing:YES];
+}
+
+- (void)setValuesFromData {
+    if (self.customData) {
+        self.customTitleTextView.text = self.customData.title;
+        self.customStart.text = self.customData.start;
+        self.customCurrent.text = [self.customData nowForUnit];
+        self.customEnd.text = self.customData.end;
+        self.customUnit.text = [self.customData unit];
+        
+        isNewCustom = NO;
+    } else isNewCustom = YES;
 }
 
 - (void)setValuesFromRecipe {
@@ -104,22 +135,40 @@ int customCharacterNumber;
     [self switchSaveButtonStatus];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
 # pragma mark - data save
 - (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:7 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
+    EJData *newData = [[EJData alloc] initWithType:6 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
     
-    [self addDataToMainViewController:newData];
+    if (isNewCustom) [self addDataToMainViewController:newData];
+    else [self modifyDataToMainViewController:newData];
 }
 
 - (void)addDataToMainViewController:(EJData *) newData {
     EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
     [mainViewController.dataArray addObject:newData];
     
+    [self postNotiToMain];
+}
+
+- (void)modifyDataToMainViewController:(EJData *) newData {
+    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    mainViewController.dataArray[self.customIndex] = newData;
+    
+    [self postNotiToMain];
+}
+
+- (void)postNotiToMain {
     NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
+
 
 #pragma mark - Notification
 - (void)characterChanged:(NSNotification*)notification {

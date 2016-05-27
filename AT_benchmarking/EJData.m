@@ -11,8 +11,8 @@
 
 @implementation EJData
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom 8: today
-enum {hour = 0, day = 1, week, month, year, life, anniversary, custom, today} curType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} curType;
 
 //@property int type;
 //@property int character;
@@ -25,6 +25,13 @@ enum {hour = 0, day = 1, week, month, year, life, anniversary, custom, today} cu
 
 NSString *unit;
 NSString *nowForUnit;
+
+- (NSString *)unit {
+    return unit;
+}
+- (NSString *)nowForUnit {
+    return nowForUnit;
+}
 
 - (id)initWithType:(int)type character:(int)character title:(NSString *)title date:(NSDate *)date start:(NSString *)start end:(NSString *)end {
     self = [super init];
@@ -77,10 +84,7 @@ NSString *nowForUnit;
         case year:
             [self setYearType];
             break;
-            
-        case life:
-            break;
-            
+
         case anniversary:
             [self setAnniversaryType:start end:end];
             break;
@@ -118,7 +122,6 @@ NSString *nowForUnit;
         _percent = 100;
     }
 }
-
 
 - (void)setHourType:(NSString *)start end:(NSString *)end {
     NSDate *startDate = [EJDateLib dateFromString:start];

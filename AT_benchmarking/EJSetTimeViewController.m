@@ -10,7 +10,6 @@
 #import "EJSetTimePickerViewController.h"
 #import "EJDateLib.h"
 #import "EJColorLib.h"
-#import "EJData.h"
 #import "EJMainViewController.h"
 #import "EJNavigationBar.h"
 
@@ -24,6 +23,7 @@
 
 @implementation EJSetTimeViewController
 
+BOOL isNewTime;
 NSDate *startTime;
 NSDate *endTime;
 int timeCharacterNumber;
@@ -38,6 +38,8 @@ int timeCharacterNumber;
      addObserver:self selector:@selector(timeSelected:) name:@"timeSelected" object:nil];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(characterChanged:) name:@"characterChanged" object:nil];
+    
+    [self setValuesFromData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,6 +47,15 @@ int timeCharacterNumber;
     
     [self setValuesFromRecipe];
     [self switchSaveButtonStatus];
+}
+
+- (void)setValuesFromData {
+    if (self.timeData) {
+        self.timeTitleTextView.text = self.timeData.title;
+        self.timeStart.text = [EJDateLib simpleHourStringFromDateString:self.timeData.start];
+        self.timeEnd.text = [EJDateLib simpleHourStringFromDateString:self.timeData.end];
+        isNewTime = NO;
+    } else isNewTime = YES;
 }
 
 - (void)setValuesFromRecipe {
@@ -144,13 +155,25 @@ int timeCharacterNumber;
 - (void)saveDate {
     EJData *newData = [[EJData alloc] initWithType:0 character:timeCharacterNumber title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
 
-    [self addDataToMainViewController:newData];
+    if (isNewTime) [self addDataToMainViewController:newData];
+    else [self modifyDataToMainViewController:newData];
 }
 
 - (void)addDataToMainViewController:(EJData *) newData {
     EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
     [mainViewController.dataArray addObject:newData];
     
+    [self postNotiToMain];
+}
+
+- (void)modifyDataToMainViewController:(EJData *) newData {
+    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+    mainViewController.dataArray[self.timeIndex] = newData;
+    
+    [self postNotiToMain];
+}
+
+- (void)postNotiToMain {
     NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     

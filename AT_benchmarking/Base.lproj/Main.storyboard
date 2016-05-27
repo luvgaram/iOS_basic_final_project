@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KFR-cb-bkz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KFR-cb-bkz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="-12" width="600" height="612"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EJCell" id="WBR-8P-kjt" customClass="EJTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EJCell" id="WBR-8P-kjt" customClass="EJTableViewCell">
                                         <rect key="frame" x="0.0" y="92" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WBR-8P-kjt" id="sVz-kf-4aN">
@@ -229,11 +229,11 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cA1-g8-30A">
                                         <rect key="frame" x="14" y="142" width="572" height="55"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="날 짜 선 택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54e-6R-rgw">
-                                                <rect key="frame" x="204" y="-8" width="165" height="63"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날 짜 선 택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54e-6R-rgw">
+                                                <rect key="frame" x="186" y="-4" width="200" height="63"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="diV-5j-azB"/>
-                                                    <constraint firstAttribute="height" constant="64" id="rAM-za-rgq"/>
+                                                    <constraint firstAttribute="width" constant="200" id="diV-5j-azB"/>
+                                                    <constraint firstAttribute="height" constant="63" id="rAM-za-rgq"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" red="0.71764705882352942" green="0.60784313725490191" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,8 +242,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.95294117647058818" green="0.83137254901960778" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="54e-6R-rgw" firstAttribute="centerX" secondItem="cA1-g8-30A" secondAttribute="centerX" id="c1B-j1-BiK"/>
-                                            <constraint firstItem="54e-6R-rgw" firstAttribute="centerY" secondItem="cA1-g8-30A" secondAttribute="centerY" id="hs3-Kj-wva"/>
+                                            <constraint firstItem="54e-6R-rgw" firstAttribute="centerY" secondItem="cA1-g8-30A" secondAttribute="centerY" id="RpW-wf-Tam"/>
+                                            <constraint firstItem="54e-6R-rgw" firstAttribute="centerX" secondItem="cA1-g8-30A" secondAttribute="centerX" id="bAb-Zt-gPz"/>
                                             <constraint firstAttribute="height" constant="55" id="iz2-qY-zLp"/>
                                         </constraints>
                                     </view>

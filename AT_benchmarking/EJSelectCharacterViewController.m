@@ -18,8 +18,8 @@
 
 @implementation EJSelectCharacterViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom 8: today
-enum {hour = 0, day = 1, week, month, year, life, anniversary, custom, today} recType;
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} recType;
 int characterNumber;
 
 - (void)viewDidLoad {
@@ -63,8 +63,6 @@ int characterNumber;
             break;
         case year:
             newData = [[EJData alloc] initWithType:year character:characterNumber title:@"올해" date:[NSDate date] start:todayString end:todayString];
-            break;
-        case life:
             break;
         case today:
             newData = [[EJData alloc] initWithType:today character:characterNumber title:@"오늘" date:[NSDate date] start:todayString end:todayString];

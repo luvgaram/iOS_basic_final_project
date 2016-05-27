@@ -28,8 +28,8 @@
 
 @implementation EJRecipeViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: life, 6: anniversary 7: custom 8: today
-typedef enum {hour = 0, day = 1, week, month, year, life, anniversary, custom, today} EJRecipetype;
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJRecipetype;
 UIStoryboard *mainStoryboard;
 
 - (void)viewDidLoad {

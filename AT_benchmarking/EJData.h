@@ -26,4 +26,7 @@
 
 - (id)initWithType:(int)type character:(int)character title:(NSString *)title date:(NSDate *)date start:(NSString *)start end:(NSString *)end now:(NSString *)now unit:(NSString *)customUnit;
 
+- (NSString *)unit;
+- (NSString *)nowForUnit;
+
 @end
