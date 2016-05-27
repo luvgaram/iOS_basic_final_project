@@ -18,6 +18,9 @@
 #import "EJColorLib.h"
 #import "EJDateLib.h"
 
+#import "EJRealmData.h"
+#import "EJDataManager.h"
+
 @implementation EJMainViewController
 
 // type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
@@ -55,6 +58,60 @@ UIStoryboard *myStoryboard;
     [self.dataArray addObject:temp2];
     [self.dataArray addObject:temp3];
     [self.dataArray addObject:temp4];
+    
+    // test Realm
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    
+//    EJRealmData *tempData = [[EJRealmData alloc] initWithValue:@{
+//                                                                 @"id" : @([dataManager getIdManager]),
+//                                                                 @"type" : @(today),
+//                                                                 @"character" : @(2),
+//                                                                 @"title" : @"오늘",
+//                                                                 @"date" : [NSDate date]
+//                                                                 }];
+//    
+//    EJRealmData *tempData2 = [[EJRealmData alloc] initWithValue:@{
+//                                                                 @"id" : @([dataManager getIdManager]),
+//                                                                 @"type" : @(week),
+//                                                                 @"character" : @(1),
+//                                                                 @"title" : @"이번주",
+//                                                                 @"date" : [NSDate date]
+//                                                                 }];
+//    
+//    EJRealmData *tempData3 = [[EJRealmData alloc] initWithValue:@{
+//                                                                  @"id" : @([dataManager getIdManager]),
+//                                                                  @"type" : @(month),
+//                                                                  @"character" : @(4),
+//                                                                  @"title" : @"이번달",
+//                                                                  @"date" : [NSDate date]
+//                                                                  }];
+//    
+//    EJRealmData *tempData4 = [[EJRealmData alloc] initWithValue:@{
+//                                                                  @"id" : @([dataManager getIdManager]),
+//                                                                  @"type" : @(year),
+//                                                                  @"character" : @(5),
+//                                                                  @"title" : @"올해",
+//                                                                  @"date" : [NSDate date]
+//                                                                  }];
+//
+//    [dataManager addData:tempData];
+//    [dataManager addData:tempData2];
+//    [dataManager addData:tempData3];
+//    [dataManager addData:tempData4];
+    
+//    [dataManager deleteData:16];
+    
+    
+//    EJRealmData *tempData = [[EJRealmData alloc] initWithValue:@{
+//                                                                @"id" : @(16),
+//                                                                @"type" : @(today),
+//                                                                @"character" : @(3),
+//                                                                @"title" : @"adsfafasfafsa",
+//                                                                @"date" : [NSDate date],
+//                                                                }];
+//    [dataManager updateData:tempData];
+    
+    [dataManager getAllData];
 
     // color values
     colorArray = [NSArray arrayWithObjects:@"#99CCCC", @"#BDD5BD", @"#D7D8B1", @"#F5DC90", @"#F2CA78", @"#EFAB79", @"#EC8C71",
