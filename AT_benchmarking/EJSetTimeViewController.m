@@ -183,7 +183,6 @@ int timeCharacterNumber;
                                                    @"start" : [EJDateLib stringFromDate:startTime],
                                                    @"end" : [EJDateLib stringFromDate:endTime]
                                                    }];
-//    EJData *newData = [[EJData alloc] initWithType:0 character:timeCharacterNumber title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
 
     if (isNewTime) [self addDataToMainViewController:newData];
     else [self modifyDataToMainViewController:newData];
@@ -211,19 +210,5 @@ int timeCharacterNumber;
     [dataManager updateData:updateData];
     [self postNotiToMain];
 }
-
-//- (void)addDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    [mainViewController.dataArray addObject:newData];
-//    
-//    [self postNotiToMain];
-//}
-//
-//- (void)modifyDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    mainViewController.dataArray[self.timeIndex] = newData;
-//    
-//    [self postNotiToMain];
-//}
 
 @end

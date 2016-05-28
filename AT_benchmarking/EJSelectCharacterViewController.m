@@ -7,7 +7,6 @@
 //
 
 #import "EJSelectCharacterViewController.h"
-//#import "EJData.h"
 #import "EJRealmData.h"
 #import "EJDataManager.h"
 #import "EJMainViewController.h"
@@ -66,14 +65,12 @@ int characterNumber;
 
 # pragma mark - data save
 - (void)saveDate {
-//    EJData *newData;
     EJRealmData *newData;
     EJDataManager *dataManager = [EJDataManager sharedInstance];
     
     NSString *todayString = [EJDateLib stringFromDate:[NSDate date]];
     switch (self.typeFromRecipe) {
         case week:
-//            newData = [[EJData alloc] initWithType:week character:characterNumber title:@"이번주" date:[NSDate date] start:todayString end:todayString];
             newData = [[EJRealmData alloc] initWithValue:@{
                                                            @"id" : @([dataManager getIdManager]),
                                                            @"type" : @(week),
@@ -84,7 +81,6 @@ int characterNumber;
             break;
             
         case month:
-//            newData = [[EJData alloc] initWithType:month character:characterNumber title:@"이번달" date:[NSDate date] start:todayString end:todayString];
             newData = [[EJRealmData alloc] initWithValue:@{
                                                            @"id" : @([dataManager getIdManager]),
                                                            @"type" : @(characterNumber),
@@ -94,7 +90,6 @@ int characterNumber;
                                                            }];
             break;
         case year:
-//            newData = [[EJData alloc] initWithType:year character:characterNumber title:@"올해" date:[NSDate date] start:todayString end:todayString];
             newData = [[EJRealmData alloc] initWithValue:@{
                                                            @"id" : @([dataManager getIdManager]),
                                                            @"type" : @(year),
@@ -104,7 +99,6 @@ int characterNumber;
                                                            }];
             break;
         case today:
-//            newData = [[EJData alloc] initWithType:today character:characterNumber title:@"오늘" date:[NSDate date] start:todayString end:todayString];
             newData = [[EJRealmData alloc] initWithValue:@{
                                                            @"id" : @([dataManager getIdManager]),
                                                            @"type" : @(today),
@@ -124,14 +118,5 @@ int characterNumber;
     
     [self postNotiToMain];
 }
-//- (void)addDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    [mainViewController.dataArray addObject:newData];
-//    
-//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-//    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//    
-//    [[self navigationController] popToRootViewControllerAnimated:YES];
-//}
 
 @end

@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "EJData.h"
 #import "EJRealmData.h"
 
 @interface EJSetTimeViewController : UIViewController
 
 @property EJRealmData *timeData;
-//@property EJData *timeData;
-//@property int timeIndex;
 @property NSString *timeTitleFromRecipe;
 
 @end

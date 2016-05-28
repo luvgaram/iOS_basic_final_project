@@ -10,22 +10,6 @@
 
 @implementation EJRealmData
 
-//@property NSInteger id;
-//@property BOOL status;
-//@property int type;
-//@property int character;
-//@property NSString *title;
-//@property NSDate *date;
-//@property NSString *start;
-//@property NSString *end;
-//@property NSString *current;
-//@property NSString *unit;
-//
-//@property NSString *startString;
-//@property NSString *endString;
-//@property NSString *now;
-//@property NSNumber *percent;
-
 + (NSString *)primaryKey {
     return @"id";
 }

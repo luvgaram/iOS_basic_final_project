@@ -8,7 +8,6 @@
 
 #import "EJSetCustomViewController.h"
 #import "EJColorLib.h"
-//#import "EJData.h"
 #import "EJDateLib.h"
 #import "EJDataManager.h"
 #import "EJMainViewController.h"
@@ -168,9 +167,7 @@ int customCharacterNumber;
 - (void)saveDate {
     EJRealmData *newData;
     EJDataManager *dataManager = [EJDataManager sharedInstance];
-    
-//    EJData *newData = [[EJData alloc] initWithType:6 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
-    
+
     newData = [[EJRealmData alloc] initWithValue:@{
                                                    @"id" : @([dataManager getIdManager]),
                                                    @"type" : @(6),
@@ -211,19 +208,5 @@ int customCharacterNumber;
     [dataManager updateData:updateData];
     [self postNotiToMain];
 }
-
-//- (void)addDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    [mainViewController.dataArray addObject:newData];
-//    
-//    [self postNotiToMain];
-//}
-//
-//- (void)modifyDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    mainViewController.dataArray[self.customIndex] = newData;
-//    
-//    [self postNotiToMain];
-//}
 
 @end

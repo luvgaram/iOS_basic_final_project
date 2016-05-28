@@ -11,5 +11,6 @@
 @interface EJProgressView : UIProgressView
 
 @property int characterIndex;
+@property NSString *bubbleText;
 
 @end

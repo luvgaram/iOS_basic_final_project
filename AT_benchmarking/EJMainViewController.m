@@ -13,7 +13,6 @@
 #import "EJSetDayViewController.h"
 #import "EJSetCustomViewController.h"
 
-#import "EJData.h"
 #import "EJProgressView.h"
 #import "EJColorLib.h"
 #import "EJDateLib.h"
@@ -121,24 +120,7 @@ UIStoryboard *myStoryboard;
             [view removeFromSuperview];
         }
     }
-    
-// EJData
-//    EJData *cellData = [self.dataArray objectAtIndex:indexPath.row];
-//    cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
-//    cell.cellTitle.text = cellData.title;
-//    cell.cellstart.text = cellData.startString;
-//    cell.cellEnd.text = cellData.endString;
-//    cell.cellPercent.text = [NSString stringWithFormat:@"%d", cellData.percent];
-//    
-//    EJProgressView* progressTest = [[EJProgressView alloc] initWithFrame:CGRectMake(66, 22, 200, 50)];
-//    NSLog(@"character in cellData %d", cellData.character);
-//
-//    progressTest.progress = cellData.percent / 100.0;
-//    progressTest.characterIndex = cellData.character;
-//
-//    [cell addSubview:progressTest];
-    
-// EJRealmData
+
     EJRealmData *cellData = [self.dataArray objectAtIndex:indexPath.row];
     NSLog(@"%d: %@ now: %@", indexPath.row, cellData, cellData.now);
     cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
@@ -153,6 +135,7 @@ UIStoryboard *myStoryboard;
     
     progressTest.progress = cellData.percent / 100.0;
     progressTest.characterIndex = cellData.character;
+    progressTest.bubbleText = cellData.now;
     
     [cell addSubview:progressTest];
     
@@ -161,15 +144,12 @@ UIStoryboard *myStoryboard;
 
 #pragma mark - tableViewDetail
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EJData *data = self.dataArray[indexPath.row];
     EJRealmData *editData = self.dataArray[indexPath.row];
 
-    switch (data.type) {
+    switch (editData.type) {
         case hour: {
             EJSetTimeViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setTimeViewControllerIdentifier"];
-            addViewController.timeData = data;
-//            addViewController.timeIndex = indexPath.row;
-            
+            addViewController.timeData = editData;  
             [self.navigationController pushViewController:addViewController animated:YES];
             
             break;
@@ -178,8 +158,6 @@ UIStoryboard *myStoryboard;
         case day: {
             EJSetDayViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
             addViewController.dayData = editData;
-//            addViewController.dayIndex = indexPath.row;
-            
             [self.navigationController pushViewController:addViewController animated:YES];
             
             break;
@@ -188,8 +166,6 @@ UIStoryboard *myStoryboard;
         case anniversary: {
             EJSetDayViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
             addViewController.dayData = editData;
-//            addViewController.dayIndex = indexPath.row;
-            
             [self.navigationController pushViewController:addViewController animated:YES];
             
             break;
@@ -197,9 +173,7 @@ UIStoryboard *myStoryboard;
             
         case custom: {
             EJSetCustomViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setCustomViewControllerIdentifier"];
-            addViewController.customData = data;
-//            addViewController.customIndex = indexPath.row;
-            
+            addViewController.customData = editData;
             [self.navigationController pushViewController:addViewController animated:YES];
             
             break;

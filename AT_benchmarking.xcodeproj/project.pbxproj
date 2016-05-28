@@ -16,7 +16,6 @@
 		A859DB3E1CE1984600AB0590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A859DB3C1CE1984600AB0590 /* LaunchScreen.storyboard */; };
 		A859DB4A1CE199D600AB0590 /* EJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB491CE199D600AB0590 /* EJMainViewController.m */; };
 		A859DB4D1CE19AEF00AB0590 /* EJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */; };
-		A859DB501CE19D9C00AB0590 /* EJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB4F1CE19D9C00AB0590 /* EJData.m */; };
 		A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB551CE1B18500AB0590 /* EJProgressView.m */; };
 		A859DB601CE1BDA200AB0590 /* EJNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A859DB5F1CE1BDA200AB0590 /* EJNavigationBar.m */; };
 		A86F89FB1CEADD61005C53BE /* EJSetDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A86F89FA1CEADD61005C53BE /* EJSetDayViewController.m */; };
@@ -46,6 +45,13 @@
 		A8F0DC291CE95CA500ADEE76 /* EJAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F0DC281CE95CA500ADEE76 /* EJAddViewController.m */; };
 		A8FE8B321CF86A2D000632CD /* EJRealmData.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B311CF86A2D000632CD /* EJRealmData.m */; };
 		A8FE8B351CF87293000632CD /* EJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B341CF87293000632CD /* EJDataManager.m */; };
+		A8FE8B3D1CF9AB79000632CD /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B381CF9AB79000632CD /* Icon-29.png */; };
+		A8FE8B3E1CF9AB79000632CD /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B391CF9AB79000632CD /* Icon-29@2x.png */; };
+		A8FE8B3F1CF9AB79000632CD /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B3A1CF9AB79000632CD /* Icon-29@3x.png */; };
+		A8FE8B401CF9AB79000632CD /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B3B1CF9AB79000632CD /* Icon-60@2x.png */; };
+		A8FE8B411CF9AB79000632CD /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B3C1CF9AB79000632CD /* Icon-60@3x.png */; };
+		A8FE8B431CF9ACCC000632CD /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B421CF9ACCC000632CD /* logo.png */; };
+		A8FE8B451CF9AE2D000632CD /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B441CF9AE2D000632CD /* bubble.png */; };
 		ABE6E2C56C5497C20015C596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21CDEE08281EDF20C963C650 /* libPods.a */; };
 		BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */; };
 /* End PBXBuildFile section */
@@ -70,8 +76,6 @@
 		A859DB491CE199D600AB0590 /* EJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJMainViewController.m; sourceTree = "<group>"; };
 		A859DB4B1CE19AEF00AB0590 /* EJTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJTableViewCell.h; sourceTree = "<group>"; };
 		A859DB4C1CE19AEF00AB0590 /* EJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJTableViewCell.m; sourceTree = "<group>"; };
-		A859DB4E1CE19D9C00AB0590 /* EJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJData.h; sourceTree = "<group>"; };
-		A859DB4F1CE19D9C00AB0590 /* EJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJData.m; sourceTree = "<group>"; };
 		A859DB541CE1B18500AB0590 /* EJProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJProgressView.h; sourceTree = "<group>"; };
 		A859DB551CE1B18500AB0590 /* EJProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJProgressView.m; sourceTree = "<group>"; };
 		A859DB5E1CE1BDA200AB0590 /* EJNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJNavigationBar.h; sourceTree = "<group>"; };
@@ -122,6 +126,13 @@
 		A8FE8B311CF86A2D000632CD /* EJRealmData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJRealmData.m; sourceTree = "<group>"; };
 		A8FE8B331CF87293000632CD /* EJDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJDataManager.h; sourceTree = "<group>"; };
 		A8FE8B341CF87293000632CD /* EJDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJDataManager.m; sourceTree = "<group>"; };
+		A8FE8B381CF9AB79000632CD /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29.png"; path = "Esset/Icon-29.png"; sourceTree = "<group>"; };
+		A8FE8B391CF9AB79000632CD /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29@2x.png"; path = "Esset/Icon-29@2x.png"; sourceTree = "<group>"; };
+		A8FE8B3A1CF9AB79000632CD /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29@3x.png"; path = "Esset/Icon-29@3x.png"; sourceTree = "<group>"; };
+		A8FE8B3B1CF9AB79000632CD /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Esset/Icon-60@2x.png"; sourceTree = "<group>"; };
+		A8FE8B3C1CF9AB79000632CD /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@3x.png"; path = "Esset/Icon-60@3x.png"; sourceTree = "<group>"; };
+		A8FE8B421CF9ACCC000632CD /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Esset/logo.png; sourceTree = "<group>"; };
+		A8FE8B441CF9AE2D000632CD /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble.png; path = Esset/bubble.png; sourceTree = "<group>"; };
 		BB9574361CF2F9C9001DC8C8 /* EJDateLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJDateLib.h; sourceTree = "<group>"; };
 		BB9574371CF2F9C9001DC8C8 /* EJDateLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJDateLib.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +182,13 @@
 		A8468E721CF565320079644F /* Esset */ = {
 			isa = PBXGroup;
 			children = (
+				A8FE8B441CF9AE2D000632CD /* bubble.png */,
+				A8FE8B421CF9ACCC000632CD /* logo.png */,
+				A8FE8B381CF9AB79000632CD /* Icon-29.png */,
+				A8FE8B391CF9AB79000632CD /* Icon-29@2x.png */,
+				A8FE8B3A1CF9AB79000632CD /* Icon-29@3x.png */,
+				A8FE8B3B1CF9AB79000632CD /* Icon-60@2x.png */,
+				A8FE8B3C1CF9AB79000632CD /* Icon-60@3x.png */,
 				A8E408C91CF6CB0E0068E312 /* female01.png */,
 				A8E408CA1CF6CB0E0068E312 /* female02.png */,
 				A8E408CB1CF6CB0E0068E312 /* male01.png */,
@@ -194,8 +212,6 @@
 		A8468E751CF592AD0079644F /* EJModel */ = {
 			isa = PBXGroup;
 			children = (
-				A859DB4E1CE19D9C00AB0590 /* EJData.h */,
-				A859DB4F1CE19D9C00AB0590 /* EJData.m */,
 				A8FE8B301CF86A2D000632CD /* EJRealmData.h */,
 				A8FE8B311CF86A2D000632CD /* EJRealmData.m */,
 				A8FE8B331CF87293000632CD /* EJDataManager.h */,
@@ -381,17 +397,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8FE8B3E1CF9AB79000632CD /* Icon-29@2x.png in Resources */,
 				A86F8A1A1CEC37D6005C53BE /* Info.plist in Resources */,
+				A8FE8B431CF9ACCC000632CD /* logo.png in Resources */,
 				A859DB3E1CE1984600AB0590 /* LaunchScreen.storyboard in Resources */,
 				A8E408D21CF6CB0E0068E312 /* female02.png in Resources */,
 				A859DB3B1CE1984600AB0590 /* Assets.xcassets in Resources */,
+				A8FE8B451CF9AE2D000632CD /* bubble.png in Resources */,
+				A8FE8B3D1CF9AB79000632CD /* Icon-29.png in Resources */,
 				A8E408D31CF6CB0E0068E312 /* male01.png in Resources */,
+				A8FE8B401CF9AB79000632CD /* Icon-60@2x.png in Resources */,
 				A8E408D51CF6CB0E0068E312 /* male03.png in Resources */,
+				A8FE8B3F1CF9AB79000632CD /* Icon-29@3x.png in Resources */,
 				A8E408D11CF6CB0E0068E312 /* female01.png in Resources */,
 				A8E408D71CF6CC190068E312 /* female03.png in Resources */,
 				A859DB391CE1984600AB0590 /* Main.storyboard in Resources */,
 				A8E408D91CF6CD390068E312 /* selectTriangle.png in Resources */,
 				A8E408D41CF6CB0E0068E312 /* male02.png in Resources */,
+				A8FE8B411CF9AB79000632CD /* Icon-60@3x.png in Resources */,
 				A8E408C51CF6C4E40068E312 /* SelectCharacterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +495,6 @@
 				A859DB4D1CE19AEF00AB0590 /* EJTableViewCell.m in Sources */,
 				BB9574381CF2F9C9001DC8C8 /* EJDateLib.m in Sources */,
 				A8E408DC1CF6CF760068E312 /* EJSelectCharacterView.m in Sources */,
-				A859DB501CE19D9C00AB0590 /* EJData.m in Sources */,
 				A86F8A1F1CEC37D6005C53BE /* PDTSimpleCalendarViewWeekdayHeader.m in Sources */,
 				A859DB561CE1B18500AB0590 /* EJProgressView.m in Sources */,
 				A8468E6B1CF52E6C0079644F /* EJFlowTouchView.m in Sources */,

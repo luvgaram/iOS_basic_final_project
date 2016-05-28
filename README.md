@@ -19,3 +19,4 @@
 | 15 | 2016.5.27 | modify and delete features |
 | 16 | 2016.5.28 | Realm data and data manager |
 | 17 | 2016.5.28 | migration to Realm |
+| 18 | 2016.5.28 | bubble for progress bar, app icon and launch screen |

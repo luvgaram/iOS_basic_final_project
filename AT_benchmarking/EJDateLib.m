@@ -56,8 +56,7 @@
     unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay;
     
     NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:startDate  toDate:endDate  options:0];
-    
-    //    NSLog(@"Conversion: %dmin %dhours %ddays %dmonths",[conversionInfo minute], [conversionInfo hour], [conversionInfo day], [conversionInfo month]);
+
     NSLog(@"Conversion: %dmin %dhours %ddays",[conversionInfo minute], [conversionInfo hour], [conversionInfo day]);
     
     return conversionInfo;

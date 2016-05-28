@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EJData.h"
 
 @interface EJTableViewCell : UITableViewCell
 

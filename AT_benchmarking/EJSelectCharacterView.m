@@ -148,18 +148,4 @@ NSMutableArray *subviewPositionArray;
     targetTriange.alpha = 1;
 }
 
-//- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-//    [super touchesBegan:touches withEvent:event];
-//    
-//    NSLog(@"touches began!");
-//}
-//
-//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [super touchesEnded:touches withEvent:event];
-//    
-//    NSLog(@"touches ended!");
-//
-//}
-
-
 @end

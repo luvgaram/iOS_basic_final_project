@@ -9,7 +9,6 @@
 #import "EJSetDayViewController.h"
 #import "EJColorLib.h"
 #import "EJDateLib.h"
-//#import "EJRealmData.h"
 #import "EJDataManager.h"
 #import "PDTSimpleCalendarViewController.h"
 #import "EJMainViewController.h"
@@ -163,9 +162,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
     EJRealmData *newData;
     EJDataManager *dataManager = [EJDataManager sharedInstance];
 
-    if (isPeriod) {
-//        newData = 
-//        [[EJData alloc] initWithType:day character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
+    if (isPeriod)
         newData = [[EJRealmData alloc] initWithValue:@{
                                                        @"id" : @([dataManager getIdManager]),
                                                        @"type" : @(day),
@@ -175,8 +172,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
                                                        @"start" : [EJDateLib stringFromDate:periodStart],
                                                        @"end" : [EJDateLib stringFromDate:periodEnd]
                                                        }];
-    } else {
-//        newData = [[EJData alloc] initWithType:anniversary character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
+    else
         newData = [[EJRealmData alloc] initWithValue:@{
                                                        @"id" : @([dataManager getIdManager]),
                                                        @"type" : @(anniversary),
@@ -186,7 +182,6 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
                                                        @"start" : [EJDateLib stringFromDate:oneDay],
                                                        @"end" : [EJDateLib stringFromDate:oneDay]
                                                        }];
-    }
     
     if (isNewDay) [self addDataToMainViewController:newData];
     else [self modifyDataToMainViewController:newData];
@@ -215,20 +210,6 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
     [dataManager updateData:updateData];
     [self postNotiToMain];
 }
-
-//- (void)addDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    [mainViewController.dataArray addObject:newData];
-//
-//    [self postNotiToMain];
-//}
-//
-//- (void)modifyDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-//    mainViewController.dataArray[self.dayIndex] = newData;
-//    
-//    [self postNotiToMain];
-//}
 
 # pragma mark - tap gesture
 - (void)setTap {

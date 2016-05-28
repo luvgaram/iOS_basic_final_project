@@ -11,8 +11,6 @@
 
 @interface EJSetCustomViewController : UIViewController
 
-//@property EJData *customData;
-//@property int customIndex;
 @property EJRealmData *customData;
 @property NSString *customTitleFromRecipe;
 @property NSString *customUnitFromRecipe;

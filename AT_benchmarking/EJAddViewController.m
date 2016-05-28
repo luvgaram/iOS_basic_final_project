@@ -9,8 +9,6 @@
 #import "EJMainViewController.h"
 #import "EJAddViewController.h"
 #import "EJDataManager.h"
-#import "EJData.h"
-//#import "EJRealmData.h"
 #import "EJColorLib.h"
 
 @interface EJAddViewController ()
@@ -23,8 +21,6 @@
 
 @implementation EJAddViewController
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
-enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} MyType;
 UIStoryboard *storyboard;
 
 - (void)viewDidLoad {
@@ -100,26 +96,6 @@ UIStoryboard *storyboard;
     UIViewController *addViewController = [storyboard instantiateViewControllerWithIdentifier:@"setRecipeViewControllerIdentifier"];
     [self.navigationController pushViewController:addViewController animated:YES];
 }
-
-//- (void)addDataToMainViewController:(EJRealmData *) newData {
-//    EJDataManager *dataManager = [EJDataManager sharedInstance];
-//    [dataManager addData:newData];
-//    
-//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-//    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//    
-//    [[self navigationController] popToRootViewControllerAnimated:YES];
-//}
-
-//- (void)addDataToMainViewController:(EJData *) newData {
-//    EJMainViewController *mainViewController = (EJMainViewController *)[self backViewController];
-//    [mainViewController.dataArray addObject:newData];
-//
-//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-//    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//        
-//    [[self navigationController] popToRootViewControllerAnimated:YES];
-//}
 
 - (UIViewController *)backViewController {
     NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;

@@ -10,14 +10,6 @@
 
 @implementation EJFlowTouchView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     
@@ -35,7 +27,6 @@
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    // tview is the UITableView subclass instance
     CGPoint tViewHit = [self.timePicker convertPoint:point fromView:self];
     if ([self.timePicker pointInside:tViewHit withEvent:event]) {
         NSLog(@"inside %hhd Picker!", self.isStart);
