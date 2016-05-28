@@ -123,19 +123,20 @@ int customCharacterNumber;
     else self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (IBAction)customTitleTextEdited:(id)sender {
+- (IBAction)customTitleTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
-- (IBAction)customStartTextEdited:(id)sender {
+
+- (IBAction)customStartTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
-- (IBAction)customCurrentTextEdited:(id)sender {
+- (IBAction)customCurrentTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
-- (IBAction)customEndTextEdited:(id)sender {
+- (IBAction)customEndTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
-- (IBAction)customUnitTextEdited:(id)sender {
+- (IBAction)customUnitTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
 

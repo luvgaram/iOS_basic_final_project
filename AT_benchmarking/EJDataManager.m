@@ -114,13 +114,20 @@ int idManager;
     NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
     int measurePercent = [conversionInfoPercent day] * 24 * 60 + [conversionInfoPercent hour] * 60 + [conversionInfoPercent minute];
 
-    data.now = [EJDateLib simpleHourStringFromDate:[NSDate date]];
+//    data.now = [EJDateLib simpleHourStringFromDate:[NSDate date]];
+    int minutes = measurePercent % 60;
+    int hours = measurePercent / 60;
+    data.now = [NSString stringWithFormat:@"%02d:%02d", hours, minutes];
+    
     data.startString = [EJDateLib simpleHourStringFromDate:startDate];
     data.endString = [EJDateLib simpleHourStringFromDate:endDate];
     
-    if ([now compare:endDate] == NSOrderedAscending)
+    if ([now compare:endDate] == NSOrderedAscending) {
         data.percent = (measurePercent / measure) * 100;
-    else {
+        int minutes = measurePercent % 60;
+        int hours = measurePercent / 60;
+        data.now = [NSString stringWithFormat:@"%02d:%02d", hours, minutes];
+    } else {
         data.percent = 100;
         data.now = @"Done!";
     }
@@ -140,13 +147,18 @@ int idManager;
     NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
     int measurePercent = [conversionInfoPercent day];
     
-    data.now = [NSString stringWithFormat:@"%d일", measurePercent];
-    data.startString = @"0일";
-    data.endString = [NSString stringWithFormat:@"%d일", [[NSNumber numberWithFloat:measure] intValue]];
+//    data.startString = @"0일";
+//    data.endString = [NSString stringWithFormat:@"%d일", [[NSNumber numberWithFloat:measure] intValue]];
+    data.startString = [EJDateLib simpleDayStringFromDate:startDate];
+    data.endString = [EJDateLib simpleDayStringFromDate:endDate];
     
     if ([now compare:endDate] == NSOrderedAscending) {
+        data.now = [NSString stringWithFormat:@"%d일", measurePercent];
         data.percent = (measurePercent / measure) * 100;
     } else {
+        NSDateComponents *conversionInfoPassed = [EJDateLib componentsFrom:endDate To:now];
+        data.now = [NSString stringWithFormat:@"+%d일", [conversionInfoPassed day]];
+        
         data.percent = 100;
     }
     
@@ -191,7 +203,7 @@ int idManager;
     NSArray *weekName = [NSArray arrayWithObjects:@"요일", @"월", @"화", @"수", @"목", @"금", @"토", @"일", nil];
     data.now = weekName[weekDay];
     data.startString = @"월";
-    data.endString = @"알";
+    data.endString = @"일";
     
     return data;
 }
@@ -249,8 +261,8 @@ int idManager;
     data.percent = (currentDay / measure) * 100;
     
     data.now = [EJDateLib simpleDayStringFromDate:[NSDate date]];
-    data.startString = @"1일1일";
-    data.endString = @"12일31일";
+    data.startString = @"1일 1일";
+    data.endString = @"12일 31일";
     
     NSLog(@"percent: %f", data.percent);
     
@@ -276,7 +288,7 @@ int idManager;
         NSDateComponents *conversionInfoPercent = [EJDateLib componentsFrom:startDate To:now];
         int measurePercent = [conversionInfoPercent day];
         
-        data.now = [NSString stringWithFormat:@"%d일", (int)(measurePercent - measure)];
+        data.now = [NSString stringWithFormat:@"D%d일", (int)(measurePercent - measure)];
         data.startString = [EJDateLib simpleDayStringFromDate:startDate];
         data.endString = [EJDateLib simpleDayStringFromDate:endDate];
         data.percent = (measurePercent / measure) * 100;

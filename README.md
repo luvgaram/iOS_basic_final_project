@@ -21,3 +21,4 @@
 | 17 | 2016.5.28 | migration to Realm |
 | 18 | 2016.5.28 | bubble for progress bar, app icon and launch screen |
 | 19 | 2016.5.29 | modify time picker: reset when outside tapped |
+| 20 | 2016.5.29 | check text field while editing |

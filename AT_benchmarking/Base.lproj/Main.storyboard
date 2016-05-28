@@ -60,9 +60,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="st" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTr-Xb-GbQ">
-                                                    <rect key="frame" x="24" y="66" width="42" height="21"/>
+                                                    <rect key="frame" x="24" y="66" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="42" id="3NV-ld-d7f"/>
+                                                        <constraint firstAttribute="width" constant="50" id="3NV-ld-d7f"/>
                                                         <constraint firstAttribute="height" constant="21" id="UHO-Oc-R6W"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
@@ -70,9 +70,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="end" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGj-9Z-L15">
-                                                    <rect key="frame" x="545" y="66" width="42" height="21"/>
+                                                    <rect key="frame" x="537" y="66" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="42" id="7Ra-k3-796"/>
+                                                        <constraint firstAttribute="width" constant="50" id="7Ra-k3-796"/>
                                                         <constraint firstAttribute="height" constant="21" id="vtc-Eq-Q6r"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
@@ -256,7 +256,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="dayTitleTextViewClicked:" destination="4xg-GH-YhQ" eventType="editingDidEnd" id="SHa-bC-kmx"/>
+                                            <action selector="dayTitleTextChanged:" destination="4xg-GH-YhQ" eventType="editingChanged" id="sTh-fU-WpD"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -732,7 +732,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="timeTitleTextEdited:" destination="RuL-sH-fwS" eventType="editingDidEnd" id="BaW-Do-lgE"/>
+                                            <action selector="timeTitleTextChanged:" destination="RuL-sH-fwS" eventType="editingChanged" id="A9Y-ON-I1h"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -816,7 +816,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="customTitleTextEdited:" destination="YRB-CJ-rko" eventType="editingDidEnd" id="dfx-yi-cUz"/>
+                                            <action selector="customTitleTextChanged:" destination="YRB-CJ-rko" eventType="editingChanged" id="EtV-Do-eN5"/>
                                         </connections>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="WwX-5A-1A0">
@@ -834,7 +834,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="customStartTextEdited:" destination="YRB-CJ-rko" eventType="editingDidEnd" id="LDo-si-MtE"/>
+                                                            <action selector="customStartTextChanged:" destination="YRB-CJ-rko" eventType="editingChanged" id="tm2-tg-rdp"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -858,7 +858,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="customCurrentTextEdited:" destination="YRB-CJ-rko" eventType="editingDidEnd" id="jIq-ak-Zyq"/>
+                                                            <action selector="customCurrentTextChanged:" destination="YRB-CJ-rko" eventType="editingChanged" id="HHr-Bi-Sji"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -882,7 +882,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="customEndTextEdited:" destination="YRB-CJ-rko" eventType="editingDidEnd" id="fui-ew-pbw"/>
+                                                            <action selector="customEndTextChanged:" destination="YRB-CJ-rko" eventType="editingChanged" id="F5I-1C-WBO"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -912,7 +912,7 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <action selector="customUnitTextEdited:" destination="YRB-CJ-rko" eventType="editingDidEnd" id="5g4-7S-Hkc"/>
+                                                    <action selector="customUnitTextChanged:" destination="YRB-CJ-rko" eventType="editingChanged" id="6jJ-Ql-9PK"/>
                                                 </connections>
                                             </textField>
                                         </subviews>

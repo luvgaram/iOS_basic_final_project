@@ -161,7 +161,7 @@ int timeCharacterNumber;
     [self presentViewController:timeEditNavController animated:YES completion:nil];
 }
 
-- (IBAction)timeTitleTextEdited:(id)sender {
+- (IBAction)timeTitleTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
 

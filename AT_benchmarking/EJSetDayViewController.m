@@ -106,7 +106,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
     if (self.dateTypeFromRecipe) [self dateViewTapped:nil];
 }
 
-- (IBAction)dayTitleTextViewClicked:(id)sender {
+- (IBAction)dayTitleTextChanged:(id)sender {
     [self switchSaveButtonStatus];
 }
 
@@ -398,6 +398,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
     
     if (!isPeriod) {
         oneDay = date;
+        [dayEditNavController viewControllers][0].title = @"잘했어요!";
         [dayEditNavController viewControllers][0].navigationItem.rightBarButtonItem.enabled = YES;
         return;
     }
@@ -425,6 +426,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
         
             NSArray *viewControllers = [dayEditNavController viewControllers];
             [dayEditNavController viewControllers][viewControllers.count - 1].navigationItem.rightBarButtonItem = saveButton;
+            [dayEditNavController viewControllers][viewControllers.count - 1].title = @"잘했어요!";
             
         } else {
             NSLog(@"errors in selected dates");
