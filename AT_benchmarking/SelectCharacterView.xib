@@ -83,8 +83,8 @@
             <color key="backgroundColor" red="0.37254901960784315" green="0.68627450980392157" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="dAU-q8-KL8" firstAttribute="width" secondItem="KTG-Wk-Bse" secondAttribute="width" constant="-35" id="JSF-xd-LaY"/>
-                <constraint firstItem="KTG-Wk-Bse" firstAttribute="top" secondItem="dAU-q8-KL8" secondAttribute="bottom" constant="-60" id="Okx-ge-YAS"/>
-                <constraint firstItem="dAU-q8-KL8" firstAttribute="top" secondItem="ICW-gK-frS" secondAttribute="bottom" constant="15" id="QDl-sI-eqj"/>
+                <constraint firstItem="KTG-Wk-Bse" firstAttribute="top" secondItem="dAU-q8-KL8" secondAttribute="bottom" constant="-80" id="Okx-ge-YAS"/>
+                <constraint firstItem="dAU-q8-KL8" firstAttribute="top" secondItem="ICW-gK-frS" secondAttribute="bottom" constant="-10" id="QDl-sI-eqj"/>
                 <constraint firstItem="KTG-Wk-Bse" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dlW-l0-GtN"/>
                 <constraint firstItem="dAU-q8-KL8" firstAttribute="centerX" secondItem="KTG-Wk-Bse" secondAttribute="centerX" id="fsR-ql-vLI"/>
                 <constraint firstAttribute="trailing" secondItem="KTG-Wk-Bse" secondAttribute="trailing" constant="16" id="mbe-Ne-btA"/>

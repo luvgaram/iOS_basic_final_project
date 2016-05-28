@@ -330,7 +330,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrb-iO-XWL">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="290"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flf-WD-8k9">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flf-WD-8k9">
                                                 <rect key="frame" x="0.0" y="8" width="41" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="41" id="EfY-24-PgI"/>
@@ -375,7 +375,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nlV-iW-ykZ">
                                         <rect key="frame" x="0.0" y="290" width="600" height="290"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDH-Qt-kqq">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDH-Qt-kqq">
                                                 <rect key="frame" x="0.0" y="8" width="41" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="41" id="gbS-zt-zeX"/>

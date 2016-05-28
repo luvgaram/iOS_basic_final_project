@@ -24,6 +24,8 @@
 @implementation EJSetTimePickerViewController
 
 BOOL isStart;
+ESTimePicker *startTimePicker;
+ESTimePicker *endTimePicker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +46,8 @@ BOOL isStart;
     self.navigationItem.leftBarButtonItem = stopButton;
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(timePickerClicked:) name:@"timePickerClicked" object:nil];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(timePickerOutsideClicked:) name:@"timePickerOutsideClicked" object:nil];
 }
 
 - (void)setDayNavigationBar:(UINavigationController *) navigationController {
@@ -68,13 +72,21 @@ BOOL isStart;
     NSLog(@"isStart: %hhd", isStart);
 }
 
+- (void)timePickerOutsideClicked:(NSNotification*)notification {
+    if ([notification.userInfo[@"isStart"] boolValue])
+        [startTimePicker setType:ESTimePickerTypeHours animated:YES];
+    else
+        [endTimePicker setType:ESTimePickerTypeHours animated:YES];
+    NSLog(@"timePickerOutsideClicked");
+}
+
 - (void)setPickers {
     float viewSize = self.view.frame.size.height;
     float pickerSize = (viewSize - 120.0) / 2.0;
     
     NSLog(@"origin, %f, %f, size: %f, %f, picker: %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height, pickerSize);
     
-    ESTimePicker *startTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
+    startTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
     
     [startTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 10, pickerSize, pickerSize)];
     [self.startTimeView addSubview:startTimePicker];
@@ -86,7 +98,7 @@ BOOL isStart;
     
     [self.startTimeView addSubview:startTouchView];
     
-    ESTimePicker *endTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
+    endTimePicker = [[ESTimePicker alloc] initWithDelegate:self];
     
     [endTimePicker setFrame:CGRectMake((self.view.frame.size.width - pickerSize) / 2.0, 10, pickerSize, pickerSize)];
     [self.endTimeView addSubview:endTimePicker];
@@ -129,15 +141,15 @@ BOOL isStart;
 
 #pragma mark - timePicker
 - (void)timePickerHoursChanged:(ESTimePicker *)timePicker toHours:(int)hour {
-    if (isStart) self.startTimeHourLabel.text = [NSString stringWithFormat:@"%d", hour];
-    else self.endTimeHourLabel.text = [NSString stringWithFormat:@"%d", hour];
+    if (isStart) self.startTimeHourLabel.text = [NSString stringWithFormat:@"%02d", hour];
+    else self.endTimeHourLabel.text = [NSString stringWithFormat:@"%02d", hour];
     
     [self switchSaveButtonStatus];
 }
 
 - (void)timePickerMinutesChanged:(ESTimePicker *)timePicker toMinutes:(int)minute {
-    if (isStart) self.startTimeMinuteLabel.text = [NSString stringWithFormat:@"%d", minute];
-    else self.endTimeMinuteLabel.text = [NSString stringWithFormat:@"%d", minute];
+    if (isStart) self.startTimeMinuteLabel.text = [NSString stringWithFormat:@"%02d", minute];
+    else self.endTimeMinuteLabel.text = [NSString stringWithFormat:@"%02d", minute];
     
     [self switchSaveButtonStatus];
 }
