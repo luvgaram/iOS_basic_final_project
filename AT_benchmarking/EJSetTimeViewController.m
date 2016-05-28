@@ -12,6 +12,7 @@
 #import "EJColorLib.h"
 #import "EJMainViewController.h"
 #import "EJNavigationBar.h"
+#import "EJDataManager.h"
 
 @interface EJSetTimeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *timeStart;
@@ -51,6 +52,10 @@ int timeCharacterNumber;
 
 - (void)setValuesFromData {
     if (self.timeData) {
+        // setCharacter
+        timeCharacterNumber = self.timeData.character;
+        [self postNotiToCharacter:timeCharacterNumber];
+        
         self.timeTitleTextView.text = self.timeData.title;
         self.timeStart.text = [EJDateLib simpleHourStringFromDateString:self.timeData.start];
         self.timeEnd.text = [EJDateLib simpleHourStringFromDateString:self.timeData.end];
@@ -97,6 +102,19 @@ int timeCharacterNumber;
 - (void)characterChanged:(NSNotification*)notification {
     timeCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
     NSLog(@"character: %d", timeCharacterNumber);
+}
+
+- (void)postNotiToMain {
+    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    [[self navigationController] popToRootViewControllerAnimated:YES];
+}
+
+- (void)postNotiToCharacter:(int)characterIndex {
+    NSDictionary *userinfo = @{@"characterIndex" : [NSNumber numberWithInt:characterIndex]};
+    NSNotification *notification = [NSNotification notificationWithName:@"setCharacter" object:self userInfo:userinfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 # pragma mark - navigation bar and button
@@ -153,31 +171,59 @@ int timeCharacterNumber;
 
 # pragma mark - data save
 - (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:0 character:timeCharacterNumber title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
+    EJRealmData *newData;
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    
+    newData = [[EJRealmData alloc] initWithValue:@{
+                                                   @"id" : @([dataManager getIdManager]),
+                                                   @"type" : @(0),
+                                                   @"character" : @(timeCharacterNumber ),
+                                                   @"title" : self.timeTitleTextView.text,
+                                                   @"date" : [NSDate date],
+                                                   @"start" : [EJDateLib stringFromDate:startTime],
+                                                   @"end" : [EJDateLib stringFromDate:endTime]
+                                                   }];
+//    EJData *newData = [[EJData alloc] initWithType:0 character:timeCharacterNumber title:self.timeTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:startTime] end:[EJDateLib stringFromDate:endTime]];
 
     if (isNewTime) [self addDataToMainViewController:newData];
     else [self modifyDataToMainViewController:newData];
 }
 
-- (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    [mainViewController.dataArray addObject:newData];
+- (void)addDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    [dataManager addData:newData];
     
     [self postNotiToMain];
 }
 
-- (void)modifyDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    mainViewController.dataArray[self.timeIndex] = newData;
+- (void)modifyDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    EJRealmData *updateData = [[EJRealmData alloc] initWithValue:@{
+                                                                   @"id" : @(self.timeData.id),
+                                                                   @"type" : @(newData.type),
+                                                                   @"character" : @(newData.character),
+                                                                   @"title" : newData.title,
+                                                                   @"date" : [NSDate date],
+                                                                   @"start" : newData.start,
+                                                                   @"end" : newData.end
+                                                                   }];
     
+    [dataManager updateData:updateData];
     [self postNotiToMain];
 }
 
-- (void)postNotiToMain {
-    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-    [[self navigationController] popToRootViewControllerAnimated:YES];
-}
+//- (void)addDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    [mainViewController.dataArray addObject:newData];
+//    
+//    [self postNotiToMain];
+//}
+//
+//- (void)modifyDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    mainViewController.dataArray[self.timeIndex] = newData;
+//    
+//    [self postNotiToMain];
+//}
 
 @end

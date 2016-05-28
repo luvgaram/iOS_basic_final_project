@@ -7,7 +7,9 @@
 //
 
 #import "EJSelectCharacterViewController.h"
-#import "EJData.h"
+//#import "EJData.h"
+#import "EJRealmData.h"
+#import "EJDataManager.h"
 #import "EJMainViewController.h"
 #import "EJColorLib.h"
 #import "EJDateLib.h"
@@ -49,37 +51,87 @@ int characterNumber;
     NSLog(@"character: %d", characterNumber);
 }
 
+- (void)postNotiToMain {
+    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    [[self navigationController] popToRootViewControllerAnimated:YES];
+}
+
+- (void)postNotiToCharacter:(int)characterIndex {
+    NSDictionary *userinfo = @{@"characterIndex" : [NSNumber numberWithInt:characterIndex]};
+    NSNotification *notification = [NSNotification notificationWithName:@"setCharacter" object:self userInfo:userinfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
 # pragma mark - data save
 - (void)saveDate {
-    EJData *newData;
+//    EJData *newData;
+    EJRealmData *newData;
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    
     NSString *todayString = [EJDateLib stringFromDate:[NSDate date]];
     switch (self.typeFromRecipe) {
         case week:
-            newData = [[EJData alloc] initWithType:week character:characterNumber title:@"이번주" date:[NSDate date] start:todayString end:todayString];
+//            newData = [[EJData alloc] initWithType:week character:characterNumber title:@"이번주" date:[NSDate date] start:todayString end:todayString];
+            newData = [[EJRealmData alloc] initWithValue:@{
+                                                           @"id" : @([dataManager getIdManager]),
+                                                           @"type" : @(week),
+                                                           @"character" : @(characterNumber),
+                                                           @"title" : @"이번주",
+                                                           @"date" : [NSDate date]
+                                                           }];
             break;
             
         case month:
-            newData = [[EJData alloc] initWithType:month character:characterNumber title:@"이번달" date:[NSDate date] start:todayString end:todayString];
+//            newData = [[EJData alloc] initWithType:month character:characterNumber title:@"이번달" date:[NSDate date] start:todayString end:todayString];
+            newData = [[EJRealmData alloc] initWithValue:@{
+                                                           @"id" : @([dataManager getIdManager]),
+                                                           @"type" : @(characterNumber),
+                                                           @"character" : @(characterNumber),
+                                                           @"title" : @"이번달",
+                                                           @"date" : [NSDate date]
+                                                           }];
             break;
         case year:
-            newData = [[EJData alloc] initWithType:year character:characterNumber title:@"올해" date:[NSDate date] start:todayString end:todayString];
+//            newData = [[EJData alloc] initWithType:year character:characterNumber title:@"올해" date:[NSDate date] start:todayString end:todayString];
+            newData = [[EJRealmData alloc] initWithValue:@{
+                                                           @"id" : @([dataManager getIdManager]),
+                                                           @"type" : @(year),
+                                                           @"character" : @(characterNumber),
+                                                           @"title" : @"올해",
+                                                           @"date" : [NSDate date]
+                                                           }];
             break;
         case today:
-            newData = [[EJData alloc] initWithType:today character:characterNumber title:@"오늘" date:[NSDate date] start:todayString end:todayString];
+//            newData = [[EJData alloc] initWithType:today character:characterNumber title:@"오늘" date:[NSDate date] start:todayString end:todayString];
+            newData = [[EJRealmData alloc] initWithValue:@{
+                                                           @"id" : @([dataManager getIdManager]),
+                                                           @"type" : @(today),
+                                                           @"character" : @(characterNumber),
+                                                           @"title" : @"오늘",
+                                                           @"date" : [NSDate date]
+                                                           }];
             break;
     }
     
     [self addDataToMainViewController:newData];
 }
 
-- (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    [mainViewController.dataArray addObject:newData];
+- (void)addDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    [dataManager addData:newData];
     
-    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-    [[self navigationController] popToRootViewControllerAnimated:YES];
+    [self postNotiToMain];
 }
+//- (void)addDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    [mainViewController.dataArray addObject:newData];
+//    
+//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//    
+//    [[self navigationController] popToRootViewControllerAnimated:YES];
+//}
 
 @end

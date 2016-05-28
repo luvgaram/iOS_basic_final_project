@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EJData.h"
+//#import "EJData.h"
+#import "EJRealmData.h"
 
 @interface EJSetDayViewController : UIViewController
 
-@property EJData *dayData;
-@property int dayIndex;
+@property EJRealmData *dayData;
+//@property int dayIndex;
 @property NSString *dayTitleFromRecipe;
 @property BOOL dateTypeFromRecipe;
 

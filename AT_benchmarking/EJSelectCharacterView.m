@@ -51,7 +51,8 @@ NSMutableArray *subviewPositionArray;
         // 4. add constraints to span entire view
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view":self.view}]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view":self.view}]];
-        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(setCharacter:) name:@"setCharacter" object:nil];
     }
     return self;
 }
@@ -71,6 +72,14 @@ NSMutableArray *subviewPositionArray;
     triangleArray[3] = self.selectTriangle04;
     triangleArray[4] = self.selectTriangle05;
     triangleArray[5] = self.selectTriangle06;
+}
+
+#pragma mark - Notification
+- (void)setCharacter:(NSNotification*)notification {
+    int index = [notification.userInfo[@"characterIndex"] intValue];
+    NSLog(@"characterFromNoti: %d", index);
+    
+    [self setTriangle:index];
 }
 
 # pragma mark - tap gesture

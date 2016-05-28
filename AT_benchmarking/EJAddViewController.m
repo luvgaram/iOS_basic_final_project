@@ -8,7 +8,9 @@
 
 #import "EJMainViewController.h"
 #import "EJAddViewController.h"
+#import "EJDataManager.h"
 #import "EJData.h"
+//#import "EJRealmData.h"
 #import "EJColorLib.h"
 
 @interface EJAddViewController ()
@@ -99,15 +101,25 @@ UIStoryboard *storyboard;
     [self.navigationController pushViewController:addViewController animated:YES];
 }
 
-- (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self backViewController];
-    [mainViewController.dataArray addObject:newData];
-    
-    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-    [[self navigationController] popToRootViewControllerAnimated:YES];
-}
+//- (void)addDataToMainViewController:(EJRealmData *) newData {
+//    EJDataManager *dataManager = [EJDataManager sharedInstance];
+//    [dataManager addData:newData];
+//    
+//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//    
+//    [[self navigationController] popToRootViewControllerAnimated:YES];
+//}
+
+//- (void)addDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self backViewController];
+//    [mainViewController.dataArray addObject:newData];
+//
+//    NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        
+//    [[self navigationController] popToRootViewControllerAnimated:YES];
+//}
 
 - (UIViewController *)backViewController {
     NSInteger numberOfViewControllers = self.navigationController.viewControllers.count;

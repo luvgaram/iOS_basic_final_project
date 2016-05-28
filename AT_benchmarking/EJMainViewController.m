@@ -38,80 +38,16 @@ UIStoryboard *myStoryboard;
                                                                       NSForegroundColorAttributeName : [UIColor whiteColor],
                                                                       NSFontAttributeName : [UIFont boldSystemFontOfSize:24.0]
                                                                       }];
+    [self setData];
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     myStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addData)];
     self.navigationItem.rightBarButtonItem = refreshButton;
-    
-    // 임시 데이터객체
-    self.dataArray = [[NSMutableArray alloc] init];
-    
-    EJData *temp = [[EJData alloc] initWithType:today character:2 title:@"오늘" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
-    EJData *temp2 = [[EJData alloc] initWithType:week character:1 title:@"이번주" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
-    EJData *temp3 = [[EJData alloc] initWithType:month character:4 title:@"이번달" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
-    EJData *temp4 = [[EJData alloc] initWithType:year character:5 title:@"올해" date:[NSDate date] start:[EJDateLib stringFromDate:[NSDate date]] end:[EJDateLib stringFromDate:[NSDate date]]];
-
-    [self.dataArray addObject:temp];
-    [self.dataArray addObject:temp2];
-    [self.dataArray addObject:temp3];
-    [self.dataArray addObject:temp4];
-    
-    // test Realm
-    EJDataManager *dataManager = [EJDataManager sharedInstance];
-    
-//    EJRealmData *tempData = [[EJRealmData alloc] initWithValue:@{
-//                                                                 @"id" : @([dataManager getIdManager]),
-//                                                                 @"type" : @(today),
-//                                                                 @"character" : @(2),
-//                                                                 @"title" : @"오늘",
-//                                                                 @"date" : [NSDate date]
-//                                                                 }];
-//    
-//    EJRealmData *tempData2 = [[EJRealmData alloc] initWithValue:@{
-//                                                                 @"id" : @([dataManager getIdManager]),
-//                                                                 @"type" : @(week),
-//                                                                 @"character" : @(1),
-//                                                                 @"title" : @"이번주",
-//                                                                 @"date" : [NSDate date]
-//                                                                 }];
-//    
-//    EJRealmData *tempData3 = [[EJRealmData alloc] initWithValue:@{
-//                                                                  @"id" : @([dataManager getIdManager]),
-//                                                                  @"type" : @(month),
-//                                                                  @"character" : @(4),
-//                                                                  @"title" : @"이번달",
-//                                                                  @"date" : [NSDate date]
-//                                                                  }];
-//    
-//    EJRealmData *tempData4 = [[EJRealmData alloc] initWithValue:@{
-//                                                                  @"id" : @([dataManager getIdManager]),
-//                                                                  @"type" : @(year),
-//                                                                  @"character" : @(5),
-//                                                                  @"title" : @"올해",
-//                                                                  @"date" : [NSDate date]
-//                                                                  }];
-//
-//    [dataManager addData:tempData];
-//    [dataManager addData:tempData2];
-//    [dataManager addData:tempData3];
-//    [dataManager addData:tempData4];
-    
-//    [dataManager deleteData:16];
-    
-    
-//    EJRealmData *tempData = [[EJRealmData alloc] initWithValue:@{
-//                                                                @"id" : @(16),
-//                                                                @"type" : @(today),
-//                                                                @"character" : @(3),
-//                                                                @"title" : @"adsfafasfafsa",
-//                                                                @"date" : [NSDate date],
-//                                                                }];
-//    [dataManager updateData:tempData];
-    
-    [dataManager getAllData];
 
     // color values
     colorArray = [NSArray arrayWithObjects:@"#99CCCC", @"#BDD5BD", @"#D7D8B1", @"#F5DC90", @"#F2CA78", @"#EFAB79", @"#EC8C71",
@@ -121,9 +57,20 @@ UIStoryboard *myStoryboard;
      addObserver:self selector:@selector(dataReceived:) name:@"addData" object:nil];
 }
 
+- (void)setData {
+    NSLog(@"setData");
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    NSArray *realmDataArray = [dataManager getAllData];
+    self.dataArray = [[NSMutableArray alloc] init];
+    for (EJRealmData *realmData in realmDataArray) {
+        [self.dataArray addObject: realmData];
+    }
+}
+
 #pragma mark - Notification
 - (void)dataReceived:(NSNotification*)notification {
     NSLog(@"Data received");
+    [self setData];
     [self.tableView reloadData];
 }
 
@@ -155,6 +102,7 @@ UIStoryboard *myStoryboard;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"rows: %d", [self.dataArray count]);
     return [self.dataArray count];
 }
 
@@ -173,17 +121,36 @@ UIStoryboard *myStoryboard;
             [view removeFromSuperview];
         }
     }
-
-    EJData *cellData = [self.dataArray objectAtIndex:indexPath.row];
+    
+// EJData
+//    EJData *cellData = [self.dataArray objectAtIndex:indexPath.row];
+//    cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
+//    cell.cellTitle.text = cellData.title;
+//    cell.cellstart.text = cellData.startString;
+//    cell.cellEnd.text = cellData.endString;
+//    cell.cellPercent.text = [NSString stringWithFormat:@"%d", cellData.percent];
+//    
+//    EJProgressView* progressTest = [[EJProgressView alloc] initWithFrame:CGRectMake(66, 22, 200, 50)];
+//    NSLog(@"character in cellData %d", cellData.character);
+//
+//    progressTest.progress = cellData.percent / 100.0;
+//    progressTest.characterIndex = cellData.character;
+//
+//    [cell addSubview:progressTest];
+    
+// EJRealmData
+    EJRealmData *cellData = [self.dataArray objectAtIndex:indexPath.row];
+    NSLog(@"%d: %@ now: %@", indexPath.row, cellData, cellData.now);
     cell.backgroundColor = [EJColorLib colorFromHexString:[colorArray objectAtIndex:indexPath.row]];
+    
     cell.cellTitle.text = cellData.title;
     cell.cellstart.text = cellData.startString;
     cell.cellEnd.text = cellData.endString;
-    cell.cellPercent.text = [NSString stringWithFormat:@"%d", cellData.percent];
+    cell.cellPercent.text = [NSString stringWithFormat:@"%.0f", cellData.percent];
     
     EJProgressView* progressTest = [[EJProgressView alloc] initWithFrame:CGRectMake(66, 22, 200, 50)];
     NSLog(@"character in cellData %d", cellData.character);
-
+    
     progressTest.progress = cellData.percent / 100.0;
     progressTest.characterIndex = cellData.character;
     
@@ -194,15 +161,14 @@ UIStoryboard *myStoryboard;
 
 #pragma mark - tableViewDetail
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EJData *data;
-    
-    data = self.dataArray[indexPath.row];
+    EJData *data = self.dataArray[indexPath.row];
+    EJRealmData *editData = self.dataArray[indexPath.row];
 
     switch (data.type) {
         case hour: {
             EJSetTimeViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setTimeViewControllerIdentifier"];
             addViewController.timeData = data;
-            addViewController.timeIndex = indexPath.row;
+//            addViewController.timeIndex = indexPath.row;
             
             [self.navigationController pushViewController:addViewController animated:YES];
             
@@ -211,8 +177,8 @@ UIStoryboard *myStoryboard;
             
         case day: {
             EJSetDayViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
-            addViewController.dayData = data;
-            addViewController.dayIndex = indexPath.row;
+            addViewController.dayData = editData;
+//            addViewController.dayIndex = indexPath.row;
             
             [self.navigationController pushViewController:addViewController animated:YES];
             
@@ -221,8 +187,8 @@ UIStoryboard *myStoryboard;
             
         case anniversary: {
             EJSetDayViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setDayViewControllerIdentifier"];
-            addViewController.dayData = data;
-            addViewController.dayIndex = indexPath.row;
+            addViewController.dayData = editData;
+//            addViewController.dayIndex = indexPath.row;
             
             [self.navigationController pushViewController:addViewController animated:YES];
             
@@ -232,7 +198,7 @@ UIStoryboard *myStoryboard;
         case custom: {
             EJSetCustomViewController *addViewController = [myStoryboard instantiateViewControllerWithIdentifier:@"setCustomViewControllerIdentifier"];
             addViewController.customData = data;
-            addViewController.customIndex = indexPath.row;
+//            addViewController.customIndex = indexPath.row;
             
             [self.navigationController pushViewController:addViewController animated:YES];
             
@@ -246,7 +212,12 @@ UIStoryboard *myStoryboard;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView beginUpdates];
+
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    EJRealmData *targetData = [self.dataArray objectAtIndex:indexPath.row];
+    [dataManager deleteData:targetData.id];
     [self.dataArray removeObjectAtIndex:indexPath.row];
+    
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];
 }

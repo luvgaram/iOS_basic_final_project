@@ -9,7 +9,8 @@
 #import "EJSetDayViewController.h"
 #import "EJColorLib.h"
 #import "EJDateLib.h"
-#import "EJData.h"
+//#import "EJRealmData.h"
+#import "EJDataManager.h"
 #import "PDTSimpleCalendarViewController.h"
 #import "EJMainViewController.h"
 #import "EJNavigationBar.h"
@@ -68,17 +69,18 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
 
     [self setValuesFromRecipe];
-    
     dayEditNavController = [[UINavigationController alloc] initWithNavigationBarClass:[EJNavigationBar class] toolbarClass:nil];
-    
     [self switchSaveButtonStatus];
 }
 
 - (void)setValuesFromData {
     if (self.dayData) {
+        // setCharacter
+        dayCharacterNumber = self.dayData.character;
+        [self postNotiToCharacter:dayCharacterNumber];
+        
         self.dayTitleTextView.text = self.dayData.title;
 
         if (self.dayData.type == day) {
@@ -96,6 +98,7 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
             NSLog(@"setValuesFromData: %@", self.dayDateSelect.text);
         }
         isNewDay = NO;
+        
     } else isNewDay = YES;
 }
 
@@ -142,40 +145,90 @@ enum {hour = 0, day = 1, week, month, year, anniversary, custom, today} EJDaytyp
     NSLog(@"character: %d", dayCharacterNumber);
 }
 
-# pragma mark - data save
-- (void)saveDate {
-    EJData *newData;
-
-    if (isPeriod) {
-        newData = [[EJData alloc] initWithType:day character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
-    } else {
-        newData = [[EJData alloc] initWithType:anniversary character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
-    }
-    
-    if (isNewDay) [self addDataToMainViewController:newData];
-    else [self modifyDataToMainViewController:newData];
-}
-
-- (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    [mainViewController.dataArray addObject:newData];
-    
-    [self postNotiToMain];
-}
-
-- (void)modifyDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    mainViewController.dataArray[self.dayIndex] = newData;
-    
-    [self postNotiToMain];
-}
-
 - (void)postNotiToMain {
     NSNotification *notification = [NSNotification notificationWithName:@"addData" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
+
+- (void)postNotiToCharacter:(int)characterIndex {
+    NSDictionary *userinfo = @{@"characterIndex" : [NSNumber numberWithInt:characterIndex]};
+    NSNotification *notification = [NSNotification notificationWithName:@"setCharacter" object:self userInfo:userinfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+# pragma mark - data save
+- (void)saveDate {
+    EJRealmData *newData;
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+
+    if (isPeriod) {
+//        newData = 
+//        [[EJData alloc] initWithType:day character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:periodStart] end:[EJDateLib stringFromDate:periodEnd]];
+        newData = [[EJRealmData alloc] initWithValue:@{
+                                                       @"id" : @([dataManager getIdManager]),
+                                                       @"type" : @(day),
+                                                       @"character" : @(dayCharacterNumber),
+                                                       @"title" : self.dayTitleTextView.text,
+                                                       @"date" : [NSDate date],
+                                                       @"start" : [EJDateLib stringFromDate:periodStart],
+                                                       @"end" : [EJDateLib stringFromDate:periodEnd]
+                                                       }];
+    } else {
+//        newData = [[EJData alloc] initWithType:anniversary character:dayCharacterNumber title:self.dayTitleTextView.text date:[NSDate date] start:[EJDateLib stringFromDate:oneDay] end:[EJDateLib stringFromDate:oneDay]];
+        newData = [[EJRealmData alloc] initWithValue:@{
+                                                       @"id" : @([dataManager getIdManager]),
+                                                       @"type" : @(anniversary),
+                                                       @"character" : @(dayCharacterNumber),
+                                                       @"title" : self.dayTitleTextView.text,
+                                                       @"date" : [NSDate date],
+                                                       @"start" : [EJDateLib stringFromDate:oneDay],
+                                                       @"end" : [EJDateLib stringFromDate:oneDay]
+                                                       }];
+    }
+    
+    if (isNewDay) [self addDataToMainViewController:newData];
+    else [self modifyDataToMainViewController:newData];
+}
+
+- (void)addDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    [dataManager addData:newData];
+
+    [self postNotiToMain];
+}
+
+
+- (void)modifyDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    EJRealmData *updateData = [[EJRealmData alloc] initWithValue:@{
+                                                                   @"id" : @(self.dayData.id),
+                                                                   @"type" : @(newData.type),
+                                                                   @"character" : @(newData.character),
+                                                                   @"title" : newData.title,
+                                                                   @"date" : [NSDate date],
+                                                                   @"start" : newData.start,
+                                                                   @"end" : newData.end
+                                                                   }];
+    
+    [dataManager updateData:updateData];
+    [self postNotiToMain];
+}
+
+//- (void)addDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    [mainViewController.dataArray addObject:newData];
+//
+//    [self postNotiToMain];
+//}
+//
+//- (void)modifyDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    mainViewController.dataArray[self.dayIndex] = newData;
+//    
+//    [self postNotiToMain];
+//}
 
 # pragma mark - tap gesture
 - (void)setTap {

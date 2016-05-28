@@ -1,4 +1,4 @@
-//
+
 //  EJSetTimeViewController.h
 //  AT_benchmarking
 //
@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EJData.h"
+//#import "EJData.h"
+#import "EJRealmData.h"
 
 @interface EJSetTimeViewController : UIViewController
 
-@property EJData *timeData;
-@property int timeIndex;
+@property EJRealmData *timeData;
+//@property EJData *timeData;
+//@property int timeIndex;
 @property NSString *timeTitleFromRecipe;
 
 @end

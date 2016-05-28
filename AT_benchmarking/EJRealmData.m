@@ -24,7 +24,7 @@
 //@property NSString *startString;
 //@property NSString *endString;
 //@property NSString *now;
-//@property int percent;
+//@property NSNumber *percent;
 
 + (NSString *)primaryKey {
     return @"id";

@@ -8,8 +8,9 @@
 
 #import "EJSetCustomViewController.h"
 #import "EJColorLib.h"
-#import "EJData.h"
+//#import "EJData.h"
 #import "EJDateLib.h"
+#import "EJDataManager.h"
 #import "EJMainViewController.h"
 
 @interface EJSetCustomViewController ()
@@ -71,11 +72,15 @@ int customCharacterNumber;
 
 - (void)setValuesFromData {
     if (self.customData) {
+        // setCharacter
+        customCharacterNumber = self.customData.character;
+        [self postNotiToCharacter:customCharacterNumber];
+        
         self.customTitleTextView.text = self.customData.title;
         self.customStart.text = self.customData.start;
-        self.customCurrent.text = [self.customData nowForUnit];
+        self.customCurrent.text = self.customData.current;
         self.customEnd.text = self.customData.end;
-        self.customUnit.text = [self.customData unit];
+        self.customUnit.text = self.customData.unit;
         
         isNewCustom = NO;
     } else isNewCustom = YES;
@@ -139,27 +144,10 @@ int customCharacterNumber;
     [self.view endEditing:YES];
 }
 
-// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
-# pragma mark - data save
-- (void)saveDate {
-    EJData *newData = [[EJData alloc] initWithType:6 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
-    
-    if (isNewCustom) [self addDataToMainViewController:newData];
-    else [self modifyDataToMainViewController:newData];
-}
-
-- (void)addDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    [mainViewController.dataArray addObject:newData];
-    
-    [self postNotiToMain];
-}
-
-- (void)modifyDataToMainViewController:(EJData *) newData {
-    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
-    mainViewController.dataArray[self.customIndex] = newData;
-    
-    [self postNotiToMain];
+#pragma mark - Notification
+- (void)characterChanged:(NSNotification*)notification {
+    customCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
+    NSLog(@"character: %d", customCharacterNumber);
 }
 
 - (void)postNotiToMain {
@@ -169,11 +157,73 @@ int customCharacterNumber;
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
 
-
-#pragma mark - Notification
-- (void)characterChanged:(NSNotification*)notification {
-    customCharacterNumber = [notification.userInfo[@"characterNumber"] intValue];
-    NSLog(@"character: %d", customCharacterNumber);
+- (void)postNotiToCharacter:(int)characterIndex {
+    NSDictionary *userinfo = @{@"characterIndex" : [NSNumber numberWithInt:characterIndex]};
+    NSNotification *notification = [NSNotification notificationWithName:@"setCharacter" object:self userInfo:userinfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
+
+// type 0: hour 1: day 2: week 3: month 4: year 5: anniversary 6:custom 7: today
+# pragma mark - data save
+- (void)saveDate {
+    EJRealmData *newData;
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    
+//    EJData *newData = [[EJData alloc] initWithType:6 character:customCharacterNumber title:self.customTitleTextView.text date:[NSDate date] start:self.customStart.text end:self.customEnd.text now:self.customCurrent.text unit:self.customUnit.text];
+    
+    newData = [[EJRealmData alloc] initWithValue:@{
+                                                   @"id" : @([dataManager getIdManager]),
+                                                   @"type" : @(6),
+                                                   @"character" : @(customCharacterNumber),
+                                                   @"title" : self.customTitleTextView.text,
+                                                   @"date" : [NSDate date],
+                                                   @"start" : self.customStart.text,
+                                                   @"end" : self.customEnd.text,
+                                                   @"current" : self.customCurrent.text,
+                                                   @"unit" : self.customUnit.text
+                                                   }];
+    
+    if (isNewCustom) [self addDataToMainViewController:newData];
+    else [self modifyDataToMainViewController:newData];
+}
+
+- (void)addDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    [dataManager addData:newData];
+    
+    [self postNotiToMain];
+}
+
+- (void)modifyDataToMainViewController:(EJRealmData *) newData {
+    EJDataManager *dataManager = [EJDataManager sharedInstance];
+    EJRealmData *updateData = [[EJRealmData alloc] initWithValue:@{
+                                                                   @"id" : @(self.customData.id),
+                                                                   @"type" : @(newData.type),
+                                                                   @"character" : @(newData.character),
+                                                                   @"title" : newData.title,
+                                                                   @"date" : [NSDate date],
+                                                                   @"start" : newData.start,
+                                                                   @"end" : newData.end,
+                                                                   @"current" : newData.current,
+                                                                   @"unit" : newData.unit
+                                                                   }];
+    
+    [dataManager updateData:updateData];
+    [self postNotiToMain];
+}
+
+//- (void)addDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    [mainViewController.dataArray addObject:newData];
+//    
+//    [self postNotiToMain];
+//}
+//
+//- (void)modifyDataToMainViewController:(EJData *) newData {
+//    EJMainViewController *mainViewController = (EJMainViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+//    mainViewController.dataArray[self.customIndex] = newData;
+//    
+//    [self postNotiToMain];
+//}
 
 @end

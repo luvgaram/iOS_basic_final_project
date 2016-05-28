@@ -24,7 +24,8 @@
 @property NSString *startString;
 @property NSString *endString;
 @property NSString *now;
-@property int percent;
+@property float percent;
+//@property NSNumber *percent;
 
 @end
 

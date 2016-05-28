@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EJData.h"
+#import "EJRealmData.h"
 
 @interface EJSetCustomViewController : UIViewController
 
-@property EJData *customData;
-@property int customIndex;
+//@property EJData *customData;
+//@property int customIndex;
+@property EJRealmData *customData;
 @property NSString *customTitleFromRecipe;
 @property NSString *customUnitFromRecipe;
 
